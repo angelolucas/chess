@@ -5,5 +5,6 @@ export default createGlobalStyle({
     background: "#11141a",
     color: "#dfe3ee",
     fontFamily: "roboto",
+    margin: 0,
   },
 });

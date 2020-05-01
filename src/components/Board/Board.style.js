@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Board = styled.div({
+  boxSizing: "border-box",
   display: "flex",
   border: "5px solid #8b9dc3",
   margin: "0 auto",
-  width: 400,
-  height: 400,
+  width: "100vw",
+  height: "100vw",
 });
 
 export const Column = styled.div({
