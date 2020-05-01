@@ -193,11 +193,16 @@ const Board = () => {
               const piece = Object.values(board.pieces).find(
                 (piece) => piece.column === column && piece.line === line
               );
+              const selected =
+                column === board.selection.column &&
+                line === board.selection.line;
+
               return (
                 <S.Square
                   key={line}
                   tabIndex="-1"
                   onClick={() => handleSelection({ column, line, piece })}
+                  selected={selected}
                 >
                   {column}
                   {line}
@@ -212,10 +217,7 @@ const Board = () => {
         square selected: {board.selection.column}
         {board.selection.line}
       </p>
-      <p>
-        piece selected:{" "}
-        {board.selection.piece && <Piece type={board.selection.piece.type} />}
-      </p>
+      <p>piece selected: {board.selection.piece?.type}</p>
     </>
   );
 };

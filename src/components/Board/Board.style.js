@@ -15,22 +15,19 @@ export const Column = styled.div({
   flexBasis: 0,
 });
 
-export const Square = styled.div({
+export const Square = styled.div(({ selected }) => ({
   flexGrow: 1,
   flexBasis: 0,
   backgroundColor: "#dfe3ee",
   color: "#11141a",
   position: "relative",
   fontSize: 12,
+  boxShadow: selected ? "inset 0 0 0 5px #3b5998" : "none",
+  outline: "none",
 
   [`${Column}:nth-child(even) &:nth-child(odd), 
     ${Column}:nth-child(odd) &:nth-child(even)`]: {
     background: "#8b9dc3",
-  },
-
-  ":focus": {
-    boxShadow: "inset 0 0 0 5px #3b5998",
-    outline: "none",
   },
 
   svg: {
@@ -40,4 +37,4 @@ export const Square = styled.div({
     width: "100%",
     height: "100%",
   },
-});
+}));
