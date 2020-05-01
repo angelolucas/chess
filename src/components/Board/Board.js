@@ -208,26 +208,38 @@ const Board = () => {
     },
   });
 
-  const handleSelection = ({ column, line, piece }) => {
-    if (board.selected.piece && !piece) {
-      setBoard({
-        ...board,
-        pieces: {
-          ...board.pieces,
-          [board.selected.piece.id]: {
-            ...board.pieces[board.selected.piece.id],
-            column,
-            line,
-          },
-        },
-        selected: { column, line, piece },
-      });
-    } else {
-      setBoard({
-        ...board,
-        selected: { column, line, piece },
-      });
+  const handleSquare = ({ column, line, piece }) => {
+    let newBoardState = Object.assign({}, board);
+    const selectedPiece = board.selected.piece;
+
+    // tap on empty square without piece selected
+    if (!selectedPiece && !piece) {
+      return false;
     }
+
+    // moviment
+    if (selectedPiece) {
+      newBoardState.pieces[selectedPiece.id].column = column;
+      newBoardState.pieces[selectedPiece.id].line = line;
+      newBoardState.selected = {
+        column: null,
+        line: null,
+        piece: null,
+      };
+      if (piece) {
+        delete newBoardState.pieces[piece.id];
+      }
+    } else {
+      newBoardState.selected = {
+        column,
+        line,
+        piece,
+      };
+    }
+
+    // change selection
+    console.log(newBoardState);
+    setBoard(newBoardState);
   };
 
   return (
@@ -246,7 +258,7 @@ const Board = () => {
               return (
                 <S.Square
                   key={line}
-                  onClick={() => handleSelection({ column, line, piece })}
+                  onClick={() => handleSquare({ column, line, piece })}
                   selected={selected}
                 >
                   {piece && <Piece type={piece.type} />}
