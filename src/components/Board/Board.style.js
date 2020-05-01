@@ -1,13 +1,27 @@
 import styled from "styled-components";
 
-export const Board = styled.div({});
+export const Board = styled.div({
+  display: "flex",
+  border: "5px solid #779559",
+  margin: "0 auto",
+  width: 400,
+  height: 400,
+});
 
 export const Column = styled.div({
-  display: "inline-block",
+  display: "flex",
+  flexDirection: "column",
+  flexGrow: 1,
+  flexBasis: 0,
 });
 
 export const Square = styled.div({
-  width: 50,
-  height: 50,
-  border: "1px solid black",
+  flexGrow: 1,
+  flexBasis: 0,
+  backgroundColor: "#EEEED3",
+
+  [`${Column}:nth-child(even) &:nth-child(odd), 
+    ${Column}:nth-child(odd) &:nth-child(even)`]: {
+    background: "#779559",
+  },
 });
