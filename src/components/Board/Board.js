@@ -193,7 +193,7 @@ const Board = () => {
               return (
                 <S.Square key={line}>
                   {column}/{line}
-                  {piecee && <piecee.image />}
+                  {piecee && <piecee.image tabIndex="-1" />}
                 </S.Square>
               );
             })}

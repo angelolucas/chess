@@ -30,7 +30,12 @@ export const Square = styled.div({
     position: "absolute",
     left: 0,
     top: 0,
-    right: 0,
-    bottom: 0,
+    width: "100%",
+    height: "100%",
+    outline: "none",
+
+    ":focus": {
+      background: "rgba(255, 0, 0, 0.2)",
+    },
   },
 });
