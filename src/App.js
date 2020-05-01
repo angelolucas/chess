@@ -1,8 +1,14 @@
 import React from "react";
+import GlobalStyles from "./GlobalStyles";
 import Board from "./components/Board";
 
 function App() {
-  return <Board />;
+  return (
+    <>
+      <GlobalStyles />
+      <Board />
+    </>
+  );
 }
 
 export default App;

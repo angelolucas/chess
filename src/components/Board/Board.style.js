@@ -19,7 +19,9 @@ export const Square = styled.div({
   flexGrow: 1,
   flexBasis: 0,
   backgroundColor: "#dfe3ee",
+  color: "#11141a",
   position: "relative",
+  fontSize: 12,
 
   [`${Column}:nth-child(even) &:nth-child(odd), 
     ${Column}:nth-child(odd) &:nth-child(even)`]: {
