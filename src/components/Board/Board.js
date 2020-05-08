@@ -7,232 +7,232 @@ const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
 
 const Board = () => {
   const [board, setBoard] = useState({
-    whiteToMove: true,
+    currentPlayer: "white",
     selected: {
-      file: undefined,
-      rank: undefined,
-      piece: undefined,
+      file: null,
+      rank: null,
+      piece: null,
     },
     pieces: {
-      "white-queen-rook": {
-        id: "white-queen-rook",
+      wqr: {
+        id: "wqr",
         player: "white",
         type: "rook",
         file: "a",
         rank: 1,
       },
-      "white-queen-knight": {
-        id: "white-queen-knight",
+      wqk: {
+        id: "wqk",
         player: "white",
         type: "knight",
         file: "b",
         rank: 1,
       },
-      "white-queen-bishop": {
-        id: "white-queen-bishop",
+      wqb: {
+        id: "wqb",
         player: "white",
         type: "bishop",
         file: "c",
         rank: 1,
       },
-      "white-queen": {
-        id: "white-queen",
+      wq: {
+        id: "wq",
         player: "white",
         type: "queen",
         file: "d",
         rank: 1,
       },
-      "white-king": {
-        id: "white-king",
+      wk: {
+        id: "wk",
         player: "white",
         type: "king",
         file: "e",
         rank: 1,
       },
-      "white-king-bishop": {
-        id: "white-king-bishop",
+      wkb: {
+        id: "wkb",
         player: "white",
         type: "bishop",
         file: "f",
         rank: 1,
       },
-      "white-king-knight": {
-        id: "white-king-knight",
+      wkk: {
+        id: "wkk",
         player: "white",
         type: "knight",
         file: "g",
         rank: 1,
       },
-      "white-king-rook": {
-        id: "white-king-rook",
+      wkr: {
+        id: "wkr",
         player: "white",
         type: "rook",
         file: "h",
         rank: 1,
       },
-      "white-pawn1": {
-        id: "white-pawn1",
+      wp1: {
+        id: "wp1",
         player: "white",
         type: "pawn",
         file: "a",
         rank: 2,
       },
-      "white-pawn2": {
-        id: "white-pawn2",
+      wp2: {
+        id: "wp2",
         player: "white",
         type: "pawn",
         file: "b",
         rank: 2,
       },
-      "white-pawn3": {
-        id: "white-pawn3",
+      wp3: {
+        id: "wp3",
         player: "white",
         type: "pawn",
         file: "c",
         rank: 2,
       },
-      "white-pawn4": {
-        id: "white-pawn4",
+      wp4: {
+        id: "wp4",
         player: "white",
         type: "pawn",
         file: "d",
         rank: 2,
       },
-      "white-pawn5": {
-        id: "white-pawn5",
+      wp5: {
+        id: "wp5",
         player: "white",
         type: "pawn",
         file: "e",
         rank: 2,
       },
-      "white-pawn6": {
-        id: "white-pawn6",
+      wp6: {
+        id: "wp6",
         player: "white",
         type: "pawn",
         file: "f",
         rank: 2,
       },
-      "white-pawn7": {
-        id: "white-pawn7",
+      wp7: {
+        id: "wp7",
         player: "white",
         type: "pawn",
         file: "g",
         rank: 2,
       },
-      "white-pawn8": {
-        id: "white-pawn8",
+      wp8: {
+        id: "wp8",
         player: "white",
         type: "pawn",
         file: "h",
         rank: 2,
       },
-      "black-queen-rook": {
-        id: "black-queen-rook",
+      bqr: {
+        id: "bqr",
         player: "black",
         type: "rook",
         file: "a",
         rank: 8,
       },
-      "black-queen-knight": {
-        id: "black-queen-knight",
+      bqk: {
+        id: "bqk",
         player: "black",
         type: "knight",
         file: "b",
         rank: 8,
       },
-      "black-queen-bishop": {
-        id: "black-queen-bishop",
+      bqb: {
+        id: "bqb",
         player: "black",
         type: "bishop",
         file: "c",
         rank: 8,
       },
-      "black-queen": {
-        id: "black-queen",
+      bq: {
+        id: "bqueen",
         player: "black",
         type: "queen",
         file: "d",
         rank: 8,
       },
-      "black-king": {
-        id: "black-king",
+      bk: {
+        id: "bk",
         player: "black",
         type: "king",
         file: "e",
         rank: 8,
       },
-      "black-king-bishop": {
-        id: "black-king-bishop",
+      bkb: {
+        id: "bkb",
         player: "black",
         type: "bishop",
         file: "f",
         rank: 8,
       },
-      "black-king-knight": {
-        id: "black-king-knight",
+      bkk: {
+        id: "bkk",
         player: "black",
         type: "knight",
         file: "g",
         rank: 8,
       },
-      "black-king-rook": {
-        id: "black-king-rook",
+      bkr: {
+        id: "bkr",
         player: "black",
         type: "rook",
         file: "h",
         rank: 8,
       },
-      "black-pawn1": {
-        id: "black-pawn1",
+      bp1: {
+        id: "bp1",
         player: "black",
         type: "pawn",
         file: "a",
         rank: 7,
       },
-      "black-pawn2": {
-        id: "black-pawn2",
+      bp2: {
+        id: "bp2",
         player: "black",
         type: "pawn",
         file: "b",
         rank: 7,
       },
-      "black-pawn3": {
-        id: "black-pawn3",
+      bp3: {
+        id: "bp3",
         player: "black",
         type: "pawn",
         file: "c",
         rank: 7,
       },
-      "black-pawn4": {
-        id: "black-pawn4",
+      bp4: {
+        id: "bp4",
         player: "black",
         type: "pawn",
         file: "d",
         rank: 7,
       },
-      "black-pawn5": {
-        id: "black-pawn5",
+      bp5: {
+        id: "bp5",
         player: "black",
         type: "pawn",
         file: "e",
         rank: 7,
       },
-      "black-pawn6": {
-        id: "black-pawn6",
+      bp6: {
+        id: "bp6",
         player: "black",
         type: "pawn",
         file: "f",
         rank: 7,
       },
-      "black-pawn7": {
-        id: "black-pawn7",
+      bp7: {
+        id: "bp7",
         player: "black",
         type: "pawn",
         file: "g",
         rank: 7,
       },
-      "black-pawn8": {
-        id: "black-pawn8",
+      bp8: {
+        id: "bp8",
         player: "black",
         type: "pawn",
         file: "h",
@@ -252,7 +252,7 @@ const Board = () => {
 
     // with moviment
     if (selectedPiece) {
-      newBoardState.whiteToMove = !board.whiteToMove;
+      newBoardState.currentPlayer = board.currentPlayer ? "white" : "black";
       newBoardState.pieces[selectedPiece.id].file = file;
       newBoardState.pieces[selectedPiece.id].rank = rank;
       newBoardState.selected = {
@@ -307,7 +307,7 @@ const Board = () => {
         {board.selected.rank}
       </p>
       <p>piece selected: {board.selected.piece?.id}</p>
-      <p>turn: {board.whiteToMove ? "white" : "black"}</p>
+      <p>current player: {board.currentPlayer}</p>
     </>
   );
 };
