@@ -148,7 +148,7 @@ const Board = () => {
         rank: 8,
       },
       bq: {
-        id: "bqueen",
+        id: "bq",
         player: "black",
         type: "queen",
         file: "d",
@@ -241,37 +241,34 @@ const Board = () => {
     },
   });
 
+  const handleSelection = ({ file, rank, piece }) => {
+    let newBoardState = Object.assign({}, board);
+
+    newBoardState.selected = {
+      file,
+      rank,
+      piece,
+    };
+
+    setBoard(newBoardState);
+  };
+
   const handleMove = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
     const selectedPiece = board.selected.piece;
 
-    // tap on empty square without piece selected
-    if (!selectedPiece && !piece) {
-      return false;
-    }
+    newBoardState.currentPlayer = board.currentPlayer ? "white" : "black";
+    newBoardState.pieces[selectedPiece.id].file = file;
+    newBoardState.pieces[selectedPiece.id].rank = rank;
+    newBoardState.selected = {
+      file: null,
+      rank: null,
+      piece: null,
+    };
 
-    // with moviment
-    if (selectedPiece) {
-      newBoardState.currentPlayer = board.currentPlayer ? "white" : "black";
-      newBoardState.pieces[selectedPiece.id].file = file;
-      newBoardState.pieces[selectedPiece.id].rank = rank;
-      newBoardState.selected = {
-        file: null,
-        rank: null,
-        piece: null,
-      };
-
-      // capture
-      if (piece) {
-        delete newBoardState.pieces[piece.id];
-      }
-    } else {
-      // selection of empty square
-      newBoardState.selected = {
-        file,
-        rank,
-        piece,
-      };
+    // capture
+    if (piece) {
+      delete newBoardState.pieces[piece.id];
     }
 
     setBoard(newBoardState);
@@ -292,7 +289,11 @@ const Board = () => {
               return (
                 <S.Square
                   key={rank}
-                  onClick={() => handleMove({ file, rank, piece })}
+                  onClick={() =>
+                    board.selected.piece
+                      ? handleMove({ file, rank, piece })
+                      : handleSelection({ file, rank, piece })
+                  }
                   selected={selected}
                 >
                   {piece && <Piece player={piece.player} piece={piece.type} />}
