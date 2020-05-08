@@ -244,6 +244,8 @@ const Board = () => {
   const handleSelection = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
 
+    if (piece.player !== board.currentPlayer) return false;
+
     newBoardState.selected = {
       file,
       rank,
@@ -257,7 +259,8 @@ const Board = () => {
     let newBoardState = Object.assign({}, board);
     const selectedPiece = board.selected.piece;
 
-    newBoardState.currentPlayer = board.currentPlayer ? "white" : "black";
+    newBoardState.currentPlayer =
+      board.currentPlayer === "white" ? "black" : "white";
     newBoardState.pieces[selectedPiece.id].file = file;
     newBoardState.pieces[selectedPiece.id].rank = rank;
     newBoardState.selected = {
@@ -271,6 +274,7 @@ const Board = () => {
       delete newBoardState.pieces[piece.id];
     }
 
+    console.log(newBoardState);
     setBoard(newBoardState);
   };
 
