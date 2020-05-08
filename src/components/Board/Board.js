@@ -241,6 +241,12 @@ const Board = () => {
     },
   });
 
+  const handleSquare = ({ file, rank, piece }) => {
+    board.selected.piece
+      ? handleMove({ file, rank, piece })
+      : handleSelection({ file, rank, piece });
+  };
+
   const handleSelection = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
 
@@ -293,11 +299,7 @@ const Board = () => {
               return (
                 <S.Square
                   key={rank}
-                  onClick={() =>
-                    board.selected.piece
-                      ? handleMove({ file, rank, piece })
-                      : handleSelection({ file, rank, piece })
-                  }
+                  onClick={() => handleSquare({ file, rank, piece })}
                   selected={selected}
                 >
                   {piece && <Piece player={piece.player} piece={piece.type} />}
