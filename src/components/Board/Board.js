@@ -2,213 +2,213 @@ import React, { useState } from "react";
 import Piece from "../Piece";
 import * as S from "./Board.style";
 
-const COLUMNS = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const LINES = [8, 7, 6, 5, 4, 3, 2, 1];
+const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
+const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
 
 const Board = () => {
   const [board, setBoard] = useState({
     selected: {
-      column: undefined,
-      line: undefined,
+      file: undefined,
+      rank: undefined,
       piece: undefined,
     },
     pieces: {
       "white-queen-rook": {
         id: "white-queen-rook",
         type: "white-rook",
-        column: "a",
-        line: 1,
+        file: "a",
+        rank: 1,
       },
       "white-queen-knight": {
         id: "white-queen-knight",
         type: "white-knight",
-        column: "b",
-        line: 1,
+        file: "b",
+        rank: 1,
       },
       "white-queen-bishop": {
         id: "white-queen-bishop",
         type: "white-bishop",
-        column: "c",
-        line: 1,
+        file: "c",
+        rank: 1,
       },
       "white-queen": {
         id: "white-queen",
         type: "white-queen",
-        column: "d",
-        line: 1,
+        file: "d",
+        rank: 1,
       },
       "white-king": {
         id: "white-king",
         type: "white-king",
-        column: "e",
-        line: 1,
+        file: "e",
+        rank: 1,
       },
       "white-king-bishop": {
         id: "white-king-bishop",
         type: "white-bishop",
-        column: "f",
-        line: 1,
+        file: "f",
+        rank: 1,
       },
       "white-king-knight": {
         id: "white-king-knight",
         type: "white-knight",
-        column: "g",
-        line: 1,
+        file: "g",
+        rank: 1,
       },
       "white-king-rook": {
         id: "white-king-rook",
         type: "white-rook",
-        column: "h",
-        line: 1,
+        file: "h",
+        rank: 1,
       },
       "white-pawn1": {
         id: "white-pawn1",
         type: "white-pawn",
-        column: "a",
-        line: 2,
+        file: "a",
+        rank: 2,
       },
       "white-pawn2": {
         id: "white-pawn2",
         type: "white-pawn",
-        column: "b",
-        line: 2,
+        file: "b",
+        rank: 2,
       },
       "white-pawn3": {
         id: "white-pawn3",
         type: "white-pawn",
-        column: "c",
-        line: 2,
+        file: "c",
+        rank: 2,
       },
       "white-pawn4": {
         id: "white-pawn4",
         type: "white-pawn",
-        column: "d",
-        line: 2,
+        file: "d",
+        rank: 2,
       },
       "white-pawn5": {
         id: "white-pawn5",
         type: "white-pawn",
-        column: "e",
-        line: 2,
+        file: "e",
+        rank: 2,
       },
       "white-pawn6": {
         id: "white-pawn6",
         type: "white-pawn",
-        column: "f",
-        line: 2,
+        file: "f",
+        rank: 2,
       },
       "white-pawn7": {
         id: "white-pawn7",
         type: "white-pawn",
-        column: "g",
-        line: 2,
+        file: "g",
+        rank: 2,
       },
       "white-pawn8": {
         id: "white-pawn8",
         type: "white-pawn",
-        column: "h",
-        line: 2,
+        file: "h",
+        rank: 2,
       },
       "black-queen-rook": {
         id: "black-queen-rook",
         type: "black-rook",
-        column: "a",
-        line: 8,
+        file: "a",
+        rank: 8,
       },
       "black-queen-knight": {
         id: "black-queen-knight",
         type: "black-knight",
-        column: "b",
-        line: 8,
+        file: "b",
+        rank: 8,
       },
       "black-queen-bishop": {
         id: "black-queen-bishop",
         type: "black-bishop",
-        column: "c",
-        line: 8,
+        file: "c",
+        rank: 8,
       },
       "black-queen": {
         id: "black-queen",
         type: "black-queen",
-        column: "d",
-        line: 8,
+        file: "d",
+        rank: 8,
       },
       "black-king": {
         id: "black-king",
         type: "black-king",
-        column: "e",
-        line: 8,
+        file: "e",
+        rank: 8,
       },
       "black-king-bishop": {
         id: "black-king-bishop",
         type: "black-bishop",
-        column: "f",
-        line: 8,
+        file: "f",
+        rank: 8,
       },
       "black-king-knight": {
         id: "black-king-knight",
         type: "black-knight",
-        column: "g",
-        line: 8,
+        file: "g",
+        rank: 8,
       },
       "black-king-rook": {
         id: "black-king-rook",
         type: "black-rook",
-        column: "h",
-        line: 8,
+        file: "h",
+        rank: 8,
       },
       "black-pawn1": {
         id: "black-pawn1",
         type: "black-pawn",
-        column: "a",
-        line: 7,
+        file: "a",
+        rank: 7,
       },
       "black-pawn2": {
         id: "black-pawn2",
         type: "black-pawn",
-        column: "b",
-        line: 7,
+        file: "b",
+        rank: 7,
       },
       "black-pawn3": {
         id: "black-pawn3",
         type: "black-pawn",
-        column: "c",
-        line: 7,
+        file: "c",
+        rank: 7,
       },
       "black-pawn4": {
         id: "black-pawn4",
         type: "black-pawn",
-        column: "d",
-        line: 7,
+        file: "d",
+        rank: 7,
       },
       "black-pawn5": {
         id: "black-pawn5",
         type: "black-pawn",
-        column: "e",
-        line: 7,
+        file: "e",
+        rank: 7,
       },
       "black-pawn6": {
         id: "black-pawn6",
         type: "black-pawn",
-        column: "f",
-        line: 7,
+        file: "f",
+        rank: 7,
       },
       "black-pawn7": {
         id: "black-pawn7",
         type: "black-pawn",
-        column: "g",
-        line: 7,
+        file: "g",
+        rank: 7,
       },
       "black-pawn8": {
         id: "black-pawn8",
         type: "black-pawn",
-        column: "h",
-        line: 7,
+        file: "h",
+        rank: 7,
       },
     },
   });
 
-  const handleSquare = ({ column, line, piece }) => {
+  const handleSquare = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
     const selectedPiece = board.selected.piece;
 
@@ -219,11 +219,11 @@ const Board = () => {
 
     // moviment
     if (selectedPiece) {
-      newBoardState.pieces[selectedPiece.id].column = column;
-      newBoardState.pieces[selectedPiece.id].line = line;
+      newBoardState.pieces[selectedPiece.id].file = file;
+      newBoardState.pieces[selectedPiece.id].rank = rank;
       newBoardState.selected = {
-        column: null,
-        line: null,
+        file: null,
+        rank: null,
         piece: null,
       };
       if (piece) {
@@ -231,8 +231,8 @@ const Board = () => {
       }
     } else {
       newBoardState.selected = {
-        column,
-        line,
+        file,
+        rank,
         piece,
       };
     }
@@ -245,20 +245,19 @@ const Board = () => {
   return (
     <>
       <S.Board>
-        {COLUMNS.map((column) => (
-          <S.Column key={column}>
-            {LINES.map((line) => {
+        {FILES.map((file) => (
+          <S.Column key={file}>
+            {RANKS.map((rank) => {
               const piece = Object.values(board.pieces).find(
-                (piece) => piece.column === column && piece.line === line
+                (piece) => piece.file === file && piece.rank === rank
               );
               const selected =
-                column === board.selected.column &&
-                line === board.selected.line;
+                file === board.selected.file && rank === board.selected.rank;
 
               return (
                 <S.Square
-                  key={line}
-                  onClick={() => handleSquare({ column, line, piece })}
+                  key={rank}
+                  onClick={() => handleSquare({ file, rank, piece })}
                   selected={selected}
                 >
                   {piece && <Piece type={piece.type} />}
@@ -269,8 +268,8 @@ const Board = () => {
         ))}
       </S.Board>
       <p>
-        square selected: {board.selected.column}
-        {board.selected.line}
+        square selected: {board.selected.file}
+        {board.selected.rank}
       </p>
       <p>piece selected: {board.selected.piece?.id}</p>
     </>
