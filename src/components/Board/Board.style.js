@@ -9,7 +9,7 @@ export const Board = styled.div({
   height: "100vw",
 });
 
-export const Column = styled.div({
+export const Ranks = styled.div({
   display: "flex",
   flexDirection: "column",
   flexGrow: 1,
@@ -26,8 +26,8 @@ export const Square = styled.div(({ selected }) => ({
   boxShadow: selected ? "inset 0 0 0 5px #3b5998" : "none",
   outline: "none",
 
-  [`${Column}:nth-child(even) &:nth-child(odd), 
-    ${Column}:nth-child(odd) &:nth-child(even)`]: {
+  [`${Ranks}:nth-child(even) &:nth-child(odd), 
+    ${Ranks}:nth-child(odd) &:nth-child(even)`]: {
     background: "#8b9dc3",
   },
 

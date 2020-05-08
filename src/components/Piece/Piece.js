@@ -12,7 +12,7 @@ import { ReactComponent as BlackBishop } from "../../assets/black-bishop.svg";
 import { ReactComponent as BlackQueen } from "../../assets/black-queen.svg";
 import { ReactComponent as BlackKing } from "../../assets/black-king.svg";
 
-const Piece = ({ type }) =>
+const Piece = ({ player, piece }) =>
   ({
     "white-pawn": <WhitePawn />,
     "white-rook": <WhiteRook />,
@@ -26,6 +26,6 @@ const Piece = ({ type }) =>
     "black-bishop": <BlackBishop />,
     "black-queen": <BlackQueen />,
     "black-king": <BlackKing />,
-  }[type]);
+  }[`${player}-${piece}`]);
 
 export default Piece;
