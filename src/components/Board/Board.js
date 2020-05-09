@@ -12,6 +12,7 @@ const Board = () => {
       file: null,
       rank: null,
       piece: null,
+      legalMove: [],
     },
     pieces: {
       wqr: {
@@ -247,16 +248,22 @@ const Board = () => {
       : handleSelection({ file, rank, piece });
   };
 
+  const legalMove = ({ file, rank, piece }) => {
+    return [
+      { file: "d", rank: 3 },
+      { file: "d", rank: 4 },
+    ];
+  };
+
   const handleSelection = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
 
-    if (piece.player !== board.currentPlayer) return false;
+    if (piece && piece.player !== board.currentPlayer) return false;
 
-    newBoardState.selected = {
-      file,
-      rank,
-      piece,
-    };
+    newBoardState.selected.file = file;
+    newBoardState.selected.rank = rank;
+    newBoardState.selected.piece = piece;
+    newBoardState.selected.legalMove = legalMove({ file, rank, piece });
 
     setBoard(newBoardState);
   };
@@ -273,6 +280,7 @@ const Board = () => {
       file: null,
       rank: null,
       piece: null,
+      legalMove: [],
     };
 
     // capture
@@ -280,7 +288,6 @@ const Board = () => {
       delete newBoardState.pieces[piece.id];
     }
 
-    console.log(newBoardState);
     setBoard(newBoardState);
   };
 
@@ -296,11 +303,16 @@ const Board = () => {
               const selected =
                 file === board.selected.file && rank === board.selected.rank;
 
+              const legalMove = board.selected.legalMove.find(
+                (square) => square.file === file && square.rank === rank
+              );
+
               return (
                 <S.Square
                   key={rank}
                   onClick={() => handleSquare({ file, rank, piece })}
-                  selected={selected}
+                  selected={selected && true}
+                  legalMove={legalMove && true}
                 >
                   {piece && <Piece player={piece.player} piece={piece.type} />}
                 </S.Square>

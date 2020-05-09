@@ -16,7 +16,7 @@ export const Ranks = styled.div({
   flexBasis: 0,
 });
 
-export const Square = styled.div(({ selected }) => ({
+export const Square = styled.div(({ selected, legalMove }) => ({
   flexGrow: 1,
   flexBasis: 0,
   backgroundColor: "#dfe3ee",
@@ -37,5 +37,18 @@ export const Square = styled.div(({ selected }) => ({
     top: 0,
     width: "100%",
     height: "100%",
+  },
+
+  ":before": {
+    display: legalMove ? "block" : "none",
+    content: "''",
+    background: "rgba(0, 0, 0, 0.15)",
+    width: 25,
+    height: 25,
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    borderRadius: 90,
   },
 }));
