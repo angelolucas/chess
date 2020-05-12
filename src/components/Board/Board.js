@@ -1,10 +1,8 @@
 import React, { useState } from "react";
+import { FILES, RANKS } from '../../constants';
+import legalMoves from "../../logics/legalMoves";
 import Piece from "../Piece";
 import * as S from "./Board.style";
-import legalMoves from "../../logics/legalMoves";
-
-const FILES = ["a", "b", "c", "d", "e", "f", "g", "h"];
-const RANKS = [8, 7, 6, 5, 4, 3, 2, 1];
 
 const Board = () => {
   const [board, setBoard] = useState({
