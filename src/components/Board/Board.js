@@ -100,9 +100,9 @@ const Board = () => {
   return (
     <>
       <S.Board>
-        {FILES.map((file) => (
-          <S.Ranks key={file}>
-            {RANKS.map((rank) => {
+        {RANKS.map((rank) => (
+          <S.Rank key={rank}>
+            {FILES.map((file) => {
               const piece = Object.values(board.pieces).find(
                 (piece) => piece.file === file && piece.rank === rank
               );
@@ -120,11 +120,12 @@ const Board = () => {
                   selected={selected && true}
                   legalMove={legalMove && true}
                 >
+                  {file}{rank}
                   {piece && <Piece player={piece.player} piece={piece.type} />}
                 </S.Square>
               );
             })}
-          </S.Ranks>
+          </S.Rank>
         ))}
       </S.Board>
       <p>
