@@ -3,9 +3,25 @@ import { getPieceBySquare } from '../utils';
 
 export default ({ selected, pieces }) => {
   const ranks = RANKS.slice(selected.rank);
-  const file = selected.file
+  const file = selected.file;
+  let legalMoves = [];
 
-  return ranks.map(rank => {
-    return { file, rank }
-  })
+  for(const rank of ranks) {
+    const piece = getPieceBySquare({file, rank, pieces });
+
+    if (piece) {
+      const ownPiece = piece.player === selected.piece.player
+
+      if (ownPiece){
+        break;
+      } else {
+        legalMoves.push({file, rank});
+        break;
+      }
+    } else {
+      legalMoves.push({file, rank});
+    }
+  }
+
+  return legalMoves
 };
