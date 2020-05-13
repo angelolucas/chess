@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FILES, RANKS } from '../../constants';
 import legalMoves from "../../logics/legalMoves";
+import {getPieceBySquare } from '../../utils';
 import Piece from "../Piece";
 import * as S from "./Board.style";
 
@@ -19,14 +20,7 @@ const Board = () => {
         player: "white",
         type: "rook",
         file: "c",
-        rank: 4,
-      },
-      5: {
-        id: 5,
-        player: "white",
-        type: "rook",
-        file: "d",
-        rank: 6,
+        rank: 2,
       },
       2: {
         id: 2,
@@ -39,8 +33,29 @@ const Board = () => {
         id: 3,
         player: "white",
         type: "queen",
-        file: "f",
-        rank: 4,
+        file: "e",
+        rank: 2,
+      },
+      4: {
+        id: 4,
+        player: "black",
+        type: "rook",
+        file: "g",
+        rank: 7,
+      },
+      5: {
+        id: 5,
+        player: "white",
+        type: "rook",
+        file: "g",
+        rank: 2,
+      },
+      6: {
+        id: 6,
+        player: "white",
+        type: "king",
+        file: "c",
+        rank: 6,
       },
     },
   });
@@ -97,15 +112,15 @@ const Board = () => {
     setBoard(newBoardState);
   };
 
+  window.board = board
+
   return (
     <>
       <S.Board>
         {RANKS.map((rank) => (
           <S.Rank key={rank}>
             {FILES.map((file) => {
-              const piece = Object.values(board.pieces).find(
-                (piece) => piece.file === file && piece.rank === rank
-              );
+              const piece = getPieceBySquare({file, rank, pieces: board.pieces});
               const selected =
                 file === board.selected.file && rank === board.selected.rank;
 
@@ -115,12 +130,11 @@ const Board = () => {
 
               return (
                 <S.Square
-                  key={rank}
+                  key={file}
                   onClick={() => handleSquare({ file, rank, piece })}
                   selected={selected && true}
                   legalMove={legalMove && true}
                 >
-                  {file}{rank}
                   {piece && <Piece player={piece.player} piece={piece.type} />}
                 </S.Square>
               );
