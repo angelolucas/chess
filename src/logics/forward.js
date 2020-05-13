@@ -1,6 +1,11 @@
+import { RANKS } from '../constants';
+import { getPieceBySquare } from '../utils';
+
 export default ({ selected, pieces }) => {
-  return [
-    { file: "d", rank: 3 },
-    { file: "d", rank: 4 },
-  ];
+  const ranks = RANKS.slice(selected.rank);
+  const file = selected.file
+
+  return ranks.map(rank => {
+    return { file, rank }
+  })
 };
