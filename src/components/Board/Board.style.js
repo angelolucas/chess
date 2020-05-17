@@ -23,7 +23,7 @@ export const Square = styled.div(({ selected, legalMove }) => ({
   color: '#11141a',
   position: 'relative',
   fontSize: 12,
-  boxShadow: selected ? 'inset 0 0 0 5px #3b5998' : 'none',
+  boxShadow: selected ? 'inset 0 0 0 5px rgba(0, 0, 0, 0.15)' : 'none',
   outline: 'none',
 
   [`${Rank}:nth-child(even) &:nth-child(odd), 

@@ -1,27 +1,12 @@
 import { RANKS } from '../constants';
-import { getPieceBySquare } from '../utils';
+import { getLegalMovesBySquares } from '../utils';
 
 export default ({ selected, pieces }) => {
-  const ranks = RANKS.slice(0, selected.rank - 1).reverse();
+  const player = selected.piece.player;
   const file = selected.file;
-  let legalMoves = [];
+  const squares = RANKS.slice(0, selected.rank - 1)
+    .reverse()
+    .map((rank) => ({ file, rank }));
 
-  for (const rank of ranks) {
-    const piece = getPieceBySquare({ file, rank, pieces });
-
-    if (piece) {
-      const ownPiece = piece.player === selected.piece.player;
-
-      if (ownPiece) {
-        break;
-      } else {
-        legalMoves.push({ file, rank });
-        break;
-      }
-    } else {
-      legalMoves.push({ file, rank });
-    }
-  }
-
-  return legalMoves;
+  return getLegalMovesBySquares({ player, squares, pieces });
 };
