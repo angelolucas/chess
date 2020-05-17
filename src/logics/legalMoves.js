@@ -1,17 +1,11 @@
-import forward from './forward';
-import backward from './backward';
-import left from './left';
-import right from './right';
+import rook from './rook';
 
 export default ({ selected, pieces }) => {
   let legalMoves = [];
 
-  // forward
+  // Rook
   if (['rook', 'queen'].includes(selected.piece.type)) {
-    legalMoves = [...legalMoves, ...forward({ selected, pieces })];
-    legalMoves = [...legalMoves, ...backward({ selected, pieces })];
-    legalMoves = [...legalMoves, ...left({ selected, pieces })];
-    legalMoves = [...legalMoves, ...right({ selected, pieces })];
+    legalMoves = [...legalMoves, ...rook({ selected, pieces })];
   }
 
   return legalMoves;
