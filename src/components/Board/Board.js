@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { FILES, RANKS } from '../../constants';
-import legalMoves from "../../logics/legalMoves";
-import {getPieceBySquare } from '../../utils';
-import Piece from "../Piece";
-import * as S from "./Board.style";
+import legalMoves from '../../logics/legalMoves';
+import { getPieceBySquare } from '../../utils';
+import Piece from '../Piece';
+import * as S from './Board.style';
 
 const Board = () => {
   const [board, setBoard] = useState({
-    currentPlayer: "white",
+    currentPlayer: 'white',
     selected: {
       file: null,
       rank: null,
@@ -17,58 +17,58 @@ const Board = () => {
     pieces: {
       1: {
         id: 1,
-        player: "white",
-        type: "rook",
-        file: "c",
+        player: 'white',
+        type: 'rook',
+        file: 'c',
         rank: 5,
       },
       2: {
         id: 2,
-        player: "white",
-        type: "bishop",
-        file: "e",
+        player: 'white',
+        type: 'bishop',
+        file: 'e',
         rank: 2,
       },
       3: {
         id: 3,
-        player: "white",
-        type: "queen",
-        file: "e",
+        player: 'white',
+        type: 'queen',
+        file: 'e',
         rank: 7,
       },
       4: {
         id: 4,
-        player: "black",
-        type: "rook",
-        file: "g",
+        player: 'black',
+        type: 'rook',
+        file: 'g',
         rank: 7,
       },
       5: {
         id: 5,
-        player: "white",
-        type: "rook",
-        file: "g",
+        player: 'white',
+        type: 'rook',
+        file: 'g',
         rank: 5,
       },
       6: {
         id: 6,
-        player: "white",
-        type: "king",
-        file: "c",
+        player: 'white',
+        type: 'king',
+        file: 'c',
         rank: 6,
       },
       7: {
         id: 7,
-        player: "black",
-        type: "pawn",
-        file: "c",
+        player: 'black',
+        type: 'pawn',
+        file: 'c',
         rank: 2,
       },
       8: {
         id: 8,
-        player: "white",
-        type: "queen",
-        file: "d",
+        player: 'white',
+        type: 'queen',
+        file: 'd',
         rank: 8,
       },
     },
@@ -106,7 +106,7 @@ const Board = () => {
 
     if (legalMove) {
       newBoardState.currentPlayer =
-        board.currentPlayer === "white" ? "black" : "white";
+        board.currentPlayer === 'white' ? 'black' : 'white';
       newBoardState.pieces[selectedPiece.id].file = file;
       newBoardState.pieces[selectedPiece.id].rank = rank;
 
@@ -126,7 +126,7 @@ const Board = () => {
     setBoard(newBoardState);
   };
 
-  window.board = board
+  window.board = board;
 
   return (
     <>
@@ -134,7 +134,11 @@ const Board = () => {
         {RANKS.map((rank) => (
           <S.Rank key={rank}>
             {FILES.map((file) => {
-              const piece = getPieceBySquare({file, rank, pieces: board.pieces});
+              const piece = getPieceBySquare({
+                file,
+                rank,
+                pieces: board.pieces,
+              });
               const selected =
                 file === board.selected.file && rank === board.selected.rank;
 

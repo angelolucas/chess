@@ -7,22 +7,22 @@ export default ({ selected, pieces }) => {
   const rank = selected.rank;
   let legalMoves = [];
 
-  for(const file of files) {
-    const piece = getPieceBySquare({rank, file, pieces });
+  for (const file of files) {
+    const piece = getPieceBySquare({ rank, file, pieces });
 
     if (piece) {
-      const ownPiece = piece.player === selected.piece.player
+      const ownPiece = piece.player === selected.piece.player;
 
-      if (ownPiece){
+      if (ownPiece) {
         break;
       } else {
-        legalMoves.push({rank, file});
+        legalMoves.push({ rank, file });
         break;
       }
     } else {
-      legalMoves.push({rank, file});
+      legalMoves.push({ rank, file });
     }
   }
 
-  return legalMoves
+  return legalMoves;
 };
