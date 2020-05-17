@@ -1,5 +1,6 @@
 import forward from "./forward";
 import backward from "./backward";
+import left from "./left";
 
 export default ({ selected, pieces }) => {
   let legalMoves = [];
@@ -8,6 +9,7 @@ export default ({ selected, pieces }) => {
   if (["rook", "queen"].includes(selected.piece.type)) {
     legalMoves = [...legalMoves, ...forward({ selected, pieces })];
     legalMoves = [...legalMoves, ...backward({ selected, pieces })];
+    legalMoves = [...legalMoves, ...left({ selected, pieces })];
   }
 
   return legalMoves;

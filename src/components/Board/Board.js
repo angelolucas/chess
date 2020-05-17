@@ -68,8 +68,8 @@ const Board = () => {
         id: 8,
         player: "white",
         type: "queen",
-        file: "a",
-        rank: 4,
+        file: "d",
+        rank: 8,
       },
     },
   });
@@ -83,7 +83,7 @@ const Board = () => {
   const handleSelection = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
 
-    if (piece && piece.player !== board.currentPlayer) return false;
+    //if (piece && piece.player !== board.currentPlayer) return false;
 
     newBoardState.selected.file = file;
     newBoardState.selected.rank = rank;
@@ -106,7 +106,7 @@ const Board = () => {
 
     if (legalMove) {
       newBoardState.currentPlayer =
-        board.currentPlayer === "white" ? "white" : "white";
+        board.currentPlayer === "white" ? "black" : "white";
       newBoardState.pieces[selectedPiece.id].file = file;
       newBoardState.pieces[selectedPiece.id].rank = rank;
 
