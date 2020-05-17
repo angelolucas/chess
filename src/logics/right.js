@@ -2,8 +2,8 @@ import { FILES } from '../constants';
 import { getPieceBySquare } from '../utils';
 
 export default ({ selected, pieces }) => {
-  const position = FILES.indexOf(selected.file);  
-  const files = FILES.slice(0, position).reverse();
+  const position = FILES.indexOf(selected.file) + 1;
+  const files = FILES.slice(position);
   const rank = selected.rank;
   let legalMoves = [];
 

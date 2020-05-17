@@ -1,6 +1,7 @@
 import forward from "./forward";
 import backward from "./backward";
 import left from "./left";
+import right from "./right";
 
 export default ({ selected, pieces }) => {
   let legalMoves = [];
@@ -10,6 +11,7 @@ export default ({ selected, pieces }) => {
     legalMoves = [...legalMoves, ...forward({ selected, pieces })];
     legalMoves = [...legalMoves, ...backward({ selected, pieces })];
     legalMoves = [...legalMoves, ...left({ selected, pieces })];
+    legalMoves = [...legalMoves, ...right({ selected, pieces })];
   }
 
   return legalMoves;
