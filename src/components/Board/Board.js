@@ -16,60 +16,60 @@ const Board = () => {
     },
     pieces: {
       1: {
-        id: 1,
+        id: 2,
         player: 'white',
-        type: 'rook',
-        file: 'c',
-        rank: 5,
+        type: 'bishop',
+        file: 'a',
+        rank: 1,
       },
       2: {
         id: 2,
         player: 'white',
         type: 'bishop',
-        file: 'e',
+        file: 'a',
         rank: 2,
       },
       3: {
         id: 3,
         player: 'white',
-        type: 'queen',
-        file: 'e',
-        rank: 7,
+        type: 'bishop',
+        file: 'a',
+        rank: 3,
       },
       4: {
         id: 4,
-        player: 'black',
-        type: 'rook',
-        file: 'g',
-        rank: 7,
+        player: 'white',
+        type: 'bishop',
+        file: 'a',
+        rank: 4,
       },
       5: {
         id: 5,
         player: 'white',
-        type: 'rook',
-        file: 'g',
+        type: 'bishop',
+        file: 'a',
         rank: 5,
       },
       6: {
         id: 6,
         player: 'white',
-        type: 'king',
-        file: 'c',
+        type: 'bishop',
+        file: 'a',
         rank: 6,
       },
       7: {
         id: 7,
-        player: 'black',
-        type: 'pawn',
-        file: 'c',
-        rank: 2,
+        player: 'white',
+        type: 'bishop',
+        file: 'd',
+        rank: 4,
       },
       8: {
         id: 8,
-        player: 'white',
-        type: 'queen',
-        file: 'd',
-        rank: 8,
+        player: 'black',
+        type: 'bishop',
+        file: 'f',
+        rank: 6,
       },
     },
   });
@@ -153,6 +153,8 @@ const Board = () => {
                   selected={selected && true}
                   legalMove={legalMove && true}
                 >
+                  {file}
+                  {rank}
                   {piece && <Piece player={piece.player} piece={piece.type} />}
                 </S.Square>
               );
