@@ -1,4 +1,5 @@
 import { FILES, RANKS } from '../constants';
+import getPieceBySquare from './getPieceBySquare';
 
 const next = ({ index, direction }) => {
   let output = { file: index.file, rank: index.rank };
@@ -17,19 +18,29 @@ const next = ({ index, direction }) => {
   return output;
 };
 
-export default ({ index, direction }) => {
-  let squares = [];
+export default ({ index, direction, pieces, player }) => {
+  let legalMoves = [];
 
   const loopSquares = ({ index, direction }) => {
     const { file, rank } = next({ index, direction });
 
     if (FILES.includes(file) && RANKS.includes(rank)) {
-      squares.push({ file: file, rank: rank });
+      const piece = getPieceBySquare({ file, rank, pieces });
 
-      loopSquares({
-        index: { file, rank },
-        direction,
-      });
+      if (piece) {
+        const enemyPiece = piece.player !== player;
+
+        if (enemyPiece) {
+          legalMoves.push({ file, rank });
+        }
+      } else {
+        legalMoves.push({ file, rank });
+
+        loopSquares({
+          index: { file, rank },
+          direction,
+        });
+      }
     }
   };
 
@@ -38,5 +49,5 @@ export default ({ index, direction }) => {
     direction,
   });
 
-  return squares;
+  return legalMoves;
 };

@@ -1,5 +1,4 @@
-import { FILES, RANKS } from '../constants';
-import { getLegalMovesBySquares, loopSquares } from '../utils';
+import { loopSquares } from '../utils';
 
 export default ({
   selected: {
@@ -9,43 +8,30 @@ export default ({
   },
   pieces,
 }) => {
-  const forwardRightSquares = loopSquares({
-    index: { file, rank },
-    direction: { file: 'forward', rank: 'forward' },
-  });
-  const forwardLeftSquares = loopSquares({
-    index: { file, rank },
-    direction: { file: 'backward', rank: 'forward' },
-  });
-  const backwardLeftSquares = loopSquares({
-    index: { file, rank },
-    direction: { file: 'backward', rank: 'backward' },
-  });
-  const backwardRightSquares = loopSquares({
-    index: { file, rank },
-    direction: { file: 'forward', rank: 'backward' },
-  });
-
   return [
-    ...getLegalMovesBySquares({
-      squares: forwardRightSquares,
-      player,
+    ...loopSquares({
+      index: { file, rank },
+      direction: { file: 'forward', rank: 'forward' },
       pieces,
+      player,
     }),
-    ...getLegalMovesBySquares({
-      squares: forwardLeftSquares,
-      player,
+    ...loopSquares({
+      index: { file, rank },
+      direction: { file: 'backward', rank: 'forward' },
       pieces,
+      player,
     }),
-    ...getLegalMovesBySquares({
-      squares: backwardLeftSquares,
-      player,
+    ...loopSquares({
+      index: { file, rank },
+      direction: { file: 'backward', rank: 'backward' },
       pieces,
+      player,
     }),
-    ...getLegalMovesBySquares({
-      squares: backwardRightSquares,
-      player,
+    ...loopSquares({
+      index: { file, rank },
+      direction: { file: 'forward', rank: 'backward' },
       pieces,
+      player,
     }),
   ];
 };
