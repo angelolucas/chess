@@ -8,7 +8,7 @@ export default ({ selected, pieces }) => {
   if (['rook', 'queen'].includes(selected.piece.type)) {
     legalMoves = [...legalMoves, ...rook({ selected, pieces })];
   }
-  if (['bishop'].includes(selected.piece.type)) {
+  if (['bishop', 'queen'].includes(selected.piece.type)) {
     legalMoves = [...legalMoves, ...bishop({ selected, pieces })];
   }
 
