@@ -21,17 +21,13 @@ export default ({ index, direction }) => {
   let squares = [];
 
   const loopSquares = ({ index, direction }) => {
-    const nextSquare = next({ index, direction });
+    const { file, rank } = next({ index, direction });
 
-    if (FILES.includes(nextSquare.file) && RANKS.includes(nextSquare.rank)) {
-      console.log(nextSquare, 'entrou');
-      squares.push({ file: nextSquare.file, rank: nextSquare.rank });
+    if (FILES.includes(file) && RANKS.includes(rank)) {
+      squares.push({ file: file, rank: rank });
 
       loopSquares({
-        index: {
-          file: nextSquare.file,
-          rank: nextSquare.rank,
-        },
+        index: { file, rank },
         direction,
       });
     }
