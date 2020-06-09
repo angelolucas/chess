@@ -6,8 +6,8 @@ export const Board = styled.div({
   flexDirection: 'column-reverse',
   border: '5px solid #8b9dc3',
   margin: '0 auto',
-  width: '100vw',
-  height: '100vw',
+  width: '100vmin',
+  height: '100vmin',
 });
 
 export const Rank = styled.div({
