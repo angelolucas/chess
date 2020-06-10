@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FILES, RANKS } from '../../constants';
-import legalMoves from '../../logics/legalMoves';
-import { getPieceBySquare } from '../../utils';
-import Piece from '../Piece';
+import { FILES, RANKS } from 'constants.js';
+import legalMoves from 'logics/legalMoves';
+import { getPieceBySquare } from 'utils';
+import Piece from 'components/Piece';
 import * as S from './Board.style';
 
 const Board = () => {
@@ -18,58 +18,16 @@ const Board = () => {
       1: {
         id: 1,
         player: 'white',
-        type: 'bishop',
-        file: 1,
-        rank: 1,
+        type: 'king',
+        file: 6,
+        rank: 6,
       },
       2: {
         id: 2,
         player: 'white',
-        type: 'bishop',
-        file: 1,
-        rank: 2,
-      },
-      3: {
-        id: 3,
-        player: 'white',
-        type: 'bishop',
-        file: 1,
-        rank: 3,
-      },
-      4: {
-        id: 4,
-        player: 'white',
-        type: 'bishop',
-        file: 1,
-        rank: 4,
-      },
-      5: {
-        id: 5,
-        player: 'white',
-        type: 'bishop',
-        file: 1,
-        rank: 5,
-      },
-      6: {
-        id: 6,
-        player: 'black',
-        type: 'rook',
-        file: 5,
-        rank: 5,
-      },
-      7: {
-        id: 7,
-        player: 'black',
-        type: 'bishop',
-        file: 1,
-        rank: 9,
-      },
-      8: {
-        id: 8,
-        player: 'black',
         type: 'queen',
-        file: 6,
-        rank: 8,
+        file: 2,
+        rank: 2,
       },
     },
   });
@@ -129,46 +87,38 @@ const Board = () => {
   window.board = board;
 
   return (
-    <>
-      <S.Board>
-        {RANKS.map((rank) => (
-          <S.Rank key={rank}>
-            {FILES.map((file) => {
-              const piece = getPieceBySquare({
-                file,
-                rank,
-                pieces: board.pieces,
-              });
-              const selected =
-                file === board.selected.file && rank === board.selected.rank;
+    <S.Board>
+      {RANKS.map((rank) => (
+        <S.Rank key={rank}>
+          {FILES.map((file) => {
+            const piece = getPieceBySquare({
+              file,
+              rank,
+              pieces: board.pieces,
+            });
+            const selected =
+              file === board.selected.file && rank === board.selected.rank;
 
-              const legalMove = board.selected.legalMoves.find(
-                (square) => square.file === file && square.rank === rank
-              );
+            const legalMove = board.selected.legalMoves.find(
+              (square) => square.file === file && square.rank === rank
+            );
 
-              return (
-                <S.Square
-                  key={file}
-                  onClick={() => handleSquare({ file, rank, piece })}
-                  selected={selected && true}
-                  legalMove={legalMove && true}
-                >
-                  {file}
-                  {rank}
-                  {piece && <Piece player={piece.player} piece={piece.type} />}
-                </S.Square>
-              );
-            })}
-          </S.Rank>
-        ))}
-      </S.Board>
-      <p>
-        square selected: {board.selected.file}
-        {board.selected.rank}
-      </p>
-      <p>piece selected: {board.selected.piece?.id}</p>
-      <p>current player: {board.currentPlayer}</p>
-    </>
+            return (
+              <S.Square
+                key={file}
+                onClick={() => handleSquare({ file, rank, piece })}
+                selected={selected && true}
+                legalMove={legalMove && true}
+              >
+                {file}
+                {rank}
+                {piece && <Piece player={piece.player} piece={piece.type} />}
+              </S.Square>
+            );
+          })}
+        </S.Rank>
+      ))}
+    </S.Board>
   );
 };
 

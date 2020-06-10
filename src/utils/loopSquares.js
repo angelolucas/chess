@@ -1,4 +1,4 @@
-import { FILES, RANKS } from '../constants';
+import { FILES, RANKS } from 'constants.js';
 import getPieceBySquare from './getPieceBySquare';
 
 const next = ({ index, direction }) => {

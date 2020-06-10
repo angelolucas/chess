@@ -29,6 +29,7 @@
       "version": "detect"
     },
     "import/resolver": {
+      "node": { "paths": ["src"] },
       "babel-module": {}
     }
   }

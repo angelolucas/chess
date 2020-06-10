@@ -1,4 +1,4 @@
-import { loopSquares } from '../utils';
+import { loopSquares } from 'utils';
 
 export default ({
   selected: {
