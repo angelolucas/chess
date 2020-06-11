@@ -18,22 +18,15 @@ const Board = () => {
       1: {
         id: 1,
         player: 'white',
-        type: 'king',
-        file: 6,
-        rank: 6,
-      },
-      2: {
-        id: 2,
-        player: 'white',
-        type: 'queen',
-        file: 2,
-        rank: 2,
+        type: 'bishop',
+        file: 4,
+        rank: 4,
       },
     },
   });
 
   const handleSquare = ({ file, rank, piece }) => {
-    board.selected.piece
+    board.selected.pieceId
       ? handleMove({ file, rank, piece })
       : handleSelection({ file, rank, piece });
   };
@@ -45,10 +38,14 @@ const Board = () => {
 
     newBoardState.selected.file = file;
     newBoardState.selected.rank = rank;
-    newBoardState.selected.piece = piece;
+    newBoardState.selected.pieceId = piece.id;
 
     if (piece) {
-      newBoardState.selected.legalMoves = legalMoves(newBoardState);
+      newBoardState.selected.legalMoves = legalMoves({
+        player: newBoardState.currentPlayer,
+        selected: newBoardState.selected,
+        pieces: newBoardState.pieces,
+      });
     }
 
     setBoard(newBoardState);
@@ -56,7 +53,7 @@ const Board = () => {
 
   const handleMove = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
-    const selectedPiece = board.selected.piece;
+    const selectedPieceId = board.selected.pieceId;
 
     const legalMove = board.selected.legalMoves.find(
       (square) => square.file === file && square.rank === rank
@@ -65,8 +62,8 @@ const Board = () => {
     if (legalMove) {
       newBoardState.currentPlayer =
         board.currentPlayer === 'white' ? 'black' : 'white';
-      newBoardState.pieces[selectedPiece.id].file = file;
-      newBoardState.pieces[selectedPiece.id].rank = rank;
+      newBoardState.pieces[selectedPieceId].file = file;
+      newBoardState.pieces[selectedPieceId].rank = rank;
 
       // capture
       if (piece) {

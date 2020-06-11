@@ -1,13 +1,6 @@
 import { loopSquares } from 'utils';
 
-export default ({
-  selected: {
-    file,
-    rank,
-    piece: { player },
-  },
-  pieces,
-}) => [
+export default ({ player, selected: { file, rank }, pieces }) => [
   ...loopSquares({
     index: { file, rank },
     direction: { file: 'forward', rank: 'forward' },
