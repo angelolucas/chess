@@ -1,4 +1,4 @@
-import { loopSquares } from 'utils';
+import loopSquares from './loopSquares';
 
 export default ({ player, selected: { file, rank }, pieces }) => [
   ...loopSquares({

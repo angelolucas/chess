@@ -11,7 +11,7 @@ const Board = () => {
     selected: {
       file: null,
       rank: null,
-      piece: null,
+      pieceId: null,
       legalMoves: [],
     },
     pieces: {

@@ -1,5 +1,5 @@
 import { FILES, RANKS } from 'constants.js';
-import getPieceBySquare from './getPieceBySquare';
+import getPieceBySquare from '../utils/getPieceBySquare';
 
 const next = ({ index, direction }) => {
   let output = { file: index.file, rank: index.rank };
