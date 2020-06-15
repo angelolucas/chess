@@ -97,7 +97,7 @@ const Board = () => {
               file === board.selected.file && rank === board.selected.rank;
 
             const legalMove = board.selected.legalMoves.find(
-              (square) => square.file === file && square.rank === rank
+              (square) => square === `${file}${rank}`
             );
 
             return (

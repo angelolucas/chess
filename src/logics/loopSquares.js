@@ -31,10 +31,10 @@ export default ({ index, direction, pieces, player }) => {
         const enemyPiece = piece.player !== player;
 
         if (enemyPiece) {
-          legalMoves.push({ file, rank });
+          legalMoves.push(`${file}${rank}`);
         }
       } else {
-        legalMoves.push({ file, rank });
+        legalMoves.push(`${file}${rank}`);
 
         loopSquares({
           index: { file, rank },
