@@ -7,7 +7,7 @@ import * as S from './Board.style';
 
 const Board = () => {
   const [board, setBoard] = useState({
-    currentPlayer: 'white',
+    player: 'white',
     selected: {
       file: null,
       rank: null,
@@ -18,6 +18,20 @@ const Board = () => {
       1: {
         id: 1,
         player: 'white',
+        type: 'bishop',
+        file: 2,
+        rank: 2,
+      },
+      2: {
+        id: 2,
+        player: 'white',
+        type: 'bishop',
+        file: 0,
+        rank: 4,
+      },
+      3: {
+        id: 3,
+        player: 'black',
         type: 'bishop',
         file: 4,
         rank: 4,
@@ -34,7 +48,7 @@ const Board = () => {
   const handleSelection = ({ file, rank, piece }) => {
     let newBoardState = Object.assign({}, board);
 
-    //if (piece && piece.player !== board.currentPlayer) return false;
+    //if (piece && piece.player !== board.player) return false;
 
     newBoardState.selected.file = file;
     newBoardState.selected.rank = rank;
@@ -42,7 +56,7 @@ const Board = () => {
 
     if (piece) {
       newBoardState.selected.legalMoves = legalMoves({
-        player: newBoardState.currentPlayer,
+        player: newBoardState.player,
         selected: newBoardState.selected,
         pieces: newBoardState.pieces,
       });
@@ -56,12 +70,11 @@ const Board = () => {
     const selectedPieceId = board.selected.pieceId;
 
     const legalMove = board.selected.legalMoves.find(
-      (square) => square.file === file && square.rank === rank
+      (square) => square === `${file}${rank}`
     );
 
     if (legalMove) {
-      newBoardState.currentPlayer =
-        board.currentPlayer === 'white' ? 'black' : 'white';
+      newBoardState.player = board.player === 'white' ? 'black' : 'white';
       newBoardState.pieces[selectedPieceId].file = file;
       newBoardState.pieces[selectedPieceId].rank = rank;
 
