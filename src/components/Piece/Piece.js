@@ -13,7 +13,7 @@ import { ReactComponent as BlackQueen } from 'assets/black-queen.svg';
 import { ReactComponent as BlackKing } from 'assets/black-king.svg';
 import * as S from './Piece.style';
 
-const Piece = ({ player, piece, square }) => {
+const Piece = ({ player, piece, ...props }) => {
   const image = {
     'white-pawn': WhitePawn,
     'white-rook': WhiteRook,
@@ -29,7 +29,7 @@ const Piece = ({ player, piece, square }) => {
     'black-king': BlackKing,
   };
 
-  return <S.Piece as={image[`${player}-${piece}`]} square={square} />;
+  return <S.Piece as={image[`${player}-${piece}`]} {...props} />;
 };
 
 export default Piece;

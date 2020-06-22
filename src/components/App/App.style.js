@@ -5,4 +5,5 @@ export const App = styled.div({
   background: '#11141a',
   color: '#dfe3ee',
   fontFamily: 'Roboto, Arial, sans-serif',
+  minHeight: '100vh',
 });

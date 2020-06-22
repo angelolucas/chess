@@ -10,6 +10,11 @@ const App = () => {
       type: 'bishop',
       square: [1, 1], // file and rank
     },
+    {
+      player: 'black',
+      type: 'queen',
+      square: [5, 4], // file and rank
+    },
   ]);
 
   return (
@@ -21,6 +26,7 @@ const App = () => {
             player={piece.player}
             piece={piece.type}
             square={piece.square}
+            selected
           >
             piece
           </Piece>
