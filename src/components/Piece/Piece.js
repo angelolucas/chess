@@ -29,7 +29,7 @@ const Piece = ({ player, piece, square }) => {
     'black-king': BlackKing,
   };
 
-  return <S.Piece as={image[`${player}-${piece}`]} file={1} rank={1} />;
+  return <S.Piece as={image[`${player}-${piece}`]} square={square} />;
 };
 
 export default Piece;

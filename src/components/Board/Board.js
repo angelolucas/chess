@@ -6,8 +6,8 @@ const Board = () => {
   const [pieces, setPieces] = useState([
     {
       player: 'white',
-      square: 11,
       type: 'bishop',
+      square: [1, 1], // file and rank
     },
   ]);
   return (
