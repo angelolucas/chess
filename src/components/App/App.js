@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import GlobalStyles from 'GlobalStyles';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
+import * as S from './App.style';
 
 const App = () => {
   const [pieces, setPieces] = useState([
@@ -13,8 +13,7 @@ const App = () => {
   ]);
 
   return (
-    <>
-      <GlobalStyles />
+    <S.App>
       <Board>
         {pieces.map((piece, key) => (
           <Piece
@@ -27,7 +26,7 @@ const App = () => {
           </Piece>
         ))}
       </Board>
-    </>
+    </S.App>
   );
 };
 
