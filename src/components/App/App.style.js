@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const App = styled.div({
+export const App = styled.div(({ theme: { color } }) => ({
   display: 'flex',
-  background: '#11141a',
+  background: color.dark,
   color: '#dfe3ee',
   fontFamily: 'Roboto, Arial, sans-serif',
   minHeight: '100vh',
-});
+}));

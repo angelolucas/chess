@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import * as S from './App.style';
@@ -29,22 +31,24 @@ const App = () => {
   window.pieces = pieces;
 
   return (
-    <S.App>
-      <Board>
-        {pieces.map((piece, key) => (
-          <Piece
-            key={key}
-            player={piece.player}
-            piece={piece.type}
-            square={piece.square}
-            selected={piece.selected}
-            onClick={() => handlePiece(piece.square)}
-          >
-            piece
-          </Piece>
-        ))}
-      </Board>
-    </S.App>
+    <ThemeProvider theme={theme}>
+      <S.App>
+        <Board>
+          {pieces.map((piece, key) => (
+            <Piece
+              key={key}
+              player={piece.player}
+              piece={piece.type}
+              square={piece.square}
+              selected={piece.selected}
+              onClick={() => handlePiece(piece.square)}
+            >
+              piece
+            </Piece>
+          ))}
+        </Board>
+      </S.App>
+    </ThemeProvider>
   );
 };
 
