@@ -8,14 +8,25 @@ const App = () => {
     {
       player: 'white',
       type: 'bishop',
-      square: [1, 1], // file and rank
+      square: [1, 1],
     },
     {
       player: 'black',
       type: 'queen',
-      square: [5, 4], // file and rank
+      square: [5, 5],
     },
   ]);
+
+  const handlePiece = (square) => {
+    setPieces(
+      pieces.map((piece) => ({
+        ...piece,
+        selected: piece.square === square,
+      }))
+    );
+  };
+
+  window.pieces = pieces;
 
   return (
     <S.App>
@@ -26,7 +37,8 @@ const App = () => {
             player={piece.player}
             piece={piece.type}
             square={piece.square}
-            selected
+            selected={piece.selected}
+            onClick={() => handlePiece(piece.square)}
           >
             piece
           </Piece>
