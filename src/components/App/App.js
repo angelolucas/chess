@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
+import LegalMove from 'components/LegalMove';
 import * as S from './App.style';
 
 const App = () => {
@@ -16,6 +17,10 @@ const App = () => {
       player: 'black',
       type: 'queen',
       square: [5, 5],
+      legalMoves: [
+        [4, 1],
+        [2, 2],
+      ],
     },
   ]);
 
@@ -35,16 +40,21 @@ const App = () => {
       <S.App>
         <Board>
           {pieces.map((piece, key) => (
-            <Piece
-              key={key}
-              player={piece.player}
-              piece={piece.type}
-              square={piece.square}
-              selected={piece.selected}
-              onClick={() => handlePiece(piece.square)}
-            >
-              piece
-            </Piece>
+            <Fragment key={key}>
+              <Piece
+                player={piece.player}
+                piece={piece.type}
+                square={piece.square}
+                selected={piece.selected}
+                onClick={() => handlePiece(piece.square)}
+              >
+                piece
+              </Piece>
+              {piece.selected &&
+                piece.legalMoves?.map((move, key) => (
+                  <LegalMove key={key} square={move} />
+                ))}
+            </Fragment>
           ))}
         </Board>
       </S.App>

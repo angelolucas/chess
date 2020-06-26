@@ -1,0 +1,16 @@
+import styled from 'styled-components';
+
+export default styled.div(({ square }) => ({
+  transform: `translate(${square[0] * 100}%, ${square[1] * 100}%)`,
+  boxSizing: 'border-box',
+  borderRadius: '50%',
+  background: 'rgba(0, 255, 0, 0.2)',
+  backgroundClip: 'content-box',
+  width: '12.5%',
+  height: '12.5%',
+  padding: 10,
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  pointerEvents: 'none',
+}));
