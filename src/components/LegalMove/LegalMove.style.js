@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export default styled.div(({ square }) => ({
+export default styled.div(({ square, theme: { color } }) => ({
   transform: `translate(${square[0] * 100}%, ${square[1] * 100}%)`,
   boxSizing: 'border-box',
   borderRadius: '50%',
-  background: 'rgba(0, 255, 0, 0.2)',
+  background: `${color.detail}33`,
   backgroundClip: 'content-box',
   width: '12.5%',
   height: '12.5%',
