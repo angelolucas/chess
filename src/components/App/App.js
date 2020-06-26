@@ -24,7 +24,7 @@ const App = () => {
     },
   ]);
 
-  const handlePiece = (square) => {
+  const handleSelection = (square) => {
     setPieces(
       pieces.map((piece) => ({
         ...piece,
@@ -61,16 +61,20 @@ const App = () => {
                 piece={piece.type}
                 square={piece.square}
                 selected={piece.selected}
-                onClick={() => handlePiece(piece.square)}
+                onFocus={() => handleSelection(piece.square)}
+                onBlur={() => handleSelection()}
+                tabIndex="-1"
               >
-                piece
+                teste
               </Piece>
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
-                    onClick={() => handleMove({ from: piece.square, to: move })}
-                    key={key}
+                    onMouseDown={() =>
+                      handleMove({ from: piece.square, to: move })
+                    }
                     square={move}
+                    key={key}
                   />
                 ))}
             </Fragment>

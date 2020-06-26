@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Piece = styled.svg(({ square, selected, theme: { color } }) => ({
+export const Piece = styled.svg(({ square, theme: { color } }) => ({
   width: '12.5%',
   height: '12.5%',
   transition: 0.3,
@@ -8,8 +8,10 @@ export const Piece = styled.svg(({ square, selected, theme: { color } }) => ({
   position: 'absolute',
   left: 0,
   top: 0,
-  boxShadow:
-    selected &&
-    `inset 0px 0px 0px 2px ${color.detail}99,
+
+  ':focus': {
+    boxShadow: `inset 0px 0px 0px 2px ${color.detail}99,
     0px 0px 0px 2px ${color.detail}99`,
+    outline: 'none',
+  },
 }));
