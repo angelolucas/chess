@@ -33,6 +33,21 @@ const App = () => {
     );
   };
 
+  const handleMove = ({ from, to }) => {
+    setPieces(
+      pieces.map((piece) => {
+        if (piece.square === from) {
+          return {
+            ...piece,
+            square: to,
+          };
+        } else {
+          return piece;
+        }
+      })
+    );
+  };
+
   window.pieces = pieces;
 
   return (
@@ -52,7 +67,11 @@ const App = () => {
               </Piece>
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
-                  <LegalMove key={key} square={move} />
+                  <LegalMove
+                    onClick={() => handleMove({ from: piece.square, to: move })}
+                    key={key}
+                    square={move}
+                  />
                 ))}
             </Fragment>
           ))}
