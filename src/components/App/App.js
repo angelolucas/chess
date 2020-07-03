@@ -1,9 +1,10 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
+import piecesWithLegalMoves from 'logics/legalMoves';
 import * as S from './App.style';
 
 const App = () => {
@@ -17,12 +18,12 @@ const App = () => {
       player: 'black',
       type: 'queen',
       square: [5, 5],
-      legalMoves: [
-        [4, 1],
-        [2, 2],
-      ],
     },
   ]);
+
+  useEffect(() => {
+    setPieces(piecesWithLegalMoves(pieces));
+  }, []);
 
   const handleSelection = (square) => {
     setPieces(
