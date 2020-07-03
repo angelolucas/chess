@@ -4,25 +4,31 @@ import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
-import piecesWithLegalMoves from 'logics/legalMoves';
+import piecesWithLegalMoves from 'logics/piecesWithLegalMoves';
 import * as S from './App.style';
 
 const App = () => {
   const [pieces, setPieces] = useState([
     {
       player: 'white',
-      type: 'bishop',
-      square: [1, 1],
+      type: 'king',
+      square: [2, 2],
     },
     {
-      player: 'black',
+      player: 'white',
       type: 'queen',
       square: [5, 5],
+    },
+    {
+      player: 'white',
+      type: 'queen',
+      square: [2, 4],
     },
   ]);
 
   useEffect(() => {
     setPieces(piecesWithLegalMoves(pieces));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelection = (square) => {
@@ -35,18 +41,18 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    setPieces(
-      pieces.map((piece) => {
-        if (piece.square === from) {
-          return {
-            ...piece,
-            square: to,
-          };
-        } else {
-          return piece;
-        }
-      })
-    );
+    const piecesInNewPositions = pieces.map((piece) => {
+      if (piece.square === from) {
+        return {
+          ...piece,
+          square: to,
+        };
+      } else {
+        return piece;
+      }
+    });
+
+    setPieces(piecesWithLegalMoves(piecesInNewPositions));
   };
 
   window.pieces = pieces;
