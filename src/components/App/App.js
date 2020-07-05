@@ -17,11 +17,11 @@ const App = () => {
     {
       player: 'white',
       type: 'queen',
-      square: [5, 5],
+      square: [4, 4],
     },
     {
       player: 'white',
-      type: 'queen',
+      type: 'pawn',
       square: [2, 4],
     },
   ]);
@@ -71,9 +71,7 @@ const App = () => {
                 onFocus={() => handleSelection(piece.square)}
                 onBlur={() => handleSelection()}
                 tabIndex="-1"
-              >
-                teste
-              </Piece>
+              />
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
