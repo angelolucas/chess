@@ -11,7 +11,7 @@ const App = () => {
   const [pieces, setPieces] = useState([
     {
       player: 'white',
-      type: 'king',
+      type: 'bishop',
       square: [2, 2],
     },
     {
@@ -21,7 +21,7 @@ const App = () => {
     },
     {
       player: 'white',
-      type: 'pawn',
+      type: 'rook',
       square: [2, 4],
     },
   ]);
