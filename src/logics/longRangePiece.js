@@ -1,3 +1,5 @@
+import squareExists from 'utils/squareExists';
+
 const getDirection = ({ square, direction }) => {
   let output = square.slice();
 
@@ -13,13 +15,6 @@ const getDirection = ({ square, direction }) => {
   }
 
   return output;
-};
-
-const squareExists = (square) => {
-  const fileExists = square[0] >= 0 && square[0] <= 7;
-  const rankExists = square[1] >= 0 && square[1] <= 7;
-
-  return fileExists && rankExists;
 };
 
 export default ({ piece, pieces }) => {
