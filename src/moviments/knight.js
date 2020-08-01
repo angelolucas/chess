@@ -11,6 +11,5 @@ export default ({ piece, pieces }) => {
     [piece.square[0] - 2, piece.square[1] - 1],
     [piece.square[0] - 1, piece.square[1] - 2],
   ];
-
   return moves.filter((move) => squareExists(move));
 };

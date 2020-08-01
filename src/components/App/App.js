@@ -4,7 +4,7 @@ import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
-import piecesWithLegalMoves from 'logics/piecesWithLegalMoves';
+import piecesWithLegalMoves from 'moviments/piecesWithLegalMoves';
 import * as S from './App.style';
 
 const App = () => {
