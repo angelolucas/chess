@@ -4,14 +4,14 @@ export default ({ piece, pieces }) => {
   const file = piece.square[0];
   const rank = piece.square[1];
   const moves = [
-    [file + 1, rank - 2],
-    [file + 2, rank - 1],
-    [file + 2, rank + 1],
-    [file + 1, rank + 2],
-    [file - 1, rank + 2],
-    [file - 2, rank + 1],
-    [file - 2, rank - 1],
-    [file - 1, rank - 2],
+    [file, rank + 1],
+    [file + 1, rank + 1],
+    [file + 1, rank],
+    [file + 1, rank - 1],
+    [file, rank - 1],
+    [file - 1, rank - 1],
+    [file - 1, rank],
+    [file - 1, rank + 1],
   ];
 
   return moves.filter((move) => squareExists(move));

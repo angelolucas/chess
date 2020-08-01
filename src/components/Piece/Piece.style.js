@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Piece = styled.svg(({ square, theme: { color } }) => ({
   width: '12.5%',
   height: '12.5%',
-  transition: 'transform 0.3s',
+  transition: 'transform 0.2s',
   transform: `translate(${square[0] * 100}%, ${square[1] * 100}%)`,
   position: 'absolute',
   left: 0,
