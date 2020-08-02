@@ -10,9 +10,14 @@ import * as S from './App.style';
 const App = () => {
   const [pieces, setPieces] = useState([
     {
+      player: 'black',
+      type: 'pawn',
+      square: [4, 1],
+    },
+    {
       player: 'white',
-      type: 'king',
-      square: [4, 4],
+      type: 'pawn',
+      square: [4, 6],
     },
   ]);
 
@@ -50,7 +55,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <S.App>
-        <Board>
+        <Board rotate={false}>
           {pieces.map((piece, key) => (
             <Fragment key={key}>
               <Piece
@@ -60,6 +65,7 @@ const App = () => {
                 selected={piece.selected}
                 onFocus={() => handleSelection(piece.square)}
                 onBlur={() => handleSelection()}
+                rotate={false}
                 tabIndex="-1"
               />
               {piece.selected &&

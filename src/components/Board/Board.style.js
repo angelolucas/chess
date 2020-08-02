@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Board = styled.div(({ theme: { color } }) => ({
+export const Board = styled.div(({ rotate, theme: { color } }) => ({
   boxShadow: `0 0 0 9px ${color.light}`,
   backgroundColor: color.light,
   boxSizing: 'border-box',
@@ -10,4 +10,5 @@ export const Board = styled.div(({ theme: { color } }) => ({
   width: '90vmin',
   height: '90vmin',
   position: 'relative',
+  transform: rotate && 'rotate(180deg)',
 }));
