@@ -1,4 +1,5 @@
 import squareExists from './squareExists';
+import getPieceBySquare from './getPieceBySquare';
 
 const getDirection = ({ square, direction }) => {
   let output = square.slice();
@@ -24,8 +25,18 @@ export default ({ piece, pieces }) => {
     const nextSquare = getDirection({ square, direction });
 
     if (squareExists(nextSquare)) {
-      legalMoves.push(nextSquare);
-      loopSquares({ square: nextSquare, direction });
+      const nextSquarePiece = getPieceBySquare({ square: nextSquare, pieces });
+
+      if (nextSquarePiece) {
+        const enemyPiece = nextSquarePiece.player !== piece.player;
+
+        if (enemyPiece) {
+          legalMoves.push(nextSquare);
+        }
+      } else {
+        legalMoves.push(nextSquare);
+        loopSquares({ square: nextSquare, direction });
+      }
     }
   };
 
