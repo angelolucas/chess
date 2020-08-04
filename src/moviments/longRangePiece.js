@@ -1,4 +1,4 @@
-import squareExists from 'utils/squareExists';
+import squareExists from './squareExists';
 
 const getDirection = ({ square, direction }) => {
   let output = square.slice();
@@ -22,9 +22,8 @@ export default ({ piece, pieces }) => {
 
   const loopSquares = ({ square, direction }) => {
     const nextSquare = getDirection({ square, direction });
-    const nextSquareExists = squareExists(nextSquare);
 
-    if (nextSquareExists) {
+    if (squareExists(nextSquare)) {
       legalMoves.push(nextSquare);
       loopSquares({ square: nextSquare, direction });
     }
