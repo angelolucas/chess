@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.js": "/chess/static/js/main.6db06682.chunk.js",
+    "main.js.map": "/chess/static/js/main.6db06682.chunk.js.map",
+    "runtime-main.js": "/chess/static/js/runtime-main.4cacbaa4.js",
+    "runtime-main.js.map": "/chess/static/js/runtime-main.4cacbaa4.js.map",
+    "static/js/2.caf1f097.chunk.js": "/chess/static/js/2.caf1f097.chunk.js",
+    "static/js/2.caf1f097.chunk.js.map": "/chess/static/js/2.caf1f097.chunk.js.map",
+    "index.html": "/chess/index.html",
+    "precache-manifest.6103638eb5a8755a2f6dede3bfe94b97.js": "/chess/precache-manifest.6103638eb5a8755a2f6dede3bfe94b97.js",
+    "service-worker.js": "/chess/service-worker.js",
+    "static/js/2.caf1f097.chunk.js.LICENSE.txt": "/chess/static/js/2.caf1f097.chunk.js.LICENSE.txt",
+    "static/media/black-bishop.44c71987.svg": "/chess/static/media/black-bishop.44c71987.svg",
+    "static/media/black-king.1a9c60f5.svg": "/chess/static/media/black-king.1a9c60f5.svg",
+    "static/media/black-knight.36847a7a.svg": "/chess/static/media/black-knight.36847a7a.svg",
+    "static/media/black-pawn.a76a6367.svg": "/chess/static/media/black-pawn.a76a6367.svg",
+    "static/media/black-queen.aa16f5dd.svg": "/chess/static/media/black-queen.aa16f5dd.svg",
+    "static/media/black-rook.ca36ca76.svg": "/chess/static/media/black-rook.ca36ca76.svg",
+    "static/media/board.8c580846.svg": "/chess/static/media/board.8c580846.svg",
+    "static/media/white-bishop.48a5e7c8.svg": "/chess/static/media/white-bishop.48a5e7c8.svg",
+    "static/media/white-king.3fd12a44.svg": "/chess/static/media/white-king.3fd12a44.svg",
+    "static/media/white-knight.9ca475fa.svg": "/chess/static/media/white-knight.9ca475fa.svg",
+    "static/media/white-pawn.3c962c6d.svg": "/chess/static/media/white-pawn.3c962c6d.svg",
+    "static/media/white-queen.91fa8348.svg": "/chess/static/media/white-queen.91fa8348.svg",
+    "static/media/white-rook.7d8ffe3f.svg": "/chess/static/media/white-rook.7d8ffe3f.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cacbaa4.js",
+    "static/js/2.caf1f097.chunk.js",
+    "static/js/main.6db06682.chunk.js"
+  ]
+}
