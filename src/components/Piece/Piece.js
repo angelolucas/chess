@@ -13,23 +13,26 @@ import { ReactComponent as BlackQueen } from 'assets/black-queen.svg';
 import { ReactComponent as BlackKing } from 'assets/black-king.svg';
 import * as S from './Piece.style';
 
-const image = {
-  'white-pawn': WhitePawn,
-  'white-rook': WhiteRook,
-  'white-knight': WhiteKnight,
-  'white-bishop': WhiteBishop,
-  'white-queen': WhiteQueen,
-  'white-king': WhiteKing,
-  'black-pawn': BlackPawn,
-  'black-rook': BlackRook,
-  'black-knight': BlackKnight,
-  'black-bishop': BlackBishop,
-  'black-queen': BlackQueen,
-  'black-king': BlackKing,
-};
+const Image = ({ player, piece }) =>
+  ({
+    'white-pawn': <WhitePawn />,
+    'white-rook': <WhiteRook />,
+    'white-knight': <WhiteKnight />,
+    'white-bishop': <WhiteBishop />,
+    'white-queen': <WhiteQueen />,
+    'white-king': <WhiteKing />,
+    'black-pawn': <BlackPawn />,
+    'black-rook': <BlackRook />,
+    'black-knight': <BlackKnight />,
+    'black-bishop': <BlackBishop />,
+    'black-queen': <BlackQueen />,
+    'black-king': <BlackKing />,
+  }[`${player}-${piece}`]);
 
 const Piece = ({ player, piece, ...props }) => (
-  <S.Piece as={image[`${player}-${piece}`]} {...props} />
+  <S.Piece {...props}>
+    <Image player={player} piece={piece} />
+  </S.Piece>
 );
 
 export default Piece;
