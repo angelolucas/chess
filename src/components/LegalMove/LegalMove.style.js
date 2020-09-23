@@ -12,4 +12,5 @@ export default styled.div(({ square, theme: { color } }) => ({
   position: 'absolute',
   left: 0,
   top: 0,
+  zIndex: 2,
 }));

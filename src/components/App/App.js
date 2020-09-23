@@ -10,16 +10,19 @@ import * as S from './App.style';
 const App = () => {
   const [pieces, setPieces] = useState([
     {
+      id: 1,
       player: 'black',
       type: 'queen',
       square: [3, 1],
     },
     {
+      id: 2,
       player: 'black',
       type: 'bishop',
       square: [5, 1],
     },
     {
+      id: 3,
       player: 'white',
       type: 'rook',
       square: [3, 6],
@@ -41,16 +44,18 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const piecesInNewPositions = pieces.map((piece) => {
-      if (piece.square === from) {
-        return {
-          ...piece,
-          square: to,
-        };
-      } else {
-        return piece;
-      }
-    });
+    const piecesInNewPositions = pieces
+      .filter((piece) => piece.square[0] !== to[0] || piece.square[1] !== to[1])
+      .map((piece) => {
+        if (piece.square === from) {
+          return {
+            ...piece,
+            square: to,
+          };
+        } else {
+          return piece;
+        }
+      });
 
     setPieces(piecesWithLegalMoves(piecesInNewPositions));
   };
@@ -61,13 +66,12 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <S.App>
         <Board rotate={false}>
-          {pieces.map((piece, key) => (
-            <Fragment key={key}>
+          {pieces.map((piece) => (
+            <Fragment key={piece.id}>
               <Piece
                 player={piece.player}
                 piece={piece.type}
                 square={piece.square}
-                selected={piece.selected}
                 onFocus={() => handleSelection(piece.square)}
                 onBlur={() => handleSelection()}
                 rotate={false}
