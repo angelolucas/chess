@@ -45,6 +45,30 @@ const App = () => {
       type: 'rook',
       square: [7, 0],
     },
+    {
+      id: 7,
+      player: 'black',
+      type: 'pawn',
+      square: [3, 1],
+    },
+    {
+      id: 8,
+      player: 'black',
+      type: 'pawn',
+      square: [4, 1],
+    },
+    {
+      id: 9,
+      player: 'white',
+      type: 'pawn',
+      square: [3, 6],
+    },
+    {
+      id: 10,
+      player: 'white',
+      type: 'pawn',
+      square: [4, 6],
+    },
   ]);
 
   useEffect(() => {

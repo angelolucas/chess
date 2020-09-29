@@ -1,4 +1,4 @@
-import squareExists from '../logics/squareExists';
+import checkSquare from '../logics/checkSquare';
 
 export default ({ piece, pieces }) => {
   const file = piece.square[0];
@@ -6,5 +6,9 @@ export default ({ piece, pieces }) => {
   const moves =
     piece.player === 'white' ? [[file, rank - 1]] : [[file, rank + 1]];
 
-  return moves.filter((square) => squareExists(square));
+  return moves.filter((square) => {
+    square = checkSquare({ square, piece, pieces });
+
+    return square.empty || square.enemy;
+  });
 };
