@@ -12,20 +12,26 @@ const App = () => {
     {
       id: 1,
       player: 'black',
-      type: 'queen',
-      square: [3, 1],
+      type: 'king',
+      square: [3, 7],
     },
     {
       id: 2,
       player: 'black',
-      type: 'bishop',
-      square: [5, 1],
+      type: 'rook',
+      square: [0, 7],
     },
     {
       id: 3,
-      player: 'white',
+      player: 'black',
       type: 'rook',
-      square: [3, 6],
+      square: [7, 7],
+    },
+    {
+      id: 4,
+      player: 'white',
+      type: 'pawn',
+      square: [5, 5],
     },
   ]);
 

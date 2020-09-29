@@ -28,7 +28,7 @@ export default ({ piece, pieces }) => {
       const nextSquarePiece = getPieceBySquare({ square: nextSquare, pieces });
 
       if (nextSquarePiece) {
-        const enemyPiece = nextSquarePiece.player !== piece.player;
+        const enemyPiece = nextSquarePiece !== piece.player;
 
         if (enemyPiece) {
           legalMoves.push(nextSquare);
