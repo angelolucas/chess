@@ -1,7 +1,7 @@
-import squareExists from './squareExists';
-import getPieceBySquare from './getPieceBySquare';
+import checkSquare from './checkSquare';
 
 const getDirection = ({ square, direction }) => {
+  console.log({ square, direction });
   let output = square.slice();
 
   if (direction[0] === 'forward') {
@@ -23,26 +23,23 @@ export default ({ piece, pieces }) => {
 
   const loopSquares = ({ square, direction }) => {
     const nextSquare = getDirection({ square, direction });
+    const checkNextSquare = checkSquare({
+      square: nextSquare,
+      piece,
+      pieces,
+    });
 
-    if (squareExists(nextSquare)) {
-      const nextSquarePiece = getPieceBySquare({ square: nextSquare, pieces });
-
-      if (nextSquarePiece) {
-        const enemyPiece = nextSquarePiece !== piece.player;
-
-        if (enemyPiece) {
-          legalMoves.push(nextSquare);
-        }
-      } else {
-        legalMoves.push(nextSquare);
-        loopSquares({ square: nextSquare, direction });
-      }
+    if (checkNextSquare.enemy) {
+      legalMoves.push(nextSquare);
+    } else if (checkNextSquare.empty) {
+      legalMoves.push(nextSquare);
+      loopSquares({ square: nextSquare, direction });
     }
   };
 
   if (['rook', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.square, direction: ['forward'] });
-    loopSquares({ square: piece.square, direction: ['backward'] });
+    loopSquares({ square: piece.square, direction: ['forward', null] });
+    loopSquares({ square: piece.square, direction: ['backward', null] });
     loopSquares({ square: piece.square, direction: [null, 'backward'] });
     loopSquares({ square: piece.square, direction: [null, 'forward'] });
   }
