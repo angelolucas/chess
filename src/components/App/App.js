@@ -86,20 +86,22 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const piecesInNewPositions = pieces
-      .filter((piece) => piece.square[0] !== to[0] || piece.square[1] !== to[1])
-      .map((piece) => {
-        if (piece.square === from) {
-          return {
-            ...piece,
-            square: to,
-          };
-        } else {
-          return piece;
-        }
-      });
+    const takePiece = pieces.filter(
+      (piece) => piece.square[0] !== to[0] || piece.square[1] !== to[1]
+    );
 
-    setPieces(piecesWithLegalMoves(piecesInNewPositions));
+    const movePiece = takePiece.map((piece) => {
+      if (piece.square === from) {
+        return {
+          ...piece,
+          square: to,
+        };
+      } else {
+        return piece;
+      }
+    });
+
+    setPieces(piecesWithLegalMoves(movePiece));
   };
 
   window.pieces = pieces;
