@@ -3,8 +3,39 @@ import checkSquare from '../logics/checkSquare';
 export default ({ piece, pieces }) => {
   const file = piece.square[0];
   const rank = piece.square[1];
-  const moves =
-    piece.player === 'white' ? [[file, rank - 1]] : [[file, rank + 1]];
+  let moves = [];
+
+  if (piece.player === 'white') {
+    const square = [file, rank - 1];
+
+    if (checkSquare({ square, piece, pieces }).empty) {
+      moves.push(square);
+    }
+  }
+
+  if (piece.player === 'black') {
+    const square = [file, rank + 1];
+
+    if (checkSquare({ square, piece, pieces }).empty) {
+      moves.push(square);
+    }
+  }
+
+  if (!piece.moved && piece.player === 'white') {
+    const square = [file, rank - 2];
+
+    if (checkSquare({ square, piece, pieces }).empty) {
+      moves.push(square);
+    }
+  }
+
+  if (!piece.moved && piece.player === 'black') {
+    const square = [file, rank + 2];
+
+    if (checkSquare({ square, piece, pieces }).empty) {
+      moves.push(square);
+    }
+  }
 
   return moves.filter((square) => {
     square = checkSquare({ square, piece, pieces });
