@@ -4,67 +4,57 @@ import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
-import piecesWithLegalMoves from 'moviments/piecesWithLegalMoves';
+import getLegalMoves from 'moviments/getLegalMoves';
 import * as S from './App.style';
 
 const App = () => {
   const [pieces, setPieces] = useState([
     {
-      id: 1,
       player: 'white',
       type: 'king',
       square: [4, 7],
     },
     {
-      id: 2,
       player: 'white',
       type: 'rook',
       square: [0, 7],
     },
     {
-      id: 3,
       player: 'white',
       type: 'rook',
       square: [7, 7],
     },
     {
-      id: 4,
       player: 'black',
       type: 'king',
       square: [4, 0],
     },
     {
-      id: 5,
       player: 'black',
       type: 'rook',
       square: [0, 0],
     },
     {
-      id: 6,
       player: 'black',
       type: 'rook',
       square: [7, 0],
     },
     {
-      id: 7,
       player: 'black',
       type: 'pawn',
       square: [3, 1],
     },
     {
-      id: 8,
       player: 'black',
       type: 'pawn',
       square: [4, 1],
     },
     {
-      id: 9,
       player: 'white',
       type: 'pawn',
       square: [3, 6],
     },
     {
-      id: 10,
       player: 'white',
       type: 'pawn',
       square: [4, 6],
@@ -72,7 +62,15 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    setPieces(piecesWithLegalMoves(pieces));
+    // Set initial state
+    setPieces(
+      pieces.map((piece, id) => ({
+        ...piece,
+        id,
+        moved: false,
+        legalMoves: getLegalMoves({ piece, pieces }),
+      }))
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -86,14 +84,15 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const takePiece = pieces.filter(
+    const withoutTakedPiece = pieces.filter(
       (piece) => piece.square[0] !== to[0] || piece.square[1] !== to[1]
     );
 
-    const movePiece = takePiece.map((piece) => {
+    const withMovedPiece = withoutTakedPiece.map((piece) => {
       if (piece.square === from) {
         return {
           ...piece,
+          moved: true,
           square: to,
         };
       } else {
@@ -101,7 +100,12 @@ const App = () => {
       }
     });
 
-    setPieces(piecesWithLegalMoves(movePiece));
+    const withLegalMoves = withMovedPiece.map((piece) => ({
+      ...piece,
+      legalMoves: getLegalMoves({ piece, pieces: withMovedPiece }),
+    }));
+
+    setPieces(withLegalMoves);
   };
 
   window.pieces = pieces;

@@ -3,7 +3,7 @@ import knight from './knight';
 import king from './king';
 import pawn from './pawn';
 
-const getLegalMoves = ({ piece, pieces }) => {
+export default ({ piece, pieces }) => {
   if (['rook', 'bishop', 'queen'].includes(piece.type)) {
     return longRangePiece({ piece, pieces });
   }
@@ -18,9 +18,3 @@ const getLegalMoves = ({ piece, pieces }) => {
   }
   return null;
 };
-
-export default (pieces) =>
-  pieces.map((piece) => ({
-    ...piece,
-    legalMoves: getLegalMoves({ piece, pieces }),
-  }));
