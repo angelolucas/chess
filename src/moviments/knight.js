@@ -1,4 +1,4 @@
-import squareExists from './squareExists';
+import checkSquare from './checkSquare';
 
 export default ({ piece, pieces }) => {
   const file = piece.square[0];
@@ -14,5 +14,9 @@ export default ({ piece, pieces }) => {
     [file - 1, rank - 2],
   ];
 
-  return moves.filter((square) => squareExists(square));
+  return moves.filter((square) => {
+    square = checkSquare({ square, piece, pieces });
+
+    return square.empty || square.enemy;
+  });
 };

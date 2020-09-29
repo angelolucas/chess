@@ -17,6 +17,6 @@ export default ({ piece, pieces }) => {
   return moves.filter((square) => {
     square = checkSquare({ square, piece, pieces });
 
-    return square?.empty || square?.enemy;
+    return square.empty || square.enemy;
   });
 };

@@ -33,6 +33,12 @@ const App = () => {
       type: 'pawn',
       square: [5, 5],
     },
+    {
+      id: 5,
+      player: 'white',
+      type: 'knight',
+      square: [5, 6],
+    },
   ]);
 
   useEffect(() => {
