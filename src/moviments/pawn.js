@@ -6,40 +6,24 @@ export default ({ piece, pieces }) => {
   let moves = [];
 
   if (piece.player === 'white') {
-    const square = [file, rank - 1];
+    moves.push([file, rank - 1]);
 
-    if (checkSquare({ square, piece, pieces }).empty) {
-      moves.push(square);
+    if (!piece.moved) {
+      moves.push([file, rank - 2]);
     }
   }
 
   if (piece.player === 'black') {
-    const square = [file, rank + 1];
+    moves.push([file, rank + 1]);
 
-    if (checkSquare({ square, piece, pieces }).empty) {
-      moves.push(square);
-    }
-  }
-
-  if (!piece.moved && piece.player === 'white') {
-    const square = [file, rank - 2];
-
-    if (checkSquare({ square, piece, pieces }).empty) {
-      moves.push(square);
-    }
-  }
-
-  if (!piece.moved && piece.player === 'black') {
-    const square = [file, rank + 2];
-
-    if (checkSquare({ square, piece, pieces }).empty) {
-      moves.push(square);
+    if (!piece.moved) {
+      moves.push([file, rank + 2]);
     }
   }
 
   return moves.filter((square) => {
     square = checkSquare({ square, piece, pieces });
 
-    return square.empty || square.enemy;
+    return square.empty;
   });
 };
