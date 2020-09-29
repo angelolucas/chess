@@ -8,9 +8,7 @@ const squareExists = (square) => {
 };
 
 export default ({ square, piece, pieces }) => {
-  const thisExists = squareExists(square);
-
-  if (!thisExists) return false;
+  if (!squareExists(square)) return false;
 
   const getPiece = getPieceBySquare({ square, pieces });
   const empty = !getPiece;
