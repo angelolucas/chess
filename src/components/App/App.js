@@ -11,33 +11,39 @@ const App = () => {
   const [pieces, setPieces] = useState([
     {
       id: 1,
-      player: 'black',
+      player: 'white',
       type: 'king',
-      square: [3, 7],
+      square: [4, 7],
     },
     {
       id: 2,
-      player: 'black',
+      player: 'white',
       type: 'rook',
       square: [0, 7],
     },
     {
       id: 3,
-      player: 'black',
+      player: 'white',
       type: 'rook',
       square: [7, 7],
     },
     {
       id: 4,
-      player: 'white',
-      type: 'pawn',
-      square: [5, 5],
+      player: 'black',
+      type: 'king',
+      square: [4, 0],
     },
     {
       id: 5,
-      player: 'white',
-      type: 'knight',
-      square: [5, 6],
+      player: 'black',
+      type: 'rook',
+      square: [0, 0],
+    },
+    {
+      id: 6,
+      player: 'black',
+      type: 'rook',
+      square: [7, 0],
     },
   ]);
 
