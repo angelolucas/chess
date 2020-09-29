@@ -1,4 +1,4 @@
-import checkSquare from './checkSquare';
+import checkSquare from '../logics/checkSquare';
 
 export default ({ piece, pieces }) => {
   const file = piece.square[0];

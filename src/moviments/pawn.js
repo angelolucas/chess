@@ -1,4 +1,4 @@
-import squareExists from './squareExists';
+import squareExists from '../logics/squareExists';
 
 export default ({ piece, pieces }) => {
   const file = piece.square[0];

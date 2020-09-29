@@ -1,7 +1,6 @@
-import checkSquare from './checkSquare';
+import checkSquare from '../logics/checkSquare';
 
 const getDirection = ({ square, direction }) => {
-  console.log({ square, direction });
   let output = square.slice();
 
   if (direction[0] === 'forward') {
