@@ -4,7 +4,7 @@ import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
-import getLegalMoves from 'moviments/getLegalMoves';
+import legalMoves from 'logics/legalMoves';
 import * as S from './App.style';
 
 const App = () => {
@@ -68,7 +68,7 @@ const App = () => {
         ...piece,
         id,
         moved: false,
-        legalMoves: getLegalMoves({ piece, pieces }),
+        legalMoves: legalMoves({ piece, pieces }),
       }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,7 +102,7 @@ const App = () => {
 
     const withLegalMoves = withMovedPiece.map((piece) => ({
       ...piece,
-      legalMoves: getLegalMoves({ piece, pieces: withMovedPiece }),
+      legalMoves: legalMoves({ piece, pieces: withMovedPiece }),
     }));
 
     setPieces(withLegalMoves);

@@ -1,4 +1,4 @@
-import checkSquare from '../logics/checkSquare';
+import checkSquare from '../checkSquare';
 
 const getDirection = ({ square, direction }) => {
   let output = square.slice();
