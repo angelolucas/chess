@@ -1,23 +1,21 @@
 import checkSquare from '../checkSquare';
 
 export default ({ piece, pieces }) => {
-  const file = piece.square[0];
-  const rank = piece.square[1];
   let moves = [];
 
   if (piece.player === 'white') {
-    moves.push([file, rank - 1]);
+    moves.push(piece.square - 10);
 
     if (!piece.moved) {
-      moves.push([file, rank - 2]);
+      moves.push(piece.square - 20);
     }
   }
 
   if (piece.player === 'black') {
-    moves.push([file, rank + 1]);
+    moves.push(piece.square + 10);
 
     if (!piece.moved) {
-      moves.push([file, rank + 2]);
+      moves.push(piece.square + 20);
     }
   }
 
