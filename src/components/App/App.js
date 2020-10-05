@@ -12,7 +12,17 @@ const App = () => {
     {
       player: 'white',
       type: 'king',
-      square: 27,
+      square: 45,
+    },
+    {
+      player: 'white',
+      type: 'knight',
+      square: 44,
+    },
+    {
+      player: 'white',
+      type: 'pawn',
+      square: 46,
     },
   ]);
 

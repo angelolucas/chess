@@ -29,23 +29,8 @@ const Image = ({ player, piece }) =>
     'black-king': <BlackKing />,
   }[`${player}-${piece}`]);
 
-const getPisition = (square) => {
-  const split = (square / 8).toFixed(3).split('.');
-  const integer = Number(split[0]);
-  const fraction = Number(split[1]);
-  let file = integer + 1;
-  let rank = ((fraction / 100) * 8) / 10;
-
-  if (fraction === 0) {
-    file = file - 1;
-    rank = 8;
-  }
-
-  return { file, rank };
-};
-
 const Piece = ({ player, piece, square, rotate, ...props }) => {
-  const { file, rank } = getPisition(square);
+  const [file, rank] = (square / 10).toString().split('.');
 
   return (
     <S.Piece file={file} rank={rank} rotate={rotate} {...props}>
