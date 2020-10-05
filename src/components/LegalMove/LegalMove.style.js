@@ -4,7 +4,7 @@ export default styled.div(({ square, theme: { color } }) => {
   const [file, rank] = (square / 10).toString().split('.');
 
   return {
-    transform: `translate(${(rank - 1) * 100}%, ${(file - 1) * 100}%)`,
+    transform: `translate(${(rank - 1) * 100}%, ${-(file - 1) * 100}%)`,
     boxSizing: 'border-box',
     borderRadius: '50%',
     background: `${color.detail}33`,
@@ -14,7 +14,7 @@ export default styled.div(({ square, theme: { color } }) => {
     padding: 10,
     position: 'absolute',
     left: 0,
-    top: 0,
+    bottom: 0,
     zIndex: 2,
     cursor: 'pointer',
   };

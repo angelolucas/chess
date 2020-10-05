@@ -5,12 +5,12 @@ export const Piece = styled.div(({ file, rank, rotate, theme: { color } }) => ({
   height: '12.5%',
   transition: 'transform 0.2s',
   transform: `
-    translate(${(rank - 1) * 100}%, ${(file - 1) * 100}%)
+    translate(${(rank - 1) * 100}%, ${-(file - 1) * 100}%)
     rotate(${rotate ? '180deg' : '0deg'})
   `,
   position: 'absolute',
   left: 0,
-  top: 0,
+  bottom: 0,
   cursor: 'pointer',
 
   ':focus': {
