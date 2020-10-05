@@ -12,7 +12,7 @@ const App = () => {
     {
       player: 'white',
       type: 'king',
-      square: 45,
+      square: 66,
     },
     {
       player: 'white',
@@ -28,6 +28,21 @@ const App = () => {
       player: 'black',
       type: 'pawn',
       square: 28,
+    },
+    {
+      player: 'black',
+      type: 'rook',
+      square: 11,
+    },
+    {
+      player: 'white',
+      type: 'queen',
+      square: 17,
+    },
+    {
+      player: 'white',
+      type: 'bishop',
+      square: 47,
     },
   ]);
 

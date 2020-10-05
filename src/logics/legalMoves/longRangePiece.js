@@ -1,21 +1,16 @@
 import checkSquare from '../checkSquare';
 
-const getDirection = ({ square, direction }) => {
-  let output = square.slice();
-
-  if (direction[0] === 'forward') {
-    output[0]++;
-  } else if (direction[0] === 'backward') {
-    output[0]--;
-  }
-  if (direction[1] === 'forward') {
-    output[1]++;
-  } else if (direction[1] === 'backward') {
-    output[1]--;
-  }
-
-  return output;
-};
+const getDirection = ({ square, direction }) =>
+  ({
+    forward: square - 10,
+    'forward-right': square - 9,
+    right: square + 1,
+    'backward-right': square + 11,
+    backward: square + 10,
+    'backward-left': square + 9,
+    left: square - 1,
+    'forward-left': square - 11,
+  }[direction]);
 
 export default ({ piece, pieces }) => {
   const legalMoves = [];
@@ -37,17 +32,17 @@ export default ({ piece, pieces }) => {
   };
 
   if (['rook', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.square, direction: ['forward', null] });
-    loopSquares({ square: piece.square, direction: ['backward', null] });
-    loopSquares({ square: piece.square, direction: [null, 'backward'] });
-    loopSquares({ square: piece.square, direction: [null, 'forward'] });
+    loopSquares({ square: piece.square, direction: 'forward' });
+    loopSquares({ square: piece.square, direction: 'right' });
+    loopSquares({ square: piece.square, direction: 'backward' });
+    loopSquares({ square: piece.square, direction: 'left' });
   }
 
   if (['bishop', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.square, direction: ['forward', 'forward'] });
-    loopSquares({ square: piece.square, direction: ['forward', 'backward'] });
-    loopSquares({ square: piece.square, direction: ['backward', 'backward'] });
-    loopSquares({ square: piece.square, direction: ['backward', 'forward'] });
+    loopSquares({ square: piece.square, direction: 'forward-right' });
+    loopSquares({ square: piece.square, direction: 'backward-right' });
+    loopSquares({ square: piece.square, direction: 'backward-left' });
+    loopSquares({ square: piece.square, direction: 'forward-left' });
   }
 
   return legalMoves;
