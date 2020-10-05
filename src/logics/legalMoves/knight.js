@@ -1,17 +1,15 @@
 import checkSquare from '../checkSquare';
 
 export default ({ piece, pieces }) => {
-  const file = piece.square[0];
-  const rank = piece.square[1];
   const moves = [
-    [file + 1, rank - 2],
-    [file + 2, rank - 1],
-    [file + 2, rank + 1],
-    [file + 1, rank + 2],
-    [file - 1, rank + 2],
-    [file - 2, rank + 1],
-    [file - 2, rank - 1],
-    [file - 1, rank - 2],
+    [piece.square - 8],
+    [piece.square - 7],
+    [piece.square + 1],
+    [piece.square + 9],
+    [piece.square + 8],
+    [piece.square + 7],
+    [piece.square - 1],
+    [piece.square - 7],
   ];
 
   return moves.filter((square) => {

@@ -12,52 +12,7 @@ const App = () => {
     {
       player: 'white',
       type: 'king',
-      square: [4, 7],
-    },
-    {
-      player: 'white',
-      type: 'rook',
-      square: [0, 7],
-    },
-    {
-      player: 'white',
-      type: 'rook',
-      square: [7, 7],
-    },
-    {
-      player: 'black',
-      type: 'king',
-      square: [4, 0],
-    },
-    {
-      player: 'black',
-      type: 'rook',
-      square: [0, 0],
-    },
-    {
-      player: 'black',
-      type: 'rook',
-      square: [7, 0],
-    },
-    {
-      player: 'black',
-      type: 'pawn',
-      square: [3, 1],
-    },
-    {
-      player: 'black',
-      type: 'pawn',
-      square: [4, 1],
-    },
-    {
-      player: 'white',
-      type: 'pawn',
-      square: [3, 6],
-    },
-    {
-      player: 'white',
-      type: 'pawn',
-      square: [4, 6],
+      square: 27,
     },
   ]);
 
@@ -84,9 +39,7 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const withoutTakedPiece = pieces.filter(
-      (piece) => piece.square[0] !== to[0] || piece.square[1] !== to[1]
-    );
+    const withoutTakedPiece = pieces.filter((piece) => piece.square !== to);
 
     const withMovedPiece = withoutTakedPiece.map((piece) => {
       if (piece.square === from) {
