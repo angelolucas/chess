@@ -10,6 +10,8 @@ export default ({ piece, pieces }) => {
     piece.square + 9,
     piece.square + 10,
     piece.square + 11,
+    piece.square + 20,
+    piece.square - 20,
   ];
 
   return moves.filter((square) => {

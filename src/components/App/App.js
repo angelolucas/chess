@@ -5,25 +5,8 @@ import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
 import legalMoves from 'logics/legalMoves';
+import startPosition from 'startPosition';
 import * as S from './App.style';
-
-const startPosition = [
-  {
-    player: 'white',
-    type: 'rook',
-    square: 11,
-  },
-  {
-    player: 'white',
-    type: 'king',
-    square: 51,
-  },
-  {
-    player: 'white',
-    type: 'rook',
-    square: 81,
-  },
-];
 
 const App = () => {
   const [pieces, setPieces] = useState(
