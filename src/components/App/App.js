@@ -72,7 +72,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <S.App>
-        <Board rotate={false}>
+        <Board>
           {pieces.map((piece) => (
             <Fragment key={piece.id}>
               <Piece
@@ -81,7 +81,6 @@ const App = () => {
                 square={piece.square}
                 onFocus={() => handleSelection(piece.square)}
                 onBlur={() => handleSelection()}
-                rotate={false}
                 tabIndex="-1"
               />
               {piece.selected &&
