@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 import Board from 'components/Board';
@@ -7,57 +7,33 @@ import LegalMove from 'components/LegalMove';
 import legalMoves from 'logics/legalMoves';
 import * as S from './App.style';
 
-const App = () => {
-  const [pieces, setPieces] = useState([
-    {
-      player: 'white',
-      type: 'king',
-      square: 66,
-    },
-    {
-      player: 'white',
-      type: 'knight',
-      square: 44,
-    },
-    {
-      player: 'white',
-      type: 'pawn',
-      square: 78,
-    },
-    {
-      player: 'black',
-      type: 'pawn',
-      square: 28,
-    },
-    {
-      player: 'black',
-      type: 'rook',
-      square: 11,
-    },
-    {
-      player: 'white',
-      type: 'queen',
-      square: 17,
-    },
-    {
-      player: 'white',
-      type: 'bishop',
-      square: 47,
-    },
-  ]);
+const startPosition = [
+  {
+    player: 'white',
+    type: 'rook',
+    square: 11,
+  },
+  {
+    player: 'white',
+    type: 'king',
+    square: 51,
+  },
+  {
+    player: 'white',
+    type: 'rook',
+    square: 81,
+  },
+];
 
-  useEffect(() => {
-    // Set initial state
-    setPieces(
-      pieces.map((piece, id) => ({
-        ...piece,
-        id,
-        moved: false,
-        legalMoves: legalMoves({ piece, pieces }),
-      }))
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const App = () => {
+  const [pieces, setPieces] = useState(
+    startPosition.map((piece, id) => ({
+      ...piece,
+      id,
+      moved: false,
+      legalMoves: legalMoves({ piece, pieces: startPosition }),
+    }))
+  );
 
   const handleSelection = (square) => {
     setPieces(
