@@ -1,7 +1,7 @@
 import checkSquare from '../checkSquare';
 
 export default ({ piece, pieces }) => {
-  const moves = [
+  let moves = [
     piece.square - 21,
     piece.square - 19,
     piece.square - 12,
@@ -12,9 +12,11 @@ export default ({ piece, pieces }) => {
     piece.square + 21,
   ];
 
-  return moves.filter((square) => {
+  moves = moves.filter((square) => {
     square = checkSquare({ square, piece, pieces });
 
     return square.empty || square.enemy;
   });
+
+  return moves;
 };

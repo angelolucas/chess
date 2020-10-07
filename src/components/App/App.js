@@ -55,6 +55,8 @@ const App = () => {
   };
 
   window.pieces = pieces;
+  console.clear();
+  console.table(pieces);
 
   return (
     <ThemeProvider theme={theme}>
