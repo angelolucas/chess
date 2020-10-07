@@ -5,10 +5,12 @@ import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
 import legalMoves from 'logics/legalMoves';
+import check from 'logics/check';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
 const App = () => {
+  const [inCheck, setInCheck] = useState(false);
   const [pieces, setPieces] = useState(
     startPosition.map((piece, id) => ({
       ...piece,
@@ -47,6 +49,8 @@ const App = () => {
       legalMoves: legalMoves({ piece, pieces: withMovedPiece }),
     }));
 
+    setInCheck(check({ pieces: withLegalMoves, player: 'white' }));
+
     setPieces(withLegalMoves);
   };
 
@@ -79,6 +83,8 @@ const App = () => {
             </Fragment>
           ))}
         </Board>
+
+        <div>{inCheck ? 'in check' : 'is not a check'}</div>
       </S.App>
     </ThemeProvider>
   );
