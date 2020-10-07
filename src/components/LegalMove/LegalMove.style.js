@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default styled.div(({ square, theme: { color } }) => {
-  const [file, rank] = (square / 10).toString().split('.');
+export default styled.div(({ position, theme: { color } }) => {
+  const [file, rank] = (position / 10).toString().split('.');
 
   return {
     transform: `translate(${(file - 1) * 100}%, ${-(rank - 1) * 100}%)`,

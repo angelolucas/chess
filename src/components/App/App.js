@@ -20,24 +20,24 @@ const App = () => {
     }))
   );
 
-  const handleSelection = (square) => {
+  const handleSelection = (position) => {
     setPieces(
       pieces.map((piece) => ({
         ...piece,
-        selected: piece.square === square,
+        selected: piece.position === position,
       }))
     );
   };
 
   const handleMove = ({ from, to }) => {
-    const withoutTakedPiece = pieces.filter((piece) => piece.square !== to);
+    const withoutTakedPiece = pieces.filter((piece) => piece.position !== to);
 
     const withMovedPiece = withoutTakedPiece.map((piece) => {
-      if (piece.square === from) {
+      if (piece.position === from) {
         return {
           ...piece,
           moved: true,
-          square: to,
+          position: to,
         };
       } else {
         return piece;
@@ -67,8 +67,8 @@ const App = () => {
               <Piece
                 player={piece.player}
                 piece={piece.type}
-                square={piece.square}
-                onFocus={() => handleSelection(piece.square)}
+                position={piece.position}
+                onFocus={() => handleSelection(piece.position)}
                 onBlur={() => handleSelection()}
                 tabIndex="-1"
               />
@@ -76,9 +76,9 @@ const App = () => {
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
                     onMouseDown={() =>
-                      handleMove({ from: piece.square, to: move })
+                      handleMove({ from: piece.position, to: move })
                     }
-                    square={move}
+                    position={move}
                     key={key}
                   />
                 ))}

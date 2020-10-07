@@ -4,18 +4,18 @@ export default ({ piece, pieces }) => {
   let moves = [];
 
   if (piece.player === 'white') {
-    moves.push(piece.square + 1);
+    moves.push(piece.position + 1);
 
     if (!piece.moved) {
-      moves.push(piece.square + 2);
+      moves.push(piece.position + 2);
     }
   }
 
   if (piece.player === 'black') {
-    moves.push(piece.square - 1);
+    moves.push(piece.position - 1);
 
     if (!piece.moved) {
-      moves.push(piece.square - 2);
+      moves.push(piece.position - 2);
     }
   }
 

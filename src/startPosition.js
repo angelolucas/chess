@@ -2,16 +2,16 @@ export default [
   {
     player: 'white',
     type: 'king',
-    square: 51,
+    position: 51,
   },
   {
     player: 'black',
     type: 'rook',
-    square: 88,
+    position: 88,
   },
   {
     player: 'black',
     type: 'bishop',
-    square: 48,
+    position: 48,
   },
 ];

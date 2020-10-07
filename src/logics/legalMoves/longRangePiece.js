@@ -32,17 +32,17 @@ export default ({ piece, pieces }) => {
   };
 
   if (['rook', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.square, direction: 'left' });
-    loopSquares({ square: piece.square, direction: 'backward' });
-    loopSquares({ square: piece.square, direction: 'forward' });
-    loopSquares({ square: piece.square, direction: 'right' });
+    loopSquares({ square: piece.position, direction: 'left' });
+    loopSquares({ square: piece.position, direction: 'backward' });
+    loopSquares({ square: piece.position, direction: 'forward' });
+    loopSquares({ square: piece.position, direction: 'right' });
   }
 
   if (['bishop', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.square, direction: 'backward-left' });
-    loopSquares({ square: piece.square, direction: 'forward-left' });
-    loopSquares({ square: piece.square, direction: 'backward-right' });
-    loopSquares({ square: piece.square, direction: 'forward-right' });
+    loopSquares({ square: piece.position, direction: 'backward-left' });
+    loopSquares({ square: piece.position, direction: 'forward-left' });
+    loopSquares({ square: piece.position, direction: 'backward-right' });
+    loopSquares({ square: piece.position, direction: 'forward-right' });
   }
 
   return legalMoves;
