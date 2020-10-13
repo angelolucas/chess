@@ -1,4 +1,4 @@
-import checkSquare from 'logics/checkSquare';
+import squareStatus from 'logics/squareStatus';
 import getPieceBySquare from 'logics/getPieceBySquare';
 
 const getMove = ({ move, piece: { player, position } }) => {
@@ -26,7 +26,7 @@ export default ({ piece, pieces }) => {
   }
 
   return movesToCheck.filter((square) => {
-    square = checkSquare({ square, piece, pieces });
+    square = squareStatus({ square, piece, pieces });
 
     return square.empty;
   });

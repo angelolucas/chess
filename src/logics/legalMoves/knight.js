@@ -1,4 +1,4 @@
-import checkSquare from '../checkSquare';
+import squareStatus from '../squareStatus';
 
 export default ({ piece, pieces }) => {
   let moves = [
@@ -13,7 +13,7 @@ export default ({ piece, pieces }) => {
   ];
 
   moves = moves.filter((square) => {
-    square = checkSquare({ square, piece, pieces });
+    square = squareStatus({ square, piece, pieces });
 
     return square.empty || square.enemy;
   });

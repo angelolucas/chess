@@ -1,4 +1,4 @@
-import checkSquare from '../checkSquare';
+import squareStatus from '../squareStatus';
 
 const getDirection = ({ square, direction }) =>
   ({
@@ -17,7 +17,7 @@ export default ({ piece, pieces }) => {
 
   const loopSquares = ({ square, direction }) => {
     const nextSquare = getDirection({ square, direction });
-    const checkNextSquare = checkSquare({
+    const checkNextSquare = squareStatus({
       square: nextSquare,
       piece,
       pieces,
