@@ -10,6 +10,7 @@ import startPosition from 'startPosition';
 import * as S from './App.style';
 
 const App = () => {
+  const [player, setPlayer] = useState('white');
   const [inCheck, setInCheck] = useState(false);
   const [pieces, setPieces] = useState(
     startPosition.map((piece, id) => ({
@@ -52,6 +53,8 @@ const App = () => {
     setInCheck(check({ pieces: withLegalMoves, player: 'white' }));
 
     setPieces(withLegalMoves);
+
+    setPlayer(player === 'white' ? 'black' : 'white');
   };
 
   window.pieces = pieces;
@@ -68,7 +71,9 @@ const App = () => {
                 player={piece.player}
                 piece={piece.type}
                 position={piece.position}
-                onFocus={() => handleSelection(piece.position)}
+                onFocus={() => {
+                  player === piece.player && handleSelection(piece.position);
+                }}
                 onBlur={() => handleSelection()}
                 tabIndex="-1"
               />
