@@ -29,11 +29,17 @@ const Image = ({ player, piece }) =>
     'black-king': <BlackKing />,
   }[`${player}-${piece}`]);
 
-const Piece = ({ player, piece, position, rotate, ...props }) => {
+const Piece = ({ player, piece, position, rotate, inCheck, ...props }) => {
   const [file, rank] = (position / 10).toString().split('.');
 
   return (
-    <S.Piece file={file} rank={rank} rotate={rotate} {...props}>
+    <S.Piece
+      file={file}
+      rank={rank}
+      rotate={rotate}
+      inCheck={inCheck}
+      {...props}
+    >
       <Image player={player} piece={piece} />
     </S.Piece>
   );

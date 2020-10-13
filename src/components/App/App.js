@@ -9,6 +9,8 @@ import check from 'logics/check';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
+const enemy = (player) => (player === 'white' ? 'black' : 'white');
+
 const App = () => {
   const [player, setPlayer] = useState('white');
   const [inCheck, setInCheck] = useState(false);
@@ -50,20 +52,19 @@ const App = () => {
       legalMoves: legalMoves({ piece, pieces: withMovedPiece }),
     }));
 
-    setInCheck(check({ pieces: withLegalMoves, player: 'white' }));
+    setInCheck(check({ player: enemy(player), pieces: withLegalMoves }));
 
     setPieces(withLegalMoves);
 
-    setPlayer(player === 'white' ? 'black' : 'white');
+    setPlayer(enemy(player));
   };
 
   window.pieces = pieces;
-  console.clear();
-  console.table(pieces);
 
   return (
     <ThemeProvider theme={theme}>
       <S.App>
+        <div>{inCheck ? `${inCheck} in check` : 'is not a check'}</div>
         <Board>
           {pieces.map((piece) => (
             <Fragment key={piece.id}>
@@ -75,6 +76,7 @@ const App = () => {
                   player === piece.player && handleSelection(piece.position);
                 }}
                 onBlur={() => handleSelection()}
+                inCheck={piece.type === 'king' && inCheck === piece.player}
                 tabIndex="-1"
               />
               {piece.selected &&
@@ -90,8 +92,6 @@ const App = () => {
             </Fragment>
           ))}
         </Board>
-
-        <div>{inCheck ? 'in check' : 'is not a check'}</div>
       </S.App>
     </ThemeProvider>
   );
