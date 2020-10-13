@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Piece = styled.div(
-  ({ file, rank, rotate, inCheck, theme: { color } }) => ({
+  ({ file, rank, rotate, checked, theme: { color } }) => ({
     width: '12.5%',
     height: '12.5%',
     transition: 'transform 0.2s',
@@ -15,7 +15,7 @@ export const Piece = styled.div(
     cursor: 'pointer',
     outline: 'none',
     boxShadow:
-      inCheck &&
+      checked &&
       `inset 0px 0px 0px 2px ${color.check},
     0px 0px 0px 2px ${color.check}`,
 
