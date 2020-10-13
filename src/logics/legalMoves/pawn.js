@@ -1,5 +1,4 @@
 import squareStatus from 'logics/squareStatus';
-import getPieceBySquare from 'logics/getPieceBySquare';
 
 const getMove = ({ move, piece: { player, position } }) => {
   if (move === 'one-ahead') {
@@ -8,26 +7,35 @@ const getMove = ({ move, piece: { player, position } }) => {
   if (move === 'two-ahead') {
     return player === 'white' ? position + 2 : position - 2;
   }
+  if (move === 'take-right') {
+    return player === 'white' ? position + 11 : position - 11;
+  }
+  if (move === 'take-left') {
+    return player === 'white' ? position - 9 : position + 9;
+  }
 };
 
 export default ({ piece, pieces }) => {
-  let movesToCheck = [];
-
-  const pieceAhead = getPieceBySquare({
-    square: getMove({ move: 'one-ahead', piece }),
+  const squareAhead = getMove({ move: 'one-ahead', piece });
+  const statusSquareAhead = squareStatus({
+    square: squareAhead,
     pieces,
   });
-  const moved = piece.moved;
+  let moves = [];
 
-  movesToCheck.push(getMove({ move: 'one-ahead', piece }));
+  if (statusSquareAhead.empty) {
+    const twoSquaresAhead = getMove({ move: 'two-ahead', piece });
+    const statusTwoSquaresAhead = squareStatus({
+      square: twoSquaresAhead,
+      pieces,
+    });
 
-  if (!moved && !pieceAhead) {
-    movesToCheck.push(getMove({ move: 'two-ahead', piece }));
+    moves.push(squareAhead);
+
+    if (!piece.moved && statusTwoSquaresAhead.empty) {
+      moves.push(twoSquaresAhead);
+    }
   }
 
-  return movesToCheck.filter((square) => {
-    square = squareStatus({ square, piece, pieces });
-
-    return square.empty;
-  });
+  return moves;
 };

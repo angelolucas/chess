@@ -1,4 +1,5 @@
-import getPieceBySquare from './getPieceBySquare';
+const getPieceBySquare = ({ square, pieces }) =>
+  Object.values(pieces).find((piece) => piece.position === square)?.player;
 
 export default ({ square, piece, pieces }) => {
   // Check if is a invalid square
