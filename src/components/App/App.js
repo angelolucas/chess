@@ -15,12 +15,12 @@ const enemy = (player) => (player === 'white' ? 'black' : 'white');
 const App = () => {
   const [player, setPlayer] = useState('white');
   const [checkedPlayer, setCheckedPlayer] = useState(false);
-  const [pieces, setPieces] = useState(
+  const [pieces, setPieces] = useState(() =>
     startPosition.map((piece, id) => ({
       ...piece,
       id,
       moved: false,
-      legalMoves: legalMoves({ piece, pieces: startPosition }),
+      legalMoves: legalMoves({ player, piece, pieces: startPosition }),
     }))
   );
 
@@ -34,7 +34,7 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const piecesInNewPosition = move({ from, to, pieces });
+    const piecesInNewPosition = move({ from, to, player, pieces });
 
     setCheckedPlayer(
       check({ player: enemy(player), pieces: piecesInNewPosition })
@@ -60,9 +60,7 @@ const App = () => {
                 player={piece.player}
                 piece={piece.type}
                 position={piece.position}
-                onFocus={() => {
-                  player === piece.player && handleSelection(piece.position);
-                }}
+                onFocus={() => handleSelection(piece.position)}
                 onBlur={() => handleSelection()}
                 checked={
                   piece.type === 'king' && checkedPlayer === piece.player
