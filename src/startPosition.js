@@ -49,4 +49,9 @@ export default [
     type: 'pawn',
     position: 57,
   },
+  {
+    player: 'white',
+    type: 'rook',
+    position: 56,
+  },
 ];
