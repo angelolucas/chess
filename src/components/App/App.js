@@ -6,6 +6,7 @@ import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
 import legalMoves from 'logics/legalMoves';
 import check from 'logics/check';
+import move from 'logics/move';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
@@ -33,28 +34,11 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const withoutTakedPiece = pieces.filter((piece) => piece.position !== to);
+    const piecesInNewPosition = move({ from, to, pieces });
 
-    const withMovedPiece = withoutTakedPiece.map((piece) => {
-      if (piece.position === from) {
-        return {
-          ...piece,
-          moved: true,
-          position: to,
-        };
-      } else {
-        return piece;
-      }
-    });
+    setInCheck(check({ player: enemy(player), pieces: piecesInNewPosition }));
 
-    const withLegalMoves = withMovedPiece.map((piece) => ({
-      ...piece,
-      legalMoves: legalMoves({ piece, pieces: withMovedPiece }),
-    }));
-
-    setInCheck(check({ player: enemy(player), pieces: withLegalMoves }));
-
-    setPieces(withLegalMoves);
+    setPieces(piecesInNewPosition);
 
     setPlayer(enemy(player));
   };
