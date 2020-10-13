@@ -1,25 +1,31 @@
-import checkSquare from '../checkSquare';
+import checkSquare from 'logics/checkSquare';
+import getPieceBySquare from 'logics/getPieceBySquare';
+
+const getMove = ({ move, piece: { player, position } }) => {
+  if (move === 'one-ahead') {
+    return player === 'white' ? position + 1 : position - 1;
+  }
+  if (move === 'two-ahead') {
+    return player === 'white' ? position + 2 : position - 2;
+  }
+};
 
 export default ({ piece, pieces }) => {
-  let moves = [];
+  let movesToCheck = [];
 
-  if (piece.player === 'white') {
-    moves.push(piece.position + 1);
+  const pieceAhead = getPieceBySquare({
+    square: getMove({ move: 'one-ahead', piece }),
+    pieces,
+  });
+  const moved = piece.moved;
 
-    if (!piece.moved) {
-      moves.push(piece.position + 2);
-    }
+  movesToCheck.push(getMove({ move: 'one-ahead', piece }));
+
+  if (!moved && !pieceAhead) {
+    movesToCheck.push(getMove({ move: 'two-ahead', piece }));
   }
 
-  if (piece.player === 'black') {
-    moves.push(piece.position - 1);
-
-    if (!piece.moved) {
-      moves.push(piece.position - 2);
-    }
-  }
-
-  return moves.filter((square) => {
+  return movesToCheck.filter((square) => {
     square = checkSquare({ square, piece, pieces });
 
     return square.empty;
