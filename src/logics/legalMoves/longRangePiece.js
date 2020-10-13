@@ -19,7 +19,7 @@ export default ({ piece, pieces }) => {
     const nextSquare = getDirection({ square, direction });
     const checkNextSquare = squareStatus({
       square: nextSquare,
-      piece,
+      player: piece.player,
       pieces,
     });
 

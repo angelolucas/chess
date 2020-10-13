@@ -12,20 +12,20 @@ export default ({ piece, pieces }) => {
   const squareAhead = getMove({ move: 'forward', piece });
   const statusSquareAhead = squareStatus({
     square: squareAhead,
+    player: piece.player,
     pieces,
-    piece,
   });
   const squareForwardLeft = getMove({ move: 'forward-left', piece });
   const statusSquareForwardLeft = squareStatus({
     square: squareForwardLeft,
+    player: piece.player,
     pieces,
-    piece,
   });
   const squareForwardRight = getMove({ move: 'forward-right', piece });
   const statusSquareForwardRight = squareStatus({
     square: squareForwardRight,
+    player: piece.player,
     pieces,
-    piece,
   });
   let moves = [];
 
@@ -33,8 +33,8 @@ export default ({ piece, pieces }) => {
     const twoSquaresAhead = getMove({ move: 'two-forward', piece });
     const statusTwoSquaresAhead = squareStatus({
       square: twoSquaresAhead,
+      player: piece.player,
       pieces,
-      piece,
     });
 
     moves.push(squareAhead);

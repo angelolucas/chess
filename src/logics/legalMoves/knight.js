@@ -13,7 +13,7 @@ export default ({ piece, pieces }) => {
   ];
 
   moves = moves.filter((square) => {
-    square = squareStatus({ square, piece, pieces });
+    square = squareStatus({ square, player: piece.player, pieces });
 
     return square.empty || square.enemy;
   });
