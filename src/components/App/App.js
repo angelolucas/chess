@@ -15,6 +15,7 @@ const enemy = (player) => (player === 'white' ? 'black' : 'white');
 const App = () => {
   const [player, setPlayer] = useState('white');
   const [checkedPlayer, setCheckedPlayer] = useState(false);
+  const [checkmatedPlayer, setCheckmatedPlayer] = useState(false);
   const [pieces, setPieces] = useState(() =>
     startPosition.map((piece, id) => ({
       ...piece,
@@ -41,11 +42,21 @@ const App = () => {
       to,
       pieces,
     });
-
-    setCheckedPlayer(
-      check({ player: nextPlayer, pieces: piecesInNewPosition }) &&
-        enemy(player)
+    const enemyInCheck = check({
+      player: nextPlayer,
+      pieces: piecesInNewPosition,
+    });
+    const enemyMoves = piecesInNewPosition.find(
+      (piece) => piece.player === nextPlayer && piece.legalMoves.length > 0
     );
+
+    if (enemyInCheck && !enemyMoves) {
+      setCheckmatedPlayer(enemy(player));
+    } else if (enemyInCheck) {
+      setCheckedPlayer(enemy(player));
+    } else {
+      setCheckedPlayer(false);
+    }
 
     setPieces(piecesInNewPosition);
 
@@ -57,12 +68,6 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <S.App>
-        <ul>
-          <li>
-            {checkedPlayer ? `${checkedPlayer} in check` : 'is not a check'}
-          </li>
-          <li>{`${player} to move`}</li>
-        </ul>
         <Board>
           {pieces.map((piece) => (
             <Fragment key={piece.id}>
@@ -76,6 +81,9 @@ const App = () => {
                 onBlur={() => handleSelection()}
                 checked={
                   piece.type === 'king' && checkedPlayer === piece.player
+                }
+                checkmated={
+                  piece.type === 'king' && checkmatedPlayer === piece.player
                 }
                 tabIndex="-1"
               />
