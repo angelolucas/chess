@@ -5,9 +5,7 @@ import knight from './knight';
 import king from './king';
 import pawn from './pawn';
 
-const enemy = (player) => (player === 'white' ? 'black' : 'white');
-
-export default ({ piece, pieces, player, pinnedPieces }) => {
+export default ({ piece, pieces, player }) => {
   let moves = [];
 
   if (['rook', 'bishop', 'queen'].includes(piece.type)) {
@@ -23,17 +21,20 @@ export default ({ piece, pieces, player, pinnedPieces }) => {
     moves = pawn({ piece, pieces });
   }
 
-  if (pinnedPieces && player && player !== piece.player) {
-    moves = moves.filter((legalMove) => {
-      const test = move({
-        from: piece.position,
-        to: legalMove,
-        pieces,
-        pinnedPieces: false,
-      });
-
-      return !check({ player: enemy(player), pieces: test });
-    });
+  // Remove the moves that leave the king in check
+  if (player && player !== piece.player) {
+    moves = moves.filter(
+      (legalMove) =>
+        !check({
+          player: player === 'white' ? 'black' : 'white',
+          pieces: move({
+            from: piece.position,
+            to: legalMove,
+            pieces,
+            pinnedPieces: false,
+          }),
+        })
+    );
   }
 
   return moves;

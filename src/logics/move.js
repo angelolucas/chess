@@ -21,7 +21,6 @@ export default ({ from, to, pieces, player }) => {
       piece,
       player,
       pieces: withMovedPiece,
-      pinnedPieces: true,
     }),
   }));
 
