@@ -34,15 +34,21 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const piecesInNewPosition = move({ from, to, player, pieces });
+    const nextPlayer = enemy(player);
+    const piecesInNewPosition = move({
+      from,
+      to,
+      player: nextPlayer,
+      pieces,
+    });
 
     setCheckedPlayer(
-      check({ player: enemy(player), pieces: piecesInNewPosition })
+      check({ player: nextPlayer, pieces: piecesInNewPosition })
     );
 
     setPieces(piecesInNewPosition);
 
-    setPlayer(enemy(player));
+    setPlayer(nextPlayer);
   };
 
   window.pieces = pieces;
@@ -50,9 +56,12 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <S.App>
-        <div>
-          {checkedPlayer ? `${checkedPlayer} in check` : 'is not a check'}
-        </div>
+        <ul>
+          <li>
+            {checkedPlayer ? `${checkedPlayer} in check` : 'is not a check'}
+          </li>
+          <li>{`${player} to move`}</li>
+        </ul>
         <Board>
           {pieces.map((piece) => (
             <Fragment key={piece.id}>

@@ -6,8 +6,8 @@ export const Board = styled.div(({ rotate, theme: { color, breakpoint } }) => ({
   display: 'flex',
   border: `3px solid ${color.light}`,
   margin: '5vmin auto',
-  width: '90vmin',
-  height: '90vmin',
+  width: '70vmin',
+  height: '70vmin',
   position: 'relative',
   transform: rotate && 'rotate(180deg)',
 
