@@ -20,7 +20,7 @@ const App = () => {
       ...piece,
       id,
       moved: false,
-      legalMoves: legalMoves({ player, piece, pieces: startPosition }),
+      legalMoves: legalMoves({ piece, pieces: startPosition }),
     }))
   );
 
@@ -38,7 +38,6 @@ const App = () => {
     const piecesInNewPosition = move({
       from,
       to,
-      player: nextPlayer,
       pieces,
     });
 
@@ -69,7 +68,9 @@ const App = () => {
                 player={piece.player}
                 piece={piece.type}
                 position={piece.position}
-                onFocus={() => handleSelection(piece.position)}
+                onFocus={() => {
+                  player === piece.player && handleSelection(piece.position);
+                }}
                 onBlur={() => handleSelection()}
                 checked={
                   piece.type === 'king' && checkedPlayer === piece.player

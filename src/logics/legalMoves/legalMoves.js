@@ -3,10 +3,8 @@ import knight from './knight';
 import king from './king';
 import pawn from './pawn';
 
-export default ({ player, piece, pieces }) => {
+export default ({ piece, pieces }) => {
   let moves = [];
-
-  if (player !== piece.player) return moves;
 
   if (['rook', 'bishop', 'queen'].includes(piece.type)) {
     moves = longRangePiece({ piece, pieces });
