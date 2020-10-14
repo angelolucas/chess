@@ -6,5 +6,5 @@ export default ({ pieces, player }) => {
     piece.legalMoves.includes(king.position)
   );
 
-  return check ? player : false;
+  return check ? true : false;
 };

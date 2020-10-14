@@ -36,13 +36,15 @@ const App = () => {
   const handleMove = ({ from, to }) => {
     const nextPlayer = enemy(player);
     const piecesInNewPosition = move({
+      player,
       from,
       to,
       pieces,
     });
 
     setCheckedPlayer(
-      check({ player: nextPlayer, pieces: piecesInNewPosition })
+      check({ player: nextPlayer, pieces: piecesInNewPosition }) &&
+        enemy(player)
     );
 
     setPieces(piecesInNewPosition);
