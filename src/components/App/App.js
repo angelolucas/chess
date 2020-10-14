@@ -10,12 +10,9 @@ import move from 'logics/move';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
-const enemy = (player) => (player === 'white' ? 'black' : 'white');
-
 const App = () => {
   const [player, setPlayer] = useState('white');
-  const [checkedPlayer, setCheckedPlayer] = useState(false);
-  const [checkmatedPlayer, setCheckmatedPlayer] = useState(false);
+
   const [pieces, setPieces] = useState(() =>
     startPosition.map((piece, id) => ({
       ...piece,
@@ -35,33 +32,25 @@ const App = () => {
   };
 
   const handleMove = ({ from, to }) => {
-    const nextPlayer = enemy(player);
     const piecesInNewPosition = move({
       player,
       from,
       to,
       pieces,
     });
-    const enemyInCheck = check({
-      player: nextPlayer,
-      pieces: piecesInNewPosition,
-    });
-    const enemyMoves = piecesInNewPosition.find(
-      (piece) => piece.player === nextPlayer && piece.legalMoves.length > 0
-    );
-
-    if (enemyInCheck && !enemyMoves) {
-      setCheckmatedPlayer(enemy(player));
-    } else if (enemyInCheck) {
-      setCheckedPlayer(enemy(player));
-    } else {
-      setCheckedPlayer(false);
-    }
 
     setPieces(piecesInNewPosition);
-
-    setPlayer(nextPlayer);
+    setPlayer(player === 'white' ? 'black' : 'white');
   };
+
+  const checked = check({
+    player,
+    pieces,
+  });
+
+  const moves = pieces.find(
+    (piece) => piece.player === player && piece.legalMoves.length
+  );
 
   window.pieces = pieces;
 
@@ -80,10 +69,13 @@ const App = () => {
                 }}
                 onBlur={() => handleSelection()}
                 checked={
-                  piece.type === 'king' && checkedPlayer === piece.player
+                  piece.type === 'king' && piece.player === player && checked
                 }
                 checkmated={
-                  piece.type === 'king' && checkmatedPlayer === piece.player
+                  piece.type === 'king' &&
+                  piece.player === player &&
+                  checked &&
+                  !moves
                 }
                 tabIndex="-1"
               />
