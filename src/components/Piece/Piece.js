@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ReactComponent as WhitePawn } from 'assets/white-pawn.svg';
 import { ReactComponent as WhiteRook } from 'assets/white-rook.svg';
 import { ReactComponent as WhiteKnight } from 'assets/white-knight.svg';
@@ -52,6 +53,16 @@ const Piece = ({
       <Image player={player} piece={piece} />
     </S.Piece>
   );
+};
+
+Piece.propTypes = {
+  player: PropTypes.oneOf(['white', 'black']).isRequired,
+  piece: PropTypes.oneOf(['rook', 'knight', 'bishop', 'queen', 'king', 'pawn'])
+    .isRequired,
+  position: PropTypes.number.isRequired,
+  rotate: PropTypes.bool,
+  checked: PropTypes.bool,
+  checkmated: PropTypes.bool,
 };
 
 export default Piece;
