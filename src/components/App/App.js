@@ -4,6 +4,7 @@ import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
 import LegalMove from 'components/LegalMove';
+import Promotion from 'components/Promotion';
 import legalMoves from 'logics/legalMoves';
 import check from 'logics/check';
 import move from 'logics/move';
@@ -21,6 +22,8 @@ const App = () => {
       legalMoves: legalMoves({ piece, pieces: startPosition }),
     }))
   );
+
+  const [promotion, setPromotion] = useState(false);
 
   const handleSelection = (position) => {
     setPieces(
@@ -91,6 +94,13 @@ const App = () => {
                 ))}
             </Fragment>
           ))}
+          {promotion && (
+            <Promotion
+              file={promotion.file}
+              player={promotion.player}
+              onClick={(e) => console.log(e)}
+            />
+          )}
         </Board>
       </S.App>
     </ThemeProvider>

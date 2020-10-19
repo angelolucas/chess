@@ -37,6 +37,7 @@ const Piece = ({
   rotate,
   checked,
   checkmated,
+  promotion,
   ...props
 }) => {
   const [file, rank] = (position / 10).toString().split('.');
@@ -48,6 +49,7 @@ const Piece = ({
       rotate={rotate}
       checked={checked}
       checkmated={checkmated}
+      promotion={promotion}
       {...props}
     >
       <Image player={player} piece={piece} />
@@ -63,6 +65,7 @@ Piece.propTypes = {
   rotate: PropTypes.bool,
   checked: PropTypes.bool,
   checkmated: PropTypes.bool,
+  promotion: PropTypes.bool,
 };
 
 export default Piece;
