@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-export default styled.div(({ position, theme: { color } }) => {
+const LegalMove = styled.div(({ position, theme: { color } }) => {
   const [file, rank] = (position / 10).toString().split('.');
 
   return {
@@ -19,3 +20,9 @@ export default styled.div(({ position, theme: { color } }) => {
     cursor: 'pointer',
   };
 });
+
+LegalMove.propTypes = {
+  position: PropTypes.number,
+};
+
+export default LegalMove;
