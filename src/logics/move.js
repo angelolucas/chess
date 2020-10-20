@@ -1,18 +1,25 @@
 import legalMoves from 'logics/legalMoves';
 
-export default ({ from, to, pieces, player }) => {
-  const withoutTakedPiece = pieces.filter((piece) => piece.position !== to);
+export default ({ moves, pieces, player }) => {
+  const withoutTakedPiece = pieces.filter((piece) => {
+    for (const move of moves) {
+      if (piece.position === move.to) return false;
+    }
+    return true;
+  });
 
   const withMovedPiece = withoutTakedPiece.map((piece) => {
-    if (piece.position === from) {
-      return {
-        ...piece,
-        moved: true,
-        position: to,
-      };
-    } else {
-      return piece;
+    for (const move of moves) {
+      if (piece.position === move.from) {
+        return {
+          ...piece,
+          moved: true,
+          position: move.to,
+        };
+      }
     }
+
+    return piece;
   });
 
   const withLegalMoves = withMovedPiece.map((piece) => ({

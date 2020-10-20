@@ -28,8 +28,7 @@ export default ({ piece, pieces, player }) => {
         !check({
           player: player === 'white' ? 'black' : 'white',
           pieces: move({
-            from: piece.position,
-            to: legalMove,
+            moves: [{ from: piece.position, to: legalMove }],
             pieces,
             pinnedPieces: false,
           }),

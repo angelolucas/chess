@@ -23,6 +23,10 @@ const App = () => {
     }))
   );
 
+  /*const [promotion, setPromotion] = useState({
+    player: 'white',
+    file: 3,
+  });*/
   const [promotion, setPromotion] = useState(false);
 
   const handleSelection = (position) => {
@@ -34,11 +38,10 @@ const App = () => {
     );
   };
 
-  const handleMove = ({ from, to }) => {
+  const handleMove = (moves) => {
     const piecesInNewPosition = move({
+      moves,
       player,
-      from,
-      to,
       pieces,
     });
 
@@ -86,7 +89,7 @@ const App = () => {
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
                     onMouseDown={() =>
-                      handleMove({ from: piece.position, to: move })
+                      handleMove([{ from: piece.position, to: move }])
                     }
                     position={move}
                     key={key}
