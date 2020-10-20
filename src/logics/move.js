@@ -1,14 +1,18 @@
 import legalMoves from 'logics/legalMoves';
 
 export default ({ moves, pieces, player }) => {
-  const withoutTakedPiece = pieces.filter((piece) => {
+  let newMap = pieces;
+
+  // Remove taked piece
+  newMap = newMap.filter((piece) => {
     for (const move of moves) {
       if (piece.position === move.to) return false;
     }
     return true;
   });
 
-  const withMovedPiece = withoutTakedPiece.map((piece) => {
+  // Move pieces
+  newMap = newMap.map((piece) => {
     for (const move of moves) {
       if (piece.position === move.from) {
         return {
@@ -22,14 +26,15 @@ export default ({ moves, pieces, player }) => {
     return piece;
   });
 
-  const withLegalMoves = withMovedPiece.map((piece) => ({
+  // Update legal moves
+  newMap = newMap.map((piece) => ({
     ...piece,
     legalMoves: legalMoves({
       piece,
       player,
-      pieces: withMovedPiece,
+      pieces: newMap,
     }),
   }));
 
-  return withLegalMoves;
+  return newMap;
 };
