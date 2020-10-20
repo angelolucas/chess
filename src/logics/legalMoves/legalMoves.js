@@ -21,7 +21,7 @@ export default ({ piece, pieces, player }) => {
     moves = pawn({ piece, pieces });
   }
 
-  // Remove the moves that leave the king in check
+  // Remove moves that leave the king in check
   if (player && player !== piece.player) {
     moves = moves.filter(
       (legalMove) =>
@@ -30,7 +30,6 @@ export default ({ piece, pieces, player }) => {
           pieces: move({
             moves: [{ from: piece.position, to: legalMove }],
             pieces,
-            pinnedPieces: false,
           }),
         })
     );
