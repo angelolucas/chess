@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Piece from 'components/Piece';
 import * as S from './Promotion.style';
 
-const Promotion = ({ file, player, onClick, ...props }) => {
+const Promotion = ({ square, onClick, ...props }) => {
+  const [file, rank] = [...square.toString()].map(Number);
+  const player = rank === 8 ? 'white' : 'black';
   const position = (order) => {
-    const white = player === 'white';
     const rank = {
-      0: white ? 8 : 1,
-      1: white ? 7 : 2,
-      2: white ? 6 : 3,
-      3: white ? 5 : 4,
+      0: player === 'white' ? 8 : 1,
+      1: player === 'white' ? 7 : 2,
+      2: player === 'white' ? 6 : 3,
+      3: player === 'white' ? 5 : 4,
     }[order];
 
     return parseInt(`${file}${rank}`);
@@ -35,8 +36,24 @@ const Promotion = ({ file, player, onClick, ...props }) => {
 };
 
 Promotion.propTypes = {
-  file: PropTypes.oneOf([1, 2, 3, 4, 5, 6, 7, 8]).isRequired,
-  player: PropTypes.oneOf(['white', 'black']).isRequired,
+  square: PropTypes.oneOf([
+    11,
+    21,
+    31,
+    41,
+    51,
+    61,
+    71,
+    81,
+    18,
+    28,
+    38,
+    48,
+    58,
+    68,
+    78,
+    88,
+  ]).isRequired,
   onClick: PropTypes.func,
 };
 

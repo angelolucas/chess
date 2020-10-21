@@ -40,7 +40,7 @@ const Piece = ({
   promotion,
   ...props
 }) => {
-  const [file, rank] = (position / 10).toString().split('.');
+  const [file, rank] = [...position.toString()].map(Number);
 
   return (
     <S.Piece

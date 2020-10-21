@@ -6,7 +6,7 @@ export default ({ moves, pieces, player }) => {
   // Remove taked piece
   newMap = newMap.filter((piece) => {
     for (const move of moves) {
-      if (piece.position === move.to) return false;
+      if (move.target === piece.position) return false;
     }
     return true;
   });
@@ -14,11 +14,11 @@ export default ({ moves, pieces, player }) => {
   // Move pieces
   newMap = newMap.map((piece) => {
     for (const move of moves) {
-      if (piece.position === move.from) {
+      if (move.piece.position === piece.position) {
         return {
           ...piece,
           moved: true,
-          position: move.to,
+          position: move.target,
         };
       }
     }

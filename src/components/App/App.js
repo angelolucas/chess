@@ -23,10 +23,6 @@ const App = () => {
     }))
   );
 
-  /*const [promotion, setPromotion] = useState({
-    player: 'white',
-    file: 3,
-  });*/
   const [promotion, setPromotion] = useState(false);
 
   const handleSelection = (position) => {
@@ -38,9 +34,13 @@ const App = () => {
     );
   };
 
-  const handleMove = (moves) => {
+  const handleMove = ({ piece, target }) => {
+    const targetRank = target % 10;
+    if ([1, 8].includes(targetRank) && piece.type === 'pawn') {
+      return setPromotion(target);
+    }
     const piecesInNewPosition = move({
-      moves,
+      moves: [{ piece, target }],
       player,
       pieces,
     });
@@ -88,21 +88,19 @@ const App = () => {
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
-                    onMouseDown={() =>
-                      handleMove([{ from: piece.position, to: move }])
-                    }
+                    onMouseDown={() => handleMove({ piece, target: move })}
                     position={move}
                     key={key}
                   />
                 ))}
             </Fragment>
           ))}
+          {/*<LegalMove
+            onMouseDown={() => handleMove({ from: 51, to: 31, castle: true })}
+            position={31}
+          />*/}
           {promotion && (
-            <Promotion
-              file={promotion.file}
-              player={promotion.player}
-              onClick={(e) => console.log(e)}
-            />
+            <Promotion square={promotion} onClick={(e) => console.log(e)} />
           )}
         </Board>
       </S.App>
