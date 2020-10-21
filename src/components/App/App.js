@@ -34,18 +34,23 @@ const App = () => {
     );
   };
 
-  const handleMove = ({ piece, target }) => {
-    const targetRank = target % 10;
-    if ([1, 8].includes(targetRank) && piece.type === 'pawn') {
-      return setPromotion(target);
+  const handleMove = ({ piece, target, promotionPiece }) => {
+    const eighthRank = [1, 8].includes(target % 10);
+    const promotionChoice =
+      eighthRank && piece.type === 'pawn' && !promotionPiece;
+
+    if (promotionChoice) {
+      return setPromotion({ piece, target });
     }
-    const piecesInNewPosition = move({
+
+    const newPosition = move({
       moves: [{ piece, target }],
       player,
       pieces,
+      promotionPiece,
     });
 
-    setPieces(piecesInNewPosition);
+    setPieces(newPosition);
     setPlayer(player === 'white' ? 'black' : 'white');
   };
 
@@ -95,12 +100,22 @@ const App = () => {
                 ))}
             </Fragment>
           ))}
-          {/*<LegalMove
+          <LegalMove
             onMouseDown={() => handleMove({ from: 51, to: 31, castle: true })}
             position={31}
-          />*/}
+          />
           {promotion && (
-            <Promotion square={promotion} onClick={(e) => console.log(e)} />
+            <Promotion
+              square={promotion.target}
+              onClick={(piece) =>
+                handleMove({
+                  promotionPiece: piece,
+                  piece: promotion.piece,
+                  target: promotion.target,
+                })
+              }
+              onClose={() => setPromotion(false)}
+            />
           )}
         </Board>
       </S.App>

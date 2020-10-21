@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Piece from 'components/Piece';
 import * as S from './Promotion.style';
 
-const Promotion = ({ square, onClick, ...props }) => {
+const Promotion = ({ square, onClick, onClose, ...props }) => {
   const [file, rank] = [...square.toString()].map(Number);
   const player = rank === 8 ? 'white' : 'black';
   const position = (order) => {
@@ -18,7 +18,7 @@ const Promotion = ({ square, onClick, ...props }) => {
   };
 
   return (
-    <S.Promotion {...props}>
+    <S.Promotion {...props} onClick={onClose}>
       {['queen', 'knight', 'rook', 'bishop'].map((piece, order) => {
         return (
           <Piece
@@ -55,6 +55,7 @@ Promotion.propTypes = {
     88,
   ]).isRequired,
   onClick: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default Promotion;
