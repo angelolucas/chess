@@ -21,7 +21,11 @@ export default ({ piece, pieces, player }) => {
     moves = pawn({ piece, pieces });
   }
 
-  // Remove moves that leave the king in check
+  /*
+   * Removes the opponent's moves that leave their king in check. That is:
+   * 1 - Prevent the king's moves to squares under attack
+   * 2 - Pin pieces
+   */
   if (player && player !== piece.player) {
     moves = moves.filter(
       (legalMove) =>
