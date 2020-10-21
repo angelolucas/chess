@@ -1,6 +1,6 @@
 import legalMoves from 'logics/legalMoves';
 
-export default ({ moves, pieces, player }) => {
+export default ({ moves, pieces, player, promotionPiece }) => {
   let newMap = pieces;
 
   // Remove taked piece
@@ -25,6 +25,20 @@ export default ({ moves, pieces, player }) => {
 
     return piece;
   });
+
+  // Promotion
+  if (promotionPiece) {
+    newMap = newMap.map((piece) => {
+      if (piece.position === moves[0].target) {
+        return {
+          ...piece,
+          type: promotionPiece,
+        };
+      }
+
+      return piece;
+    });
+  }
 
   // Update legal moves
   newMap = newMap.map((piece) => ({
