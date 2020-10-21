@@ -40,7 +40,7 @@ const App = () => {
       eighthRank && piece.type === 'pawn' && !promotionPiece;
 
     if (promotionChoice) {
-      return setPromotion({ piece, target });
+      return setPromotion({ pawn: piece, target });
     }
 
     const newPosition = move({
@@ -54,14 +54,16 @@ const App = () => {
     setPlayer(player === 'white' ? 'black' : 'white');
   };
 
+  const moves = pieces.find(
+    (piece) => piece.player === player && piece.legalMoves.length
+  );
+
   const checked = check({
     player,
     pieces,
   });
 
-  const moves = pieces.find(
-    (piece) => piece.player === player && piece.legalMoves.length
-  );
+  const checkmated = checked && !moves;
 
   window.pieces = pieces;
 
@@ -80,13 +82,10 @@ const App = () => {
                 }}
                 onBlur={() => handleSelection()}
                 checked={
-                  piece.type === 'king' && piece.player === player && checked
+                  checked && piece.type === 'king' && piece.player === player
                 }
                 checkmated={
-                  piece.type === 'king' &&
-                  piece.player === player &&
-                  checked &&
-                  !moves
+                  checkmated && piece.type === 'king' && piece.player === player
                 }
                 tabIndex="-1"
               />
@@ -107,10 +106,10 @@ const App = () => {
           {promotion && (
             <Promotion
               square={promotion.target}
-              onClick={(piece) =>
+              onClick={(promotionPiece) =>
                 handleMove({
-                  promotionPiece: piece,
-                  piece: promotion.piece,
+                  promotionPiece,
+                  piece: promotion.pawn,
                   target: promotion.target,
                 })
               }
