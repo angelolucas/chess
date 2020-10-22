@@ -64,41 +64,35 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <S.App>
         <Board>
-          {pieces.map((piece) => (
-            <Fragment key={piece.id}>
+          {pieces.map(({ id, color, type, position, selected, legalMoves }) => (
+            <Fragment key={id}>
               <Piece
-                color={piece.color}
-                type={piece.type}
-                position={piece.position}
+                color={color}
+                type={type}
+                position={position}
                 onFocus={() => {
-                  player === piece.color && handleSelection(piece.position);
+                  player === color && handleSelection(position);
                 }}
                 onBlur={() => handleSelection()}
-                checked={
-                  checked && piece.type === 'king' && piece.color === player
-                }
-                checkmated={
-                  checkmated && piece.type === 'king' && piece.color === player
-                }
+                checked={checked && type === 'king' && color === player}
+                checkmated={checkmated && type === 'king' && color === player}
                 tabIndex="-1"
               />
-              {piece.selected &&
-                piece.legalMoves?.map((move, key) => (
+              {selected &&
+                legalMoves?.map((move, key) => (
                   <LegalMove
                     onMouseDown={() => {
                       const eighthRank = [1, 8].includes(move % 10);
-                      const promotionChoice =
-                        eighthRank && piece.type === 'pawn' && !promotion;
 
-                      if (promotionChoice) {
+                      if (eighthRank && type === 'pawn' && !promotion) {
                         return setPromotion({
-                          origin: piece.position,
+                          origin: position,
                           target: move,
                         });
                       }
 
                       handleMove({
-                        origin: piece.position,
+                        origin: position,
                         target: move,
                       });
                     }}
