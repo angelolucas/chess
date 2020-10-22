@@ -44,7 +44,7 @@ const App = () => {
     }
 
     const newPosition = move({
-      moves: [{ piece, target }],
+      move: { from: piece.position, to: target },
       player,
       pieces,
       promotionPiece,
