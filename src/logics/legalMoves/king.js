@@ -1,19 +1,19 @@
 import squareStatus from '../squareStatus';
 
-export default ({ piece, pieces }) => {
+export default ({ piece: { position, player }, pieces }) => {
   let moves = [
-    piece.position - 11,
-    piece.position - 10,
-    piece.position - 9,
-    piece.position - 1,
-    piece.position + 1,
-    piece.position + 9,
-    piece.position + 10,
-    piece.position + 11,
+    position - 11, // backward-left
+    position - 10, // left
+    position - 9, // forward-left
+    position - 1, // backward
+    position + 1, // forward
+    position + 9, // backward-right
+    position + 10, // right
+    position + 11, // forward-right
   ];
 
   moves = moves.filter((square) => {
-    square = squareStatus({ square, player: piece.player, pieces });
+    square = squareStatus({ square, player, pieces });
 
     return square.empty || square.enemy;
   });
