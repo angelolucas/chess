@@ -1,45 +1,50 @@
 import squareStatus from 'logics/squareStatus';
+import getSquare from '../getSquare';
 
-const getMove = ({ move, piece: { player, position } }) =>
-  ({
-    forward: player === 'white' ? position + 1 : position - 1,
-    'two-forward': player === 'white' ? position + 2 : position - 2,
-    'forward-left': player === 'white' ? position - 9 : position + 9,
-    'forward-right': player === 'white' ? position + 11 : position - 11,
-  }[move]);
-
-export default ({ piece, pieces }) => {
-  const squareAhead = getMove({ move: 'forward', piece });
+export default ({ piece: { player, moved, position }, pieces }) => {
+  const squareAhead = getSquare({ direction: 'forward', player, position });
   const statusSquareAhead = squareStatus({
     square: squareAhead,
-    player: piece.player,
+    player,
     pieces,
   });
-  const squareForwardLeft = getMove({ move: 'forward-left', piece });
+  const squareForwardLeft = getSquare({
+    direction: 'forward-left',
+    player,
+    position,
+  });
   const statusSquareForwardLeft = squareStatus({
     square: squareForwardLeft,
-    player: piece.player,
+    player,
     pieces,
   });
-  const squareForwardRight = getMove({ move: 'forward-right', piece });
+  const squareForwardRight = getSquare({
+    direction: 'forward-right',
+    player,
+    position,
+  });
   const statusSquareForwardRight = squareStatus({
     square: squareForwardRight,
-    player: piece.player,
+    player,
     pieces,
   });
-  let moves = [];
+  const moves = [];
 
   if (statusSquareAhead.empty) {
-    const twoSquaresAhead = getMove({ move: 'two-forward', piece });
+    const twoSquaresAhead = getSquare({
+      direction: 'two-forward',
+      player,
+      position,
+    });
     const statusTwoSquaresAhead = squareStatus({
       square: twoSquaresAhead,
-      player: piece.player,
+      player,
       pieces,
     });
 
     moves.push(squareAhead);
 
-    if (!piece.moved && statusTwoSquaresAhead.empty) {
+    if (!moved && statusTwoSquaresAhead.empty) {
       moves.push(twoSquaresAhead);
     }
   }
