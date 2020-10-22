@@ -55,7 +55,7 @@ const App = () => {
   };
 
   const moves = pieces.find(
-    (piece) => piece.player === player && piece.legalMoves.length
+    (piece) => piece.color === player && piece.legalMoves.length
   );
 
   const checked = check({
@@ -74,18 +74,18 @@ const App = () => {
           {pieces.map((piece) => (
             <Fragment key={piece.id}>
               <Piece
-                player={piece.player}
-                piece={piece.type}
+                color={piece.color}
+                type={piece.type}
                 position={piece.position}
                 onFocus={() => {
-                  player === piece.player && handleSelection(piece.position);
+                  player === piece.color && handleSelection(piece.position);
                 }}
                 onBlur={() => handleSelection()}
                 checked={
-                  checked && piece.type === 'king' && piece.player === player
+                  checked && piece.type === 'king' && piece.color === player
                 }
                 checkmated={
-                  checkmated && piece.type === 'king' && piece.player === player
+                  checkmated && piece.type === 'king' && piece.color === player
                 }
                 tabIndex="-1"
               />
@@ -99,10 +99,6 @@ const App = () => {
                 ))}
             </Fragment>
           ))}
-          <LegalMove
-            onMouseDown={() => handleMove({ from: 51, to: 31, castle: true })}
-            position={31}
-          />
           {promotion && (
             <Promotion
               square={promotion.target}

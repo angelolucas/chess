@@ -1,31 +1,35 @@
 import squareStatus from 'logics/squareStatus';
 import getSquare from '../getSquare';
 
-export default ({ piece: { player, moved, position }, pieces }) => {
-  const squareAhead = getSquare({ direction: 'forward', player, position });
+export default ({ piece: { color, moved, position }, pieces }) => {
+  const squareAhead = getSquare({
+    direction: 'forward',
+    player: color,
+    position,
+  });
   const statusSquareAhead = squareStatus({
     square: squareAhead,
-    player,
+    player: color,
     pieces,
   });
   const squareForwardLeft = getSquare({
     direction: 'forward-left',
-    player,
+    player: color,
     position,
   });
   const statusSquareForwardLeft = squareStatus({
     square: squareForwardLeft,
-    player,
+    player: color,
     pieces,
   });
   const squareForwardRight = getSquare({
     direction: 'forward-right',
-    player,
+    player: color,
     position,
   });
   const statusSquareForwardRight = squareStatus({
     square: squareForwardRight,
-    player,
+    player: color,
     pieces,
   });
   const moves = [];
@@ -33,12 +37,12 @@ export default ({ piece: { player, moved, position }, pieces }) => {
   if (statusSquareAhead.empty) {
     const twoSquaresAhead = getSquare({
       direction: 'two-forward',
-      player,
+      player: color,
       position,
     });
     const statusTwoSquaresAhead = squareStatus({
       square: twoSquaresAhead,
-      player,
+      player: color,
       pieces,
     });
 

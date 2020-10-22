@@ -1,6 +1,6 @@
 import squareStatus from '../squareStatus';
 
-export default ({ piece: { position, player }, pieces }) => {
+export default ({ piece: { position, color }, pieces }) => {
   let moves = [
     position - 11, // backward-left
     position - 10, // left
@@ -13,7 +13,7 @@ export default ({ piece: { position, player }, pieces }) => {
   ];
 
   moves = moves.filter((square) => {
-    square = squareStatus({ square, player, pieces });
+    square = squareStatus({ square, player: color, pieces });
 
     return square.empty || square.enemy;
   });

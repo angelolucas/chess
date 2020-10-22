@@ -14,7 +14,7 @@ import { ReactComponent as BlackQueen } from 'assets/black-queen.svg';
 import { ReactComponent as BlackKing } from 'assets/black-king.svg';
 import * as S from './Piece.style';
 
-const Image = ({ player, piece }) =>
+const Image = ({ color, type }) =>
   ({
     'white-pawn': <WhitePawn />,
     'white-rook': <WhiteRook />,
@@ -28,11 +28,11 @@ const Image = ({ player, piece }) =>
     'black-bishop': <BlackBishop />,
     'black-queen': <BlackQueen />,
     'black-king': <BlackKing />,
-  }[`${player}-${piece}`]);
+  }[`${color}-${type}`]);
 
 const Piece = ({
-  player,
-  piece,
+  color,
+  type,
   position,
   rotate,
   checked,
@@ -52,14 +52,14 @@ const Piece = ({
       promotion={promotion}
       {...props}
     >
-      <Image player={player} piece={piece} />
+      <Image color={color} type={type} />
     </S.Piece>
   );
 };
 
 Piece.propTypes = {
-  player: PropTypes.oneOf(['white', 'black']).isRequired,
-  piece: PropTypes.oneOf(['rook', 'knight', 'bishop', 'queen', 'king', 'pawn'])
+  color: PropTypes.oneOf(['white', 'black']).isRequired,
+  type: PropTypes.oneOf(['rook', 'knight', 'bishop', 'queen', 'king', 'pawn'])
     .isRequired,
   position: PropTypes.number.isRequired,
   rotate: PropTypes.bool,

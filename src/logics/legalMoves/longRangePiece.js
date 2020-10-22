@@ -1,14 +1,14 @@
 import squareStatus from '../squareStatus';
 import getSquare from '../getSquare';
 
-export default ({ piece: { player, position, type }, pieces }) => {
+export default ({ piece: { color, position, type }, pieces }) => {
   const moves = [];
 
   const loopSquares = ({ position, direction }) => {
     const nextSquare = getSquare({ position, direction });
     const checkNextSquare = squareStatus({
       square: nextSquare,
-      player,
+      player: color,
       pieces,
     });
 

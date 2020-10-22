@@ -26,7 +26,7 @@ export default ({ piece, pieces, player }) => {
    * 1 - Prevent the king's moves to squares under attack
    * 2 - Pin pieces
    */
-  if (player && player !== piece.player) {
+  if (player && player !== piece.color) {
     moves = moves.filter(
       (legalMove) =>
         !check({

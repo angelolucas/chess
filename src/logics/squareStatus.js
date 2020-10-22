@@ -1,5 +1,5 @@
 const getPieceBySquare = ({ square, pieces }) =>
-  Object.values(pieces).find((piece) => piece.position === square)?.player;
+  Object.values(pieces).find((piece) => piece.position === square)?.color;
 
 export default ({ square, player, pieces }) => {
   // Check if is a invalid square
