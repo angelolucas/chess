@@ -34,14 +34,7 @@ const App = () => {
     );
   };
 
-  const handleMove = ({ origin, target, isPawn, promotionPiece }) => {
-    const eighthRank = [1, 8].includes(target % 10);
-    const promotionChoice = eighthRank && isPawn && !promotionPiece;
-
-    if (promotionChoice) {
-      return setPromotion({ origin, target });
-    }
-
+  const handleMove = ({ origin, target, promotionPiece }) => {
     const newPosition = move({
       origin,
       target,
@@ -92,13 +85,23 @@ const App = () => {
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
-                    onMouseDown={() =>
+                    onMouseDown={() => {
+                      const eighthRank = [1, 8].includes(move % 10);
+                      const promotionChoice =
+                        eighthRank && piece.type === 'pawn' && !promotion;
+
+                      if (promotionChoice) {
+                        return setPromotion({
+                          origin: piece.position,
+                          target: move,
+                        });
+                      }
+
                       handleMove({
                         origin: piece.position,
                         target: move,
-                        isPawn: piece.type === 'pawn',
-                      })
-                    }
+                      });
+                    }}
                     position={move}
                     key={key}
                   />
@@ -110,9 +113,9 @@ const App = () => {
               square={promotion.target}
               onClick={(promotionPiece) =>
                 handleMove({
-                  promotionPiece,
                   origin: promotion.origin,
                   target: promotion.target,
+                  promotionPiece,
                 })
               }
               onClose={() => setPromotion(false)}
