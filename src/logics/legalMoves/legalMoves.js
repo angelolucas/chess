@@ -32,7 +32,8 @@ export default ({ piece, pieces, player }) => {
         !check({
           player: player === 'white' ? 'black' : 'white',
           pieces: move({
-            move: { from: piece.position, to: legalMove },
+            origin: piece.position,
+            target: legalMove,
             pieces,
           }),
         })

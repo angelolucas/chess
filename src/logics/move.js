@@ -1,18 +1,18 @@
 import legalMoves from 'logics/legalMoves';
 
-export default ({ move, pieces, player, promotionPiece }) => {
+export default ({ origin, target, pieces, player, promotionPiece }) => {
   let newMap = pieces;
 
   // Remove taked piece
-  newMap = newMap.filter((piece) => piece.position !== move.to);
+  newMap = newMap.filter((piece) => piece.position !== target);
 
   // Move pieces
   newMap = newMap.map((piece) => {
-    if (piece.position === move.from) {
+    if (piece.position === origin) {
       return {
         ...piece,
         moved: true,
-        position: move.to,
+        position: target,
       };
     }
 
@@ -22,7 +22,7 @@ export default ({ move, pieces, player, promotionPiece }) => {
   // Promotion
   if (promotionPiece) {
     newMap = newMap.map((piece) => {
-      if (piece.position === move.to) {
+      if (piece.position === target) {
         return {
           ...piece,
           type: promotionPiece,

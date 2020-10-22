@@ -5,13 +5,13 @@ import * as S from './Promotion.style';
 
 const Promotion = ({ square, onClick, onClose, ...props }) => {
   const [file, rank] = [...square.toString()].map(Number);
-  const player = rank === 8 ? 'white' : 'black';
+  const color = rank === 8 ? 'white' : 'black';
   const position = (order) => {
     const rank = {
-      0: player === 'white' ? 8 : 1,
-      1: player === 'white' ? 7 : 2,
-      2: player === 'white' ? 6 : 3,
-      3: player === 'white' ? 5 : 4,
+      0: color === 'white' ? 8 : 1,
+      1: color === 'white' ? 7 : 2,
+      2: color === 'white' ? 6 : 3,
+      3: color === 'white' ? 5 : 4,
     }[order];
 
     return parseInt(`${file}${rank}`);
@@ -19,14 +19,14 @@ const Promotion = ({ square, onClick, onClose, ...props }) => {
 
   return (
     <S.Promotion {...props} onClick={onClose}>
-      {['queen', 'knight', 'rook', 'bishop'].map((piece, order) => {
+      {['queen', 'knight', 'rook', 'bishop'].map((pieceType, order) => {
         return (
           <Piece
-            player={player}
-            piece={piece}
+            color={color}
+            type={pieceType}
             position={position(order)}
             promotion
-            onClick={() => onClick(piece)}
+            onClick={() => onClick(pieceType)}
             key={order}
           />
         );

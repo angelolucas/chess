@@ -34,17 +34,17 @@ const App = () => {
     );
   };
 
-  const handleMove = ({ piece, target, promotionPiece }) => {
+  const handleMove = ({ origin, target, isPawn, promotionPiece }) => {
     const eighthRank = [1, 8].includes(target % 10);
-    const promotionChoice =
-      eighthRank && piece.type === 'pawn' && !promotionPiece;
+    const promotionChoice = eighthRank && isPawn && !promotionPiece;
 
     if (promotionChoice) {
-      return setPromotion({ pawn: piece, target });
+      return setPromotion({ origin, target });
     }
 
     const newPosition = move({
-      move: { from: piece.position, to: target },
+      origin,
+      target,
       player,
       pieces,
       promotionPiece,
@@ -92,7 +92,13 @@ const App = () => {
               {piece.selected &&
                 piece.legalMoves?.map((move, key) => (
                   <LegalMove
-                    onMouseDown={() => handleMove({ piece, target: move })}
+                    onMouseDown={() =>
+                      handleMove({
+                        origin: piece.position,
+                        target: move,
+                        isPawn: piece.type === 'pawn',
+                      })
+                    }
                     position={move}
                     key={key}
                   />
@@ -105,7 +111,7 @@ const App = () => {
               onClick={(promotionPiece) =>
                 handleMove({
                   promotionPiece,
-                  piece: promotion.pawn,
+                  origin: promotion.origin,
                   target: promotion.target,
                 })
               }
