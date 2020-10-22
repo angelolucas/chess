@@ -1,49 +1,38 @@
 import squareStatus from '../squareStatus';
+import getSquare from '../getSquare';
 
-const getDirection = ({ square, direction }) =>
-  ({
-    'backward-left': square - 11,
-    backward: square - 10,
-    'backward-right': square - 9,
-    left: square - 1,
-    right: square + 1,
-    'forward-left': square + 9,
-    forward: square + 10,
-    'forward-right': square + 11,
-  }[direction]);
+export default ({ piece: { player, position, type }, pieces }) => {
+  const moves = [];
 
-export default ({ piece, pieces }) => {
-  const legalMoves = [];
-
-  const loopSquares = ({ square, direction }) => {
-    const nextSquare = getDirection({ square, direction });
+  const loopSquares = ({ position, direction }) => {
+    const nextSquare = getSquare({ position, direction });
     const checkNextSquare = squareStatus({
       square: nextSquare,
-      player: piece.player,
+      player,
       pieces,
     });
 
     if (checkNextSquare.enemy) {
-      legalMoves.push(nextSquare);
+      moves.push(nextSquare);
     } else if (checkNextSquare.empty) {
-      legalMoves.push(nextSquare);
-      loopSquares({ square: nextSquare, direction });
+      moves.push(nextSquare);
+      loopSquares({ position: nextSquare, direction });
     }
   };
 
-  if (['rook', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.position, direction: 'left' });
-    loopSquares({ square: piece.position, direction: 'backward' });
-    loopSquares({ square: piece.position, direction: 'forward' });
-    loopSquares({ square: piece.position, direction: 'right' });
+  if (['rook', 'queen'].includes(type)) {
+    loopSquares({ position, direction: 'left' });
+    loopSquares({ position, direction: 'backward' });
+    loopSquares({ position, direction: 'forward' });
+    loopSquares({ position, direction: 'right' });
   }
 
-  if (['bishop', 'queen'].includes(piece.type)) {
-    loopSquares({ square: piece.position, direction: 'backward-left' });
-    loopSquares({ square: piece.position, direction: 'forward-left' });
-    loopSquares({ square: piece.position, direction: 'backward-right' });
-    loopSquares({ square: piece.position, direction: 'forward-right' });
+  if (['bishop', 'queen'].includes(type)) {
+    loopSquares({ position, direction: 'backward-left' });
+    loopSquares({ position, direction: 'forward-left' });
+    loopSquares({ position, direction: 'backward-right' });
+    loopSquares({ position, direction: 'forward-right' });
   }
 
-  return legalMoves;
+  return moves;
 };
