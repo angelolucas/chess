@@ -3,9 +3,9 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'theme';
 import Board from 'components/Board';
 import Piece from 'components/Piece';
-import LegalMove from 'components/LegalMove';
+import Move from 'components/Move';
 import Promotion from 'components/Promotion';
-import legalMoves from 'logics/legalMoves';
+import moves from 'logics/moves';
 import check from 'logics/check';
 import move from 'logics/move';
 import startPosition from 'startPosition';
@@ -19,7 +19,7 @@ const App = () => {
       ...piece,
       id,
       moved: false,
-      legalMoves: legalMoves({ piece, pieces: startPosition }),
+      moves: moves({ piece, pieces: startPosition }),
     }))
   );
 
@@ -47,8 +47,8 @@ const App = () => {
     setPlayer(player === 'white' ? 'black' : 'white');
   };
 
-  const moves = pieces.find(
-    (piece) => piece.color === player && piece.legalMoves.length
+  const playerMoves = pieces.find(
+    (piece) => piece.color === player && piece.moves.length
   );
 
   const checked = check({
@@ -56,7 +56,7 @@ const App = () => {
     pieces,
   });
 
-  const checkmated = checked && !moves;
+  const checkmated = checked && !playerMoves;
 
   window.pieces = pieces;
 
@@ -64,7 +64,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <S.App>
         <Board>
-          {pieces.map(({ id, color, type, position, selected, legalMoves }) => (
+          {pieces.map(({ id, color, type, position, selected, moves }) => (
             <Fragment key={id}>
               <Piece
                 color={color}
@@ -79,8 +79,8 @@ const App = () => {
                 tabIndex="-1"
               />
               {selected &&
-                legalMoves?.map((move, key) => (
-                  <LegalMove
+                moves?.map((move, key) => (
+                  <Move
                     onMouseDown={() => {
                       const eighthRank = [1, 8].includes(move % 10);
 

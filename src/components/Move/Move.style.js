@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const LegalMove = styled.div(({ position, theme: { color } }) => {
+const Move = styled.div(({ position, theme: { color } }) => {
   const [file, rank] = [...position.toString()].map(Number);
 
   return {
@@ -27,8 +27,8 @@ const LegalMove = styled.div(({ position, theme: { color } }) => {
   };
 });
 
-LegalMove.propTypes = {
+Move.propTypes = {
   position: PropTypes.number,
 };
 
-export default LegalMove;
+export default Move;
