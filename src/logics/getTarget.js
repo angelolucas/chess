@@ -27,12 +27,8 @@ const getPiece = ({ square, pieces }) =>
 
 export default ({ direction, piece: { color, position }, pieces }) => {
   const square = getSquare({ color, position, direction });
-  const validSquare = !(
-    square < 11 ||
-    square > 88 ||
-    square % 10 === 0 ||
-    square % 10 === 9
-  );
+  const validSquare =
+    square >= 11 && square <= 88 && square % 10 !== 0 && square % 10 !== 9;
 
   // Check if is a invalid square
   if (validSquare) {
