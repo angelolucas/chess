@@ -1,22 +1,20 @@
-import squareStatus from '../squareStatus';
-import getSquare from '../getSquare';
+import getTarget from '../getTarget';
 
 export default ({ piece: { color, position, type }, pieces }) => {
   const moves = [];
 
   const loopSquares = ({ position, direction }) => {
-    const nextSquare = getSquare({ position, direction });
-    const checkNextSquare = squareStatus({
-      square: nextSquare,
-      player: color,
+    const target = getTarget({
+      direction,
+      piece: { color, position },
       pieces,
     });
 
-    if (checkNextSquare.enemy) {
-      moves.push(nextSquare);
-    } else if (checkNextSquare.empty) {
-      moves.push(nextSquare);
-      loopSquares({ position: nextSquare, direction });
+    if (target.enemy) {
+      moves.push(target.square);
+    } else if (target.empty) {
+      moves.push(target.square);
+      loopSquares({ position: target.square, direction });
     }
   };
 
