@@ -11,6 +11,14 @@ const getSquare = ({ color = 'white', position, direction }) => {
     forward: white ? position + 1 : position - 1,
     'forward-right': white ? position + 11 : position - 11,
     'two-forward': white ? position + 2 : position - 2,
+    'two-left-backward': white ? position - 21 : position + 21,
+    'two-left-forward': white ? position - 19 : position + 19,
+    'two-backward-left': white ? position - 12 : position + 12,
+    'two-forward-left': white ? position - 8 : position + 8,
+    'two-backward-right': white ? position + 8 : position - 8,
+    'two-forward-right': white ? position + 12 : position - 12,
+    'two-right-backward': white ? position + 19 : position - 19,
+    'two-right-forwad': white ? position + 21 : position - 21,
   }[direction];
 };
 
