@@ -1,22 +1,28 @@
-import squareStatus from '../squareStatus';
+import getTarget from '../getTarget';
 
-export default ({ piece: { position, color }, pieces }) => {
-  let moves = [
-    position - 11, // backward-left
-    position - 10, // left
-    position - 9, // forward-left
-    position - 1, // backward
-    position + 1, // forward
-    position + 9, // backward-right
-    position + 10, // right
-    position + 11, // forward-right
+export default ({ piece: { color, position }, pieces }) => {
+  const moves = [
+    'backward-left',
+    'left',
+    'forward-left',
+    'backward',
+    'forward',
+    'backward-right',
+    'right',
+    'forward-right',
   ];
 
-  moves = moves.filter((square) => {
-    square = squareStatus({ square, player: color, pieces });
+  return moves.reduce((squares, direction) => {
+    const target = getTarget({
+      direction,
+      piece: { color, position },
+      pieces,
+    });
 
-    return square.empty || square.enemy;
-  });
+    if (target.empty || target.enemy) {
+      squares.push(target.square);
+    }
 
-  return moves;
+    return squares;
+  }, []);
 };
