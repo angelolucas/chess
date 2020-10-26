@@ -10,15 +10,15 @@ const getSquare = ({ color = 'white', position, direction }) => {
     'forward-left': white ? position - 9 : position + 9,
     forward: white ? position + 1 : position - 1,
     'forward-right': white ? position + 11 : position - 11,
-    'two-forward': white ? position + 2 : position - 2,
-    'two-left-backward': white ? position - 21 : position + 21,
-    'two-left-forward': white ? position - 19 : position + 19,
-    'two-backward-left': white ? position - 12 : position + 12,
-    'two-forward-left': white ? position - 8 : position + 8,
-    'two-backward-right': white ? position + 8 : position - 8,
-    'two-forward-right': white ? position + 12 : position - 12,
-    'two-right-backward': white ? position + 19 : position - 19,
-    'two-right-forwad': white ? position + 21 : position - 21,
+    'two-forward': white ? position + 2 : position - 2, // pawn
+    'two-left-backward': white ? position - 21 : position + 21, // knight
+    'two-left-forward': white ? position - 19 : position + 19, // knight
+    'two-backward-left': white ? position - 12 : position + 12, // knight
+    'two-forward-left': white ? position - 8 : position + 8, // knight
+    'two-backward-right': white ? position + 8 : position - 8, // knight
+    'two-forward-right': white ? position + 12 : position - 12, // knight
+    'two-right-backward': white ? position + 19 : position - 19, // knight
+    'two-right-forwad': white ? position + 21 : position - 21, // knight
   }[direction];
 };
 

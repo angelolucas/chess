@@ -1,62 +1,41 @@
-import squareStatus from 'logics/squareStatus';
-import getSquare from '../getSquare';
+import getTarget from '../getTarget';
 
 export default ({ piece: { color, moved, position }, pieces }) => {
-  const squareAhead = getSquare({
+  const squareAhead = getTarget({
     direction: 'forward',
-    player: color,
-    position,
-  });
-  const statusSquareAhead = squareStatus({
-    square: squareAhead,
-    player: color,
+    piece: { color, position },
     pieces,
   });
-  const squareForwardLeft = getSquare({
+  const squareForwardLeft = getTarget({
     direction: 'forward-left',
-    player: color,
-    position,
-  });
-  const statusSquareForwardLeft = squareStatus({
-    square: squareForwardLeft,
-    player: color,
+    piece: { color, position },
     pieces,
   });
-  const squareForwardRight = getSquare({
+  const squareForwardRight = getTarget({
     direction: 'forward-right',
-    player: color,
-    position,
-  });
-  const statusSquareForwardRight = squareStatus({
-    square: squareForwardRight,
-    player: color,
+    piece: { color, position },
     pieces,
   });
   const moves = [];
 
-  if (statusSquareAhead.empty) {
-    const twoSquaresAhead = getSquare({
+  if (squareAhead.empty) {
+    const twoSquaresAhead = getTarget({
       direction: 'two-forward',
-      player: color,
-      position,
-    });
-    const statusTwoSquaresAhead = squareStatus({
-      square: twoSquaresAhead,
-      player: color,
+      piece: { color, position },
       pieces,
     });
 
-    moves.push(squareAhead);
+    moves.push(squareAhead.square);
 
-    if (!moved && statusTwoSquaresAhead.empty) {
-      moves.push(twoSquaresAhead);
+    if (!moved && twoSquaresAhead.empty) {
+      moves.push(twoSquaresAhead.square);
     }
   }
-  if (statusSquareForwardLeft.enemy) {
-    moves.push(squareForwardLeft);
+  if (squareForwardLeft.enemy) {
+    moves.push(squareForwardLeft.square);
   }
-  if (statusSquareForwardRight.enemy) {
-    moves.push(squareForwardRight);
+  if (squareForwardRight.enemy) {
+    moves.push(squareForwardRight.square);
   }
 
   return moves;

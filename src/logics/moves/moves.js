@@ -3,7 +3,7 @@ import check from 'logics/check';
 import longRangePiece from './longRangePiece';
 import knight from './knight';
 import king from './king';
-//import pawn from './pawn';
+import pawn from './pawn';
 
 export default ({ piece, pieces, player }) => {
   let moves = [];
@@ -18,7 +18,7 @@ export default ({ piece, pieces, player }) => {
     moves = king({ piece, pieces });
   }
   if (piece.type === 'pawn') {
-    //moves = pawn({ piece, pieces });
+    moves = pawn({ piece, pieces });
   }
 
   /*
