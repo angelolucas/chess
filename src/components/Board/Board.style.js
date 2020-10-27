@@ -18,3 +18,16 @@ export const Board = styled.div(({ rotate, theme: { color, breakpoint } }) => ({
     border: 0,
   },
 }));
+
+export const Coordinates = styled.svg(({ theme: { color } }) => ({
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+
+  ['.coordinate-light']: {
+    fill: color.dark,
+  },
+  ['.coordinate-dark']: {
+    fill: color.light,
+  },
+}));
