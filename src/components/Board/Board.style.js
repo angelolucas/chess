@@ -24,10 +24,10 @@ export const Coordinates = styled.svg(({ theme: { color } }) => ({
   width: '100%',
   height: '100%',
 
-  ['.coordinate-light']: {
+  '.coordinate-light': {
     fill: color.dark,
   },
-  ['.coordinate-dark']: {
+  '.coordinate-dark': {
     fill: color.light,
   },
 }));
