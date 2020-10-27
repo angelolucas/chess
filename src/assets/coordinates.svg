@@ -1,18 +1,74 @@
-<svg viewBox="0 0 100 100" class="coordinates">
-  <text x="0.75" y="3.5" font-size="2.8" class="coordinate-light">8</text>
-  <text x="0.75" y="15.75" font-size="2.8" class="coordinate-dark">7</text>
-  <text x="0.75" y="28.25" font-size="2.8" class="coordinate-light">6</text>
-  <text x="0.75" y="40.75" font-size="2.8" class="coordinate-dark">5</text>
-  <text x="0.75" y="53.25" font-size="2.8" class="coordinate-light">4</text>
-  <text x="0.75" y="65.75" font-size="2.8" class="coordinate-dark">3</text>
-  <text x="0.75" y="78.25" font-size="2.8" class="coordinate-light">2</text>
-  <text x="0.75" y="90.75" font-size="2.8" class="coordinate-dark">1</text>
-  <text x="10" y="99" font-size="2.8" class="coordinate-dark">a</text>
-  <text x="22.5" y="99" font-size="2.8" class="coordinate-light">b</text>
-  <text x="35" y="99" font-size="2.8" class="coordinate-dark">c</text>
-  <text x="47.5" y="99" font-size="2.8" class="coordinate-light">d</text>
-  <text x="60" y="99" font-size="2.8" class="coordinate-dark">e</text>
-  <text x="72.5" y="99" font-size="2.8" class="coordinate-light">f</text>
-  <text x="85" y="99" font-size="2.8" class="coordinate-dark">g</text>
-  <text x="97.5" y="99" font-size="2.8" class="coordinate-light">h</text>
+<svg viewBox="0 0 80 80" class="coordinates">
+  <text x="0" y="10" font-size="1.5" class="coordinate-light">18</text>
+  <text x="0" y="20" font-size="1.5" class="coordinate-dark">17</text>
+  <text x="0" y="30" font-size="1.5" class="coordinate-light">16</text>
+  <text x="0" y="40" font-size="1.5" class="coordinate-dark">15</text>
+  <text x="0" y="50" font-size="1.5" class="coordinate-light">14</text>
+  <text x="0" y="60" font-size="1.5" class="coordinate-dark">13</text>
+  <text x="0" y="70" font-size="1.5" class="coordinate-light">12</text>
+  <text x="0" y="80" font-size="1.5" class="coordinate-dark">11</text>
+
+  <text x="10" y="10" font-size="1.5" class="coordinate-dark">28</text>
+  <text x="10" y="20" font-size="1.5" class="coordinate-light">27</text>
+  <text x="10" y="30" font-size="1.5" class="coordinate-dark">26</text>
+  <text x="10" y="40" font-size="1.5" class="coordinate-light">25</text>
+  <text x="10" y="50" font-size="1.5" class="coordinate-dark">24</text>
+  <text x="10" y="60" font-size="1.5" class="coordinate-light">23</text>
+  <text x="10" y="70" font-size="1.5" class="coordinate-dark">22</text>
+  <text x="10" y="80" font-size="1.5" class="coordinate-light">21</text>
+
+  <text x="20" y="10" font-size="1.5" class="coordinate-light">38</text>
+  <text x="20" y="20" font-size="1.5" class="coordinate-dark">37</text>
+  <text x="20" y="30" font-size="1.5" class="coordinate-light">36</text>
+  <text x="20" y="40" font-size="1.5" class="coordinate-dark">35</text>
+  <text x="20" y="50" font-size="1.5" class="coordinate-light">34</text>
+  <text x="20" y="60" font-size="1.5" class="coordinate-dark">33</text>
+  <text x="20" y="70" font-size="1.5" class="coordinate-light">32</text>
+  <text x="20" y="80" font-size="1.5" class="coordinate-dark">31</text>
+
+  <text x="30" y="10" font-size="1.5" class="coordinate-dark">48</text>
+  <text x="30" y="20" font-size="1.5" class="coordinate-light">47</text>
+  <text x="30" y="30" font-size="1.5" class="coordinate-dark">46</text>
+  <text x="30" y="40" font-size="1.5" class="coordinate-light">45</text>
+  <text x="30" y="50" font-size="1.5" class="coordinate-dark">44</text>
+  <text x="30" y="60" font-size="1.5" class="coordinate-light">43</text>
+  <text x="30" y="70" font-size="1.5" class="coordinate-dark">42</text>
+  <text x="30" y="80" font-size="1.5" class="coordinate-light">41</text>
+
+  <text x="40" y="10" font-size="1.5" class="coordinate-light">58</text>
+  <text x="40" y="20" font-size="1.5" class="coordinate-dark">57</text>
+  <text x="40" y="30" font-size="1.5" class="coordinate-light">56</text>
+  <text x="40" y="40" font-size="1.5" class="coordinate-dark">55</text>
+  <text x="40" y="50" font-size="1.5" class="coordinate-light">54</text>
+  <text x="40" y="60" font-size="1.5" class="coordinate-dark">53</text>
+  <text x="40" y="70" font-size="1.5" class="coordinate-light">52</text>
+  <text x="40" y="80" font-size="1.5" class="coordinate-dark">51</text>
+
+  <text x="50" y="10" font-size="1.5" class="coordinate-dark">68</text>
+  <text x="50" y="20" font-size="1.5" class="coordinate-light">67</text>
+  <text x="50" y="30" font-size="1.5" class="coordinate-dark">66</text>
+  <text x="50" y="40" font-size="1.5" class="coordinate-light">65</text>
+  <text x="50" y="50" font-size="1.5" class="coordinate-dark">64</text>
+  <text x="50" y="60" font-size="1.5" class="coordinate-light">63</text>
+  <text x="50" y="70" font-size="1.5" class="coordinate-dark">62</text>
+  <text x="50" y="80" font-size="1.5" class="coordinate-light">61</text>
+
+  <text x="60" y="10" font-size="1.5" class="coordinate-light">78</text>
+  <text x="60" y="20" font-size="1.5" class="coordinate-dark">77</text>
+  <text x="60" y="30" font-size="1.5" class="coordinate-light">76</text>
+  <text x="60" y="40" font-size="1.5" class="coordinate-dark">75</text>
+  <text x="60" y="50" font-size="1.5" class="coordinate-light">74</text>
+  <text x="60" y="60" font-size="1.5" class="coordinate-dark">73</text>
+  <text x="60" y="70" font-size="1.5" class="coordinate-light">72</text>
+  <text x="60" y="80" font-size="1.5" class="coordinate-dark">71</text>
+
+  <text x="70" y="10" font-size="1.5" class="coordinate-dark">88</text>
+  <text x="70" y="20" font-size="1.5" class="coordinate-light">87</text>
+  <text x="70" y="30" font-size="1.5" class="coordinate-dark">86</text>
+  <text x="70" y="40" font-size="1.5" class="coordinate-light">85</text>
+  <text x="70" y="50" font-size="1.5" class="coordinate-dark">84</text>
+  <text x="70" y="60" font-size="1.5" class="coordinate-light">83</text>
+  <text x="70" y="70" font-size="1.5" class="coordinate-dark">82</text>
+  <text x="70" y="80" font-size="1.5" class="coordinate-light">81</text>
+
 </svg>
