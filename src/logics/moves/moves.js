@@ -1,7 +1,7 @@
 import move from 'logics/move';
 import check from 'logics/check';
-import rook from './rook';
 import queen from './queen';
+import rook from './rook';
 import bishop from './bishop';
 import knight from './knight';
 import king from './king';
@@ -10,24 +10,14 @@ import pawn from './pawn';
 export default ({ piece, pieces, player }) => {
   let moves = [];
 
-  if (piece.type === 'rook') {
-    moves = rook({ piece, pieces });
-  }
-  if (piece.type === 'queen') {
-    moves = queen({ piece, pieces });
-  }
-  if (piece.type === 'bishop') {
-    moves = bishop({ piece, pieces });
-  }
-  if (piece.type === 'knight') {
-    moves = knight({ piece, pieces });
-  }
-  if (piece.type === 'king') {
-    moves = king({ piece, pieces });
-  }
-  if (piece.type === 'pawn') {
-    moves = pawn({ piece, pieces });
-  }
+  moves = {
+    queen: queen({ piece, pieces }),
+    rook: rook({ piece, pieces }),
+    bishop: bishop({ piece, pieces }),
+    knight: knight({ piece, pieces }),
+    pawn: pawn({ piece, pieces }),
+    king: king({ piece, pieces }),
+  }[piece.type];
 
   /*
    * Removes the opponent's moves that leave their king in check. That is:
