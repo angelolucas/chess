@@ -1,6 +1,6 @@
 import getTarget from '../getTarget';
 
-export default ({ directions, piece: { color, position }, pieces }) => {
+export default ({ directions, piece: { color, position }, pieces, player }) => {
   let moves = [];
 
   const loopSquaresByDirection = ({ direction, position }) => {

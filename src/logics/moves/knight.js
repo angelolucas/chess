@@ -1,7 +1,8 @@
 import getTarget from '../getTarget';
+import legalMoves from './legalMoves';
 
-export default ({ piece: { color, position }, pieces }) => {
-  let moves = [
+export default ({ piece: { color, position }, pieces, player }) => {
+  const directions = [
     'two-left-backward',
     'two-left-forward',
     'two-backward-left',
@@ -11,8 +12,7 @@ export default ({ piece: { color, position }, pieces }) => {
     'two-right-backward',
     'two-right-forwad',
   ];
-
-  return moves.reduce((squares, direction) => {
+  const moves = directions.reduce((squares, direction) => {
     const target = getTarget({
       direction,
       piece: { color, position },
@@ -25,4 +25,6 @@ export default ({ piece: { color, position }, pieces }) => {
 
     return squares;
   }, []);
+
+  return legalMoves({ moves, piece: { color, position }, pieces, player });
 };
