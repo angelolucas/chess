@@ -1,5 +1,5 @@
 # ♟ Chess 
-At first, the idea of this project is to create a simple game of chess to be played by two people on the same screen.
+At first, the idea of this project is to create a simple chess game to be played by two people on the same screen.
 
 ## Main Rules Tasks
 ### Moviments
