@@ -1,7 +1,7 @@
 import getTarget from '../getTarget';
 
 export default ({ piece: { color, position }, pieces }) => {
-  let moves = [
+  const directions = [
     'two-left-backward',
     'two-left-forward',
     'two-backward-left',
@@ -12,7 +12,7 @@ export default ({ piece: { color, position }, pieces }) => {
     'two-right-forwad',
   ];
 
-  return moves.reduce((squares, direction) => {
+  return directions.reduce((squares, direction) => {
     const target = getTarget({
       direction,
       piece: { color, position },
