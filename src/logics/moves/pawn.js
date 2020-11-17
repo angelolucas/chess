@@ -1,7 +1,6 @@
 import getTarget from '../getTarget';
-import legalMoves from './legalMoves';
 
-export default ({ piece: { color, moved, position }, pieces, player }) => {
+export default ({ piece: { color, moved, position }, pieces }) => {
   const targetAhead = getTarget({
     direction: 'forward',
     piece: { color, position },
@@ -39,5 +38,5 @@ export default ({ piece: { color, moved, position }, pieces, player }) => {
     moves.push(targetForwardRight.square);
   }
 
-  return legalMoves({ moves, piece: { color, position }, pieces, player });
+  return moves;
 };
