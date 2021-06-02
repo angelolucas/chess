@@ -1,6 +1,6 @@
 # ♟ Chess 
 At first, the idea of this project is to create a simple chess game to be played by two people on the same screen.
-[angelolucas.github.io/chess/](angelolucas.github.io/chess/)
+[angelolucas.github.io/chess/](http://angelolucas.github.io/chess/)
 
 ## Main Rules Tasks
 ### Moviments
