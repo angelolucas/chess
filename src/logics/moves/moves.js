@@ -10,14 +10,12 @@ import pawn from './pawn';
 export default ({ piece, pieces, player }) => {
   let moves = [];
 
-  moves = {
-    queen: queen({ piece, pieces }),
-    rook: rook({ piece, pieces }),
-    bishop: bishop({ piece, pieces }),
-    knight: knight({ piece, pieces }),
-    pawn: pawn({ piece, pieces }),
-    king: king({ piece, pieces }),
-  }[piece.type];
+  if (piece.type === 'queen') moves = queen({ piece, pieces });
+  if (piece.type === 'rook') moves = rook({ piece, pieces });
+  if (piece.type === 'bishop') moves = bishop({ piece, pieces });
+  if (piece.type === 'knight') moves = knight({ piece, pieces });
+  if (piece.type === 'pawn') moves = pawn({ piece, pieces });
+  if (piece.type === 'king') moves = king({ piece, pieces });
 
   /*
    * Removes the opponent's moves that leave their king in check. That is:
