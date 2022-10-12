@@ -17,6 +17,10 @@ const getSquare = ({ color = 'white', position, direction }) => {
     // Two squares jump of pawn
     'two-forward': white ? position + 2 : position - 2,
 
+    // Castles
+    'two-right': position + 20,
+    'two-left': position - 20,
+
     // Knight moves
     'two-left-backward': white ? position - 21 : position + 21,
     'two-left-forward': white ? position - 19 : position + 19,

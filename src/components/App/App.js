@@ -11,17 +11,25 @@ import move from 'logics/move';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
+const parseStartPosition = () => {
+  let parsedStartPosition = startPosition.map((piece, id) => ({
+    ...piece,
+    id,
+    moved: false,
+  }));
+
+  let parsedStartPositionWithMoves = parsedStartPosition.map((piece) => ({
+    ...piece,
+    moves: moves({ piece, pieces: parsedStartPosition }),
+  }));
+
+  return parsedStartPositionWithMoves;
+};
+
 const App = () => {
   const [player, setPlayer] = useState('white');
 
-  const [pieces, setPieces] = useState(() =>
-    startPosition.map((piece, id) => ({
-      ...piece,
-      id,
-      moved: false,
-      moves: moves({ piece, pieces: startPosition }),
-    }))
-  );
+  const [pieces, setPieces] = useState(() => parseStartPosition);
 
   const [promotion, setPromotion] = useState(false);
 

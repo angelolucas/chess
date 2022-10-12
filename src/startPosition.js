@@ -6,33 +6,8 @@ export default [
   },
   {
     color: 'white',
-    type: 'knight',
-    position: 21,
-  },
-  {
-    color: 'white',
-    type: 'bishop',
-    position: 31,
-  },
-  {
-    color: 'white',
-    type: 'queen',
-    position: 41,
-  },
-  {
-    color: 'white',
     type: 'king',
     position: 51,
-  },
-  {
-    color: 'white',
-    type: 'bishop',
-    position: 61,
-  },
-  {
-    color: 'white',
-    type: 'knight',
-    position: 71,
   },
   {
     color: 'white',
@@ -86,33 +61,8 @@ export default [
   },
   {
     color: 'black',
-    type: 'knight',
-    position: 28,
-  },
-  {
-    color: 'black',
-    type: 'bishop',
-    position: 38,
-  },
-  {
-    color: 'black',
-    type: 'queen',
-    position: 48,
-  },
-  {
-    color: 'black',
     type: 'king',
     position: 58,
-  },
-  {
-    color: 'black',
-    type: 'bishop',
-    position: 68,
-  },
-  {
-    color: 'black',
-    type: 'knight',
-    position: 78,
   },
   {
     color: 'black',

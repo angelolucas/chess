@@ -10,6 +10,8 @@ export default ({ piece: { color, position }, pieces }) => {
     'backward-right',
     'right',
     'forward-right',
+    'two-right',
+    'two-left',
   ];
 
   return directions.reduce((squares, direction) => {

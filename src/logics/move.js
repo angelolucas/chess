@@ -2,6 +2,7 @@ import moves from 'logics/moves';
 
 export default ({ origin, target, pieces, player, promotionPiece }) => {
   let newMap = pieces;
+  console.log('test');
 
   // Remove taked piece
   newMap = newMap.filter((piece) => piece.position !== target);
