@@ -16,43 +16,8 @@ export default [
   },
   {
     color: 'white',
-    type: 'pawn',
-    position: 12,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 22,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 32,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 42,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 52,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 62,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 72,
-  },
-  {
-    color: 'white',
-    type: 'pawn',
-    position: 82,
+    type: 'bishop',
+    position: 84,
   },
   {
     color: 'black',
@@ -71,42 +36,12 @@ export default [
   },
   {
     color: 'black',
-    type: 'pawn',
-    position: 17,
+    type: 'bishop',
+    position: 16,
   },
   {
     color: 'black',
-    type: 'pawn',
-    position: 27,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 37,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 47,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 57,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 67,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 77,
-  },
-  {
-    color: 'black',
-    type: 'pawn',
-    position: 87,
+    type: 'bishop',
+    position: 86,
   },
 ];

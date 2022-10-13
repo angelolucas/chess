@@ -29,7 +29,7 @@ const parseStartPosition = () => {
 const App = () => {
   const [player, setPlayer] = useState('white');
 
-  const [pieces, setPieces] = useState(() => parseStartPosition);
+  const [pieces, setPieces] = useState(() => parseStartPosition());
 
   const [promotion, setPromotion] = useState(false);
 

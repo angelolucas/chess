@@ -1,4 +1,8 @@
-const getSquare = ({ color = 'white', position, direction }) => {
+export const getSquareByDirection = ({
+  color = 'white',
+  position,
+  direction,
+}) => {
   const white = color === 'white';
 
   return {
@@ -18,8 +22,8 @@ const getSquare = ({ color = 'white', position, direction }) => {
     'two-forward': white ? position + 2 : position - 2,
 
     // Castles
-    'two-right': position + 20,
-    'two-left': position - 20,
+    'two-right': white ? position + 20 : position - 20,
+    'two-left': white ? position - 20 : position + 20,
 
     // Knight moves
     'two-left-backward': white ? position - 21 : position + 21,
@@ -33,24 +37,36 @@ const getSquare = ({ color = 'white', position, direction }) => {
   }[direction];
 };
 
-const getPiece = ({ square, pieces }) =>
-  Object.values(pieces).find((piece) => piece.position === square)?.color;
+export const getPiece = ({ square, pieces }) =>
+  Object.values(pieces).find((piece) => piece.position === square);
 
-export default ({ direction, piece: { color, position }, pieces }) => {
-  const square = getSquare({ color, position, direction });
+export default ({ direction, piece: { color, position }, pieces, options }) => {
+  const square = getSquareByDirection({ color, position, direction });
   const validSquare =
     square >= 11 && square <= 88 && square % 10 !== 0 && square % 10 !== 9;
 
   // Check if is a invalid square
   if (validSquare) {
     const piece = getPiece({ square, pieces });
-    const enemy = piece && piece !== color;
-
-    return {
+    const enemy = piece && piece.color !== color;
+    const target = {
       square,
       empty: !piece,
       enemy,
     };
+
+    if (options?.underAttack) {
+      const underAttack = pieces.find(
+        (piece) => piece.moves && piece.moves.includes(square)
+      );
+
+      return {
+        ...target,
+        underAttack,
+      };
+    }
+
+    return target;
   }
 
   return false;

@@ -10,8 +10,6 @@ import pawn from './pawn';
 export default ({ piece, pieces, player }) => {
   let moves = [];
 
-  console.log({ piece });
-
   if (piece.type === 'queen') moves = queen({ piece, pieces });
   if (piece.type === 'rook') moves = rook({ piece, pieces });
   if (piece.type === 'bishop') moves = bishop({ piece, pieces });
