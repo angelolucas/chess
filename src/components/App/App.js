@@ -5,9 +5,9 @@ import Board from 'components/Board';
 import Piece from 'components/Piece';
 import Move from 'components/Move';
 import Promotion from 'components/Promotion';
-import moves from 'logics/moves';
+import getMovesByPiece from 'logics/moves';
 import check from 'logics/check';
-import move from 'logics/move';
+import getPosition from 'logics/getPosition';
 import startPosition from 'startPosition';
 import * as S from './App.style';
 
@@ -20,7 +20,7 @@ const parseStartPosition = () => {
 
   let parsedStartPositionWithMoves = parsedStartPosition.map((piece) => ({
     ...piece,
-    moves: moves({ piece, pieces: parsedStartPosition }),
+    moves: getMovesByPiece({ piece, pieces: parsedStartPosition }),
   }));
 
   return parsedStartPositionWithMoves;
@@ -43,7 +43,7 @@ const App = () => {
   };
 
   const handleMove = ({ origin, target, promotionPiece }) => {
-    const newPosition = move({
+    const newPosition = getPosition({
       origin,
       target,
       player,

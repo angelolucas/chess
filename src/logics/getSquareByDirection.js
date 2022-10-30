@@ -1,0 +1,38 @@
+export const getSquareByDirection = ({
+  color = 'white',
+  position,
+  direction,
+}) => {
+  const white = color === 'white';
+
+  return {
+    // Straight moves
+    forward: white ? position + 1 : position - 1,
+    left: white ? position - 10 : position + 10,
+    right: white ? position + 10 : position - 10,
+    backward: white ? position - 1 : position + 1,
+
+    // Diagonal moves
+    'backward-left': white ? position - 11 : position + 11,
+    'backward-right': white ? position + 9 : position - 9,
+    'forward-left': white ? position - 9 : position + 9,
+    'forward-right': white ? position + 11 : position - 11,
+
+    // Two squares jump of pawn
+    'two-forward': white ? position + 2 : position - 2,
+
+    // Castles
+    'two-right': white ? position + 20 : position - 20,
+    'two-left': white ? position - 20 : position + 20,
+
+    // Knight moves
+    'two-left-backward': white ? position - 21 : position + 21,
+    'two-left-forward': white ? position - 19 : position + 19,
+    'two-backward-left': white ? position - 12 : position + 12,
+    'two-forward-left': white ? position - 8 : position + 8,
+    'two-backward-right': white ? position + 8 : position - 8,
+    'two-forward-right': white ? position + 12 : position - 12,
+    'two-right-backward': white ? position + 19 : position - 19,
+    'two-right-forwad': white ? position + 21 : position - 21,
+  }[direction];
+};

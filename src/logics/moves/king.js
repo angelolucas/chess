@@ -1,4 +1,6 @@
-import getTarget, { getPiece, getSquareByDirection } from '../getTarget';
+import { getPiece } from 'logics/getPiece';
+import { getSquareByDirection } from 'logics/getSquareByDirection';
+import getTarget from '../getTarget';
 
 const castlingUnderAttack = ({
   rightSide,

@@ -1,1 +1,1 @@
-export { default } from './moves';
+export { default } from '../getMovesByPieces';

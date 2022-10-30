@@ -1,11 +1,11 @@
-import move from 'logics/move';
+import getPosition from 'logics/getPosition';
 import check from 'logics/check';
-import queen from './queen';
-import rook from './rook';
-import bishop from './bishop';
-import knight from './knight';
-import king from './king';
-import pawn from './pawn';
+import queen from './moves/queen';
+import rook from './moves/rook';
+import bishop from './moves/bishop';
+import knight from './moves/knight';
+import king from './moves/king';
+import pawn from './moves/pawn';
 
 export default ({ piece, pieces, player }) => {
   let moves = [];
@@ -27,7 +27,7 @@ export default ({ piece, pieces, player }) => {
       (legalMove) =>
         !check({
           player: player === 'white' ? 'black' : 'white',
-          pieces: move({
+          pieces: getPosition({
             origin: piece.position,
             target: legalMove,
             pieces,

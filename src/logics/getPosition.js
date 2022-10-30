@@ -1,4 +1,4 @@
-import moves from 'logics/moves';
+import getMovesByPiece from 'logics/moves';
 
 export default ({ origin, target, pieces, player, promotionPiece }) => {
   let newMap = pieces;
@@ -36,7 +36,7 @@ export default ({ origin, target, pieces, player, promotionPiece }) => {
   // Update legal moves
   newMap = newMap.map((piece) => ({
     ...piece,
-    moves: moves({
+    moves: getMovesByPiece({
       piece,
       player,
       pieces: newMap,
