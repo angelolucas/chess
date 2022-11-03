@@ -1,13 +1,13 @@
 import getMovesByPiece from 'logics/moves';
 
 export default ({ origin, target, pieces, player, promotionPiece }) => {
-  let newMap = pieces;
+  let newPosition = pieces;
 
   // Remove taked piece
-  newMap = newMap.filter((piece) => piece.position !== target);
+  newPosition = newPosition.filter((piece) => piece.position !== target);
 
   // Move pieces
-  newMap = newMap.map((piece) => {
+  newPosition = newPosition.map((piece) => {
     if (piece.position === origin) {
       return {
         ...piece,
@@ -21,7 +21,7 @@ export default ({ origin, target, pieces, player, promotionPiece }) => {
 
   // Promotion
   if (promotionPiece) {
-    newMap = newMap.map((piece) => {
+    newPosition = newPosition.map((piece) => {
       if (piece.position === target) {
         return {
           ...piece,
@@ -33,15 +33,40 @@ export default ({ origin, target, pieces, player, promotionPiece }) => {
     });
   }
 
-  // Update legal moves
-  newMap = newMap.map((piece) => ({
-    ...piece,
-    moves: getMovesByPiece({
-      piece,
-      player,
-      pieces: newMap,
-    }),
-  }));
+  /*
+   * Updates the moves of all pieces except the king
+   * The king needs the movement of all pieces to know whether or
+   * not it can occupy a square that is not under attack by the enemy
+   * For this reason, the king's movement is updated last, on the map below
+   */
+  newPosition = newPosition.map((piece) => {
+    if (piece.type !== 'king') {
+      return {
+        ...piece,
+        moves: getMovesByPiece({
+          piece,
+          player,
+          pieces: newPosition,
+        }),
+      };
+    }
+    return piece;
+  });
 
-  return newMap;
+  // Update king move
+  newPosition = newPosition.map((piece) => {
+    if (piece.type === 'king') {
+      return {
+        ...piece,
+        moves: getMovesByPiece({
+          piece,
+          player,
+          pieces: newPosition,
+        }),
+      };
+    }
+    return piece;
+  });
+
+  return newPosition;
 };
