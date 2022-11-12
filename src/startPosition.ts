@@ -1,6 +1,6 @@
-import { BasicPiece } from 'types/piece';
+import { IBasicPiece } from 'types/piece';
 
-const startPosition: BasicPiece[] = [
+const startPosition: IBasicPiece[] = [
   {
     color: 'white',
     type: 'rook',
