@@ -1,9 +1,11 @@
-import Board from './Board';
+'use client';
+
+import Chess from './Chess';
 
 const App = () => {
   return (
     <div className="flex justify-center items-center h-full">
-      <Board />
+      <Chess />
     </div>
   );
 };

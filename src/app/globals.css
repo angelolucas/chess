@@ -8,5 +8,5 @@ body {
 }
 
 body {
-  @apply bg-dark;
+  @apply bg-ui-background;
 }
