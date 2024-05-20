@@ -21,7 +21,9 @@ const Board = () => {
             key={`${row}-${col}`}
             className={`w-full h-full ${getSquareColor(row, col)}`}
           >
-            {/* {row}-{col} */}
+            <p className="text-ui-text-primary">
+              {row}-{col}
+            </p>
           </div>
         ))
       )}

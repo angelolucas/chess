@@ -22,4 +22,6 @@ export type Piece = {
   player: Player;
   type: PieceType;
   position: Position;
+  moved: boolean;
+  moves: Array<Position>;
 };

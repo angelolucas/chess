@@ -12,7 +12,7 @@ const config: Config = {
         'light-square': 'rgba(80, 80, 80, 1)', // Dark gray
         'dark-square': 'rgba(30, 30, 30, 1)', // Very dark gray
         possible: 'rgba(169, 169, 169, 0.5)', // Light gray
-        'last-move': 'rgba(255, 215, 0, 0.5)', // Gold
+        move: 'rgba(255, 215, 0, 0.5)', // Gold
         check: 'rgba(255, 99, 71, 0.5)', // Tomato
         checkmate: 'rgba(128, 0, 0, 0.5)', // Maroon
         'selected-piece': 'rgba(135, 206, 250, 0.5)', // Light sky blue
