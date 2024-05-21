@@ -51,7 +51,7 @@ const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
       alt="white pawn"
       width={100}
       height={100}
-      className={clsx('absolute cursor-pointer', {
+      className={clsx('absolute cursor-pointer transition-[top,left]', {
         'bg-board-selected-piece': selected,
       })}
       style={{

@@ -1,8 +1,8 @@
-import { Move, Piece } from '@/types/app.types';
+import { Piece } from '@/types/app.types';
 
 interface NewBoardPositionProps {
   piece: Piece;
-  move: Move;
+  move: number;
   boardPosition: Piece[];
 }
 
@@ -16,6 +16,19 @@ export const newBoardPosition = ({
   // Remove taked piece
   newBoardPosition = newBoardPosition.filter((piece) => {
     return piece.position !== move;
+  });
+
+  // Move pieces
+  newBoardPosition = newBoardPosition.map((item) => {
+    if (item.id === piece.id) {
+      return {
+        ...piece,
+        moved: true,
+        position: move,
+      };
+    }
+
+    return item;
   });
 
   return newBoardPosition;

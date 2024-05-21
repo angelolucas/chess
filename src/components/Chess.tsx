@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
-import { Piece as PieceProps, Position } from '@/types/app.types';
+import { Piece as PieceProps } from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
 import { newBoardPosition } from '@/rules/newBoardPosition';
@@ -17,7 +17,8 @@ const Chess = () => {
     setSelectedPiece(piece);
   };
 
-  const handleMove = (piece: PieceProps, move: Position) => {
+  const handleMove = (piece: PieceProps, move: number) => {
+    setSelectedPiece(null);
     setBoardPosition(newBoardPosition({ piece, move, boardPosition }));
   };
 
@@ -36,14 +37,13 @@ const Chess = () => {
         />
       ))}
 
-      {selectedPiece &&
-        selectedPiece.moves.map((move) => (
-          <Move
-            key={`${move.col}${move.row}`}
-            position={move}
-            onClick={() => handleMove(selectedPiece, move)}
-          />
-        ))}
+      {selectedPiece?.moves.map((move) => (
+        <Move
+          key={move}
+          position={move}
+          onClick={() => handleMove(selectedPiece, move)}
+        />
+      ))}
     </div>
   );
 };
