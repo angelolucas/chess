@@ -1,4 +1,4 @@
-import { PieceType, Player, Position } from '@/types/app.types';
+import { PieceType, Player } from '@/types/app.types';
 import IconWhitePawn from '@/icons/white-pawn.svg';
 import IconBlackPawn from '@/icons/black-pawn.svg';
 import IconWhiteRook from '@/icons/white-rook.svg';
@@ -15,11 +15,12 @@ import IconBlackKing from '@/icons/black-king.svg';
 import Image from 'next/image';
 import { BOARD_COLS, BOARD_ROWS } from '@/constants/board';
 import clsx from 'clsx';
+import getRowColByPosition from '@/helpers/getRowColByPosition';
 
 interface PieceProps {
   player: Player;
   type: PieceType;
-  position: Position;
+  position: number;
   selected: boolean;
   onClick: () => void;
 }
@@ -42,6 +43,8 @@ const getPieceAsset = (player: Player, type: PieceType) => {
 };
 
 const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
+  const { row, col } = getRowColByPosition(position);
+
   return (
     <Image
       src={getPieceAsset(player, type).src}
@@ -54,8 +57,8 @@ const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
       style={{
         width: `calc(100%/${BOARD_COLS})`,
         height: `calc(100%/${BOARD_ROWS})`,
-        top: `${position.row * (100 / BOARD_ROWS)}%`,
-        left: `${position.col * (100 / BOARD_COLS)}%`,
+        top: `${row * (100 / BOARD_ROWS)}%`,
+        left: `${col * (100 / BOARD_COLS)}%`,
       }}
       onClick={onClick}
     />

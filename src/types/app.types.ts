@@ -12,16 +12,11 @@ export enum PieceType {
   pawn = 'pawn',
 }
 
-export type Position = {
-  row: number;
-  col: number;
-};
-
 export type Piece = {
   id: number;
   player: Player;
   type: PieceType;
-  position: Position;
+  position: number;
   moved: boolean;
-  moves: Array<Position>;
+  moves: Array<number>;
 };

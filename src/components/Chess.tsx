@@ -6,9 +6,11 @@ import { initialPosition } from '@/constants/initialPosition';
 import { Piece as PieceProps, Position } from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
+import { newBoardPosition } from '@/rules/newBoardPosition';
 
 const Chess = () => {
-  const [pieces, setPieces] = useState<Array<PieceProps>>(initialPosition);
+  const [boardPosition, setBoardPosition] =
+    useState<Array<PieceProps>>(initialPosition);
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
 
   const handlePieceSelection = (piece: PieceProps) => {
@@ -16,14 +18,14 @@ const Chess = () => {
   };
 
   const handleMove = (piece: PieceProps, move: Position) => {
-    // TODO: Implement move logic
+    setBoardPosition(newBoardPosition({ piece, move, boardPosition }));
   };
 
   return (
     <div className="relative">
       <Board />
 
-      {pieces.map((piece) => (
+      {boardPosition.map((piece) => (
         <Piece
           key={piece.id}
           player={piece.player}
