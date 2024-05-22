@@ -1,4 +1,5 @@
 import { Piece } from '@/types/app.types';
+import { legalMoves } from './legalMoves';
 
 interface NewBoardPositionProps {
   piece: Piece;
@@ -30,6 +31,15 @@ export const newBoardPosition = ({
 
     return item;
   });
+
+  // Update legal moves
+  newBoardPosition = newBoardPosition.map((piece) => ({
+    ...piece,
+    moves: legalMoves({
+      piece,
+      boardPosition: newBoardPosition,
+    }),
+  }));
 
   return newBoardPosition;
 };
