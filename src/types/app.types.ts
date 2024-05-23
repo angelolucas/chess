@@ -23,27 +23,27 @@ export type Piece = {
 
 export enum Direction {
   // Straight moves
-  forward = 'forward',
-  backward = 'backward',
-  left = 'left',
-  right = 'right',
+  forward = 10,
+  backward = -10,
+  left = -1,
+  right = 1,
 
   // Diagonal moves
-  forwardLeft = 'forwardLeft',
-  forwardRight = 'forwardRight',
-  backwardLeft = 'backwardLeft',
-  backwardRight = 'backwardRight',
+  forwardLeft = -9,
+  forwardRight = -11,
+  backwardLeft = 11,
+  backwardRight = 9,
 
   // Two squares jump of pawn
-  pawnTwoForward = 'pawnTwoForward',
+  pawnTwoForward = 2,
 
   // Knight moves
-  knightLeftBackward = 'knightLeftBackward',
-  knightLeftForward = 'knightLeftForward',
-  knightBackwardLeft = 'knightBackwardLeft',
-  knightForwardLeft = 'knightForwardLeft',
-  knightBackwardRight = 'knightBackwardRight',
-  knightForwardRight = 'knightForwardRight',
-  knightRightBackward = 'knightRightBackward',
-  knightRightForwad = 'knightRightForward',
+  knightLeftBackward = -21,
+  knightLeftForward = -19,
+  knightBackwardLeft = -12,
+  knightForwardLeft = -8,
+  knightBackwardRight = 8,
+  knightForwardRight = 12,
+  knightRightBackward = 19,
+  knightRightForwad = 21,
 }

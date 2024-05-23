@@ -1,8 +1,5 @@
-import { BOARD_COLS } from '@/constants/board';
-
 const getRowColByPosition = (position: number) => {
-  const row = Math.floor(position / BOARD_COLS);
-  const col = position % BOARD_COLS;
+  const [row, col] = position.toString().split('').map(Number);
 
   return { row, col };
 };

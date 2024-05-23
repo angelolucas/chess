@@ -44,22 +44,21 @@ const getPieceAsset = (player: Player, type: PieceType) => {
 
 const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
   const { row, col } = getRowColByPosition(position);
+  const width = `calc(100%/${BOARD_COLS})`;
+  const height = `calc(100%/${BOARD_ROWS})`;
+  const top = `${(row - 1) * (100 / BOARD_ROWS)}%`;
+  const left = `${(col - 1) * (100 / BOARD_COLS)}%`;
 
   return (
     <Image
+      className={clsx('absolute cursor-pointer transition-[top,left]', {
+        'bg-board-selected-piece': selected,
+      })}
       src={getPieceAsset(player, type).src}
       alt="white pawn"
       width={100}
       height={100}
-      className={clsx('absolute cursor-pointer transition-[top,left]', {
-        'bg-board-selected-piece': selected,
-      })}
-      style={{
-        width: `calc(100%/${BOARD_COLS})`,
-        height: `calc(100%/${BOARD_ROWS})`,
-        top: `${row * (100 / BOARD_ROWS)}%`,
-        left: `${col * (100 / BOARD_COLS)}%`,
-      }}
+      style={{ width, height, top, left }}
       onClick={onClick}
     />
   );

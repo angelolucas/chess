@@ -7,10 +7,15 @@ import { Piece as PieceProps } from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
 import { newBoardPosition } from '@/rules/newBoardPosition';
+import { legalMoves } from '@/rules/legalMoves';
 
 const Chess = () => {
-  const [boardPosition, setBoardPosition] =
-    useState<Array<PieceProps>>(initialPosition);
+  const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
+    initialPosition.map((piece) => ({
+      ...piece,
+      moves: legalMoves({ piece, boardPosition: initialPosition }),
+    }))
+  );
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
 
   const handlePieceSelection = (piece: PieceProps) => {

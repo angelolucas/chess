@@ -8,15 +8,14 @@ interface MoveProps {
 
 const Move = ({ position, onClick }: MoveProps) => {
   const { row, col } = getRowColByPosition(position);
+  const width = `calc(100%/${BOARD_COLS})`;
+  const height = `calc(100%/${BOARD_ROWS})`;
+  const top = `${(row - 1) * (100 / BOARD_ROWS)}%`;
+  const left = `${(col - 1) * (100 / BOARD_COLS)}%`;
 
   return (
     <button
-      style={{
-        width: `calc(100%/${BOARD_COLS})`,
-        height: `calc(100%/${BOARD_ROWS})`,
-        top: `${row * (100 / BOARD_ROWS)}%`,
-        left: `${col * (100 / BOARD_COLS)}%`,
-      }}
+      style={{ width, height, top, left }}
       className="absolute flex items-center justify-center"
       onClick={onClick}
     >

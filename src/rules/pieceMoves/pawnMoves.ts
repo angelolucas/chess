@@ -1,4 +1,4 @@
-import { getPieceTarget } from '@/helpers/getPieceTarget';
+import { getSquareByDirection } from '@/helpers/getSquareByDirection';
 import { Direction, Piece } from '@/types/app.types';
 
 interface PawnMoves {
@@ -9,24 +9,43 @@ interface PawnMoves {
 export const pawnMoves = ({ piece, boardPosition }: PawnMoves) => {
   const moves = [];
 
-  const squareAhead = getPieceTarget({
+  const squareAhead = getSquareByDirection({
     direction: Direction.forward,
-    piece,
     boardPosition,
+    piece,
+  });
+  const targetTwoForward = getSquareByDirection({
+    direction: Direction.pawnTwoForward,
+    boardPosition,
+    piece,
+  });
+  const targetForwardLeft = getSquareByDirection({
+    direction: Direction.forwardLeft,
+    boardPosition,
+    piece,
+  });
+  const targetForwardRight = getSquareByDirection({
+    direction: Direction.forwardRight,
+    boardPosition,
+    piece,
   });
 
-  const squareRight = getPieceTarget({
-    direction: Direction.right,
-    piece,
-    boardPosition,
-  });
-
-  if (!squareAhead.piece) {
+  if (squareAhead && !squareAhead?.piece) {
     moves.push(squareAhead.square);
+
+    if (!piece.moved && targetTwoForward && !targetTwoForward.piece) {
+      moves.push(targetTwoForward.square);
+    }
   }
 
-  if (!squareAhead.piece) {
-    moves.push(squareRight.square);
+  if (targetForwardLeft && targetForwardLeft.enemy) {
+    console.log('targetForwardLeft');
+    moves.push(targetForwardLeft.square);
+  }
+
+  if (targetForwardRight && targetForwardRight.enemy) {
+    console.log('targetForwardRight');
+    moves.push(targetForwardRight.square);
   }
 
   return moves;

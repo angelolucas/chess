@@ -9,7 +9,9 @@ interface LegalMoves {
 export const legalMoves = ({ piece, boardPosition }: LegalMoves) => {
   let moves: number[] = [];
 
-  if (piece.type === 'pawn') moves = pawnMoves({ piece, boardPosition });
+  if (piece.type === 'pawn') {
+    moves = pawnMoves({ piece, boardPosition });
+  }
 
   return moves;
 };
