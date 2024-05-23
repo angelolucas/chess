@@ -39,12 +39,10 @@ export const pawnMoves = ({ piece, boardPosition }: PawnMoves) => {
   }
 
   if (targetForwardLeft && targetForwardLeft.enemy) {
-    console.log('targetForwardLeft');
     moves.push(targetForwardLeft.square);
   }
 
   if (targetForwardRight && targetForwardRight.enemy) {
-    console.log('targetForwardRight');
     moves.push(targetForwardRight.square);
   }
 

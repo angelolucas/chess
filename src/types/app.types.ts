@@ -23,19 +23,19 @@ export type Piece = {
 
 export enum Direction {
   // Straight moves
-  forward = 10,
-  backward = -10,
+  forward = -10,
+  backward = 10,
   left = -1,
   right = 1,
 
   // Diagonal moves
-  forwardLeft = -9,
-  forwardRight = -11,
-  backwardLeft = 11,
-  backwardRight = 9,
+  forwardLeft = -11,
+  forwardRight = -9,
+  backwardLeft = 9,
+  backwardRight = 11,
 
   // Two squares jump of pawn
-  pawnTwoForward = 2,
+  pawnTwoForward = -20,
 
   // Knight moves
   knightLeftBackward = -21,
