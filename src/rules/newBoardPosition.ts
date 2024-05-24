@@ -33,11 +33,12 @@ export const newBoardPosition = ({
   });
 
   // Update legal moves
-  newBoardPosition = newBoardPosition.map((piece) => ({
-    ...piece,
+  newBoardPosition = newBoardPosition.map((currentPiece) => ({
+    ...currentPiece,
     moves: legalMoves({
-      piece,
+      piece: currentPiece,
       boardPosition: newBoardPosition,
+      lastMove: { piece, move },
     }),
   }));
 
