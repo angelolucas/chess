@@ -1,18 +1,25 @@
 import getRowColByPosition from '@/helpers/getRowColByPosition';
 import { getTargetByDirection } from '@/helpers/getTargetByDirection';
-import { Direction, Piece, PieceType, Player } from '@/types/app.types';
+import {
+  Direction,
+  Move,
+  MoveType,
+  Piece,
+  PieceType,
+  Player,
+} from '@/types/app.types';
 
 interface PawnMoves {
   piece: Piece;
   boardPosition: Piece[];
   lastMove?: {
     piece: Piece;
-    move: number;
+    move: Move;
   };
 }
 
 export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
-  const moves = [];
+  const moves: Move[] = [];
 
   const squareAhead = getTargetByDirection({
     direction: Direction.forward,
@@ -36,19 +43,19 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
   });
 
   if (squareAhead && !squareAhead?.piece) {
-    moves.push(squareAhead.square);
+    moves.push({ square: squareAhead.square, type: MoveType.move });
 
     if (!piece.moved && squareTwoForward && !squareTwoForward.piece) {
-      moves.push(squareTwoForward.square);
+      moves.push({ square: squareTwoForward.square, type: MoveType.move });
     }
   }
 
   if (squareForwardLeft && squareForwardLeft.opponent) {
-    moves.push(squareForwardLeft.square);
+    moves.push({ square: squareForwardLeft.square, type: MoveType.capture });
   }
 
   if (squareForwardRight && squareForwardRight.opponent) {
-    moves.push(squareForwardRight.square);
+    moves.push({ square: squareForwardRight.square, type: MoveType.capture });
   }
 
   // En passant
@@ -64,22 +71,29 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
       boardPosition,
       piece,
     });
-
     const correctColumn =
       (piece.player === Player.white && row === 4) ||
       (piece.player === Player.black && row === 5);
     const lastMoveIsPawn = lastMove.piece.type === PieceType.pawn;
     const lastMovePawnMovedTwoSquares =
-      Math.abs(lastMove.piece.position - lastMove.move) === 20;
-    const lastMovePawnRight = squareRight?.piece?.position === lastMove.move;
-    const lastMovePawnLeft = squareLeft?.piece?.position === lastMove.move;
+      Math.abs(lastMove.piece.position - lastMove.move.square) === 20;
+    const lastMovePawnRight =
+      squareRight?.piece?.position === lastMove.move.square;
+    const lastMovePawnLeft =
+      squareLeft?.piece?.position === lastMove.move.square;
 
     if (correctColumn && lastMoveIsPawn && lastMovePawnMovedTwoSquares) {
       if (lastMovePawnLeft && squareForwardLeft) {
-        moves.push(squareForwardLeft.square);
+        moves.push({
+          square: squareForwardLeft.square,
+          type: MoveType.enPassant,
+        });
       }
       if (lastMovePawnRight && squareForwardRight) {
-        moves.push(squareForwardRight.square);
+        moves.push({
+          square: squareForwardRight.square,
+          type: MoveType.enPassant,
+        });
       }
     }
   }

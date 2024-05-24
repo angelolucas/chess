@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
-import { Piece as PieceProps } from '@/types/app.types';
+import { Move as MoveProps, Piece as PieceProps } from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
 import { newBoardPosition } from '@/rules/newBoardPosition';
@@ -22,7 +22,7 @@ const Chess = () => {
     setSelectedPiece(piece);
   };
 
-  const handleMove = (piece: PieceProps, move: number) => {
+  const handleMove = (piece: PieceProps, move: MoveProps) => {
     setSelectedPiece(null);
     setBoardPosition(newBoardPosition({ piece, move, boardPosition }));
   };
@@ -44,8 +44,8 @@ const Chess = () => {
 
       {selectedPiece?.moves.map((move) => (
         <Move
-          key={move}
-          position={move}
+          key={move.square}
+          position={move.square}
           onClick={() => handleMove(selectedPiece, move)}
         />
       ))}

@@ -12,13 +12,24 @@ export enum PieceType {
   pawn = 'pawn',
 }
 
+export enum MoveType {
+  move = 'move',
+  capture = 'capture',
+  enPassant = 'enPassant',
+}
+
+export type Move = {
+  square: number;
+  type?: MoveType;
+};
+
 export type Piece = {
   id: number;
   player: Player;
   type: PieceType;
   position: number;
   moved: boolean;
-  moves: Array<number>;
+  moves: Array<Move>;
 };
 
 export enum Direction {

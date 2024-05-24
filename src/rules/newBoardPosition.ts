@@ -1,9 +1,9 @@
-import { Piece } from '@/types/app.types';
+import { Move, Piece } from '@/types/app.types';
 import { legalMoves } from './legalMoves';
 
 interface NewBoardPositionProps {
   piece: Piece;
-  move: number;
+  move: Move;
   boardPosition: Piece[];
 }
 
@@ -16,20 +16,20 @@ export const newBoardPosition = ({
 
   // Remove taked piece
   newBoardPosition = newBoardPosition.filter((piece) => {
-    return piece.position !== move;
+    return piece.position !== move.square;
   });
 
   // Move pieces
-  newBoardPosition = newBoardPosition.map((item) => {
-    if (item.id === piece.id) {
+  newBoardPosition = newBoardPosition.map((currentPiece) => {
+    if (currentPiece.id === piece.id) {
       return {
-        ...piece,
+        ...currentPiece,
         moved: true,
-        position: move,
+        position: move.square,
       };
     }
 
-    return item;
+    return currentPiece;
   });
 
   // Update legal moves
