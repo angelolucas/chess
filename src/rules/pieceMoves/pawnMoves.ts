@@ -42,6 +42,7 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
     piece,
   });
 
+  // Move forward
   if (squareAhead && !squareAhead?.piece) {
     moves.push({ square: squareAhead.square, type: MoveType.move });
 
@@ -50,6 +51,7 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
     }
   }
 
+  // Capture
   if (squareForwardLeft && squareForwardLeft.opponent) {
     moves.push({ square: squareForwardLeft.square, type: MoveType.capture });
   }

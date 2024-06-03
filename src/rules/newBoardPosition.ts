@@ -1,5 +1,6 @@
-import { Move, Piece } from '@/types/app.types';
+import { Direction, Move, MoveType, Piece } from '@/types/app.types';
 import { legalMoves } from './legalMoves';
+import { getSquareByDirection } from '@/helpers/getSquareByDirection';
 
 interface NewBoardPositionProps {
   piece: Piece;
@@ -14,10 +15,25 @@ export const newBoardPosition = ({
 }: NewBoardPositionProps) => {
   let newBoardPosition = [...boardPosition];
 
-  // Remove taked piece
-  newBoardPosition = newBoardPosition.filter((piece) => {
-    return piece.position !== move.square;
-  });
+  // Capture piece
+  if (move.type === MoveType.capture) {
+    newBoardPosition = newBoardPosition.filter((piece) => {
+      return piece.position !== move.square;
+    });
+  }
+
+  // En passant
+  if (move.type === MoveType.enPassant) {
+    const squareOpponentPawn = getSquareByDirection({
+      direction: Direction.backward,
+      player: piece.player,
+      position: move.square,
+    });
+
+    newBoardPosition = newBoardPosition.filter((currentPiece) => {
+      return currentPiece.position !== squareOpponentPawn;
+    });
+  }
 
   // Move pieces
   newBoardPosition = newBoardPosition.map((currentPiece) => {

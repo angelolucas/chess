@@ -16,11 +16,12 @@ export enum MoveType {
   move = 'move',
   capture = 'capture',
   enPassant = 'enPassant',
+  castling = 'castling',
 }
 
 export type Move = {
   square: number;
-  type?: MoveType;
+  type: MoveType;
 };
 
 export type Piece = {

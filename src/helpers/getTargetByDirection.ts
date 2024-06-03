@@ -12,7 +12,11 @@ export const getTargetByDirection = ({
   boardPosition,
   piece,
 }: getTargetByDirection) => {
-  const square = getSquareByDirection({ direction, piece });
+  const square = getSquareByDirection({
+    direction,
+    player: piece.player,
+    position: piece.position,
+  });
   const targetPiece = boardPosition.find((item) => item.position === square);
 
   if (square) {

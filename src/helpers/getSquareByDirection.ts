@@ -1,16 +1,18 @@
-import { Direction, Piece, Player } from '@/types/app.types';
+import { Direction, Player } from '@/types/app.types';
 
 interface getSquareByDirection {
   direction: Direction;
-  piece: Piece;
+  player: Player;
+  position: number;
 }
 
 export const getSquareByDirection = ({
   direction,
-  piece,
+  player,
+  position,
 }: getSquareByDirection) => {
-  const directionValue = piece.player === Player.black ? -direction : direction;
-  const square = piece.position + directionValue;
+  const directionValue = player === Player.black ? -direction : direction;
+  const square = position + directionValue;
   const validSquare =
     square >= 11 && square <= 88 && square % 10 !== 0 && square % 10 !== 9;
 

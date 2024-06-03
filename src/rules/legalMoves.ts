@@ -1,4 +1,4 @@
-import { Move, Piece } from '@/types/app.types';
+import { Move, Piece, PieceType } from '@/types/app.types';
 import { pawnMoves } from './pieceMoves/pawnMoves';
 
 interface LegalMoves {
@@ -13,7 +13,7 @@ interface LegalMoves {
 export const legalMoves = ({ piece, boardPosition, lastMove }: LegalMoves) => {
   let moves: Move[] = [];
 
-  if (piece.type === 'pawn') {
+  if (piece.type === PieceType.pawn) {
     moves = pawnMoves({ piece, boardPosition, lastMove });
   }
 
