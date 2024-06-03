@@ -22,6 +22,8 @@ interface PieceProps {
   type: PieceType;
   position: number;
   selected?: boolean;
+  checked?: boolean;
+  checkmated?: boolean;
   promotion?: boolean;
   onClick: () => void;
 }
@@ -48,6 +50,8 @@ const Piece = ({
   type,
   position,
   selected,
+  checked,
+  checkmated,
   promotion,
   onClick,
 }: PieceProps) => {
@@ -62,6 +66,8 @@ const Piece = ({
       className={clsx('absolute cursor-pointer transition-[top,left]', {
         'bg-board-selected-piece': selected,
         'bg-board-promotion shadow-lg shadow-board-promotion': promotion,
+        'bg-board-check': checked,
+        'bg-board-checkmate': checkmated,
       })}
       src={getPieceAsset(player, type).src}
       alt="white pawn"
