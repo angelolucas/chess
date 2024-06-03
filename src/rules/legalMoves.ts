@@ -2,6 +2,7 @@ import { Move, Piece, PieceType } from '@/types/app.types';
 import { pawnMoves } from './pieceMoves/pawnMoves';
 import { kingMoves } from './pieceMoves/kingMoves';
 import { knightMoves } from './pieceMoves/knightMoves';
+import { rookMoves } from './pieceMoves/rookMoves';
 
 interface LegalMoves {
   piece: Piece;
@@ -17,6 +18,10 @@ export const legalMoves = ({ piece, boardPosition, lastMove }: LegalMoves) => {
 
   if (piece.type === PieceType.pawn) {
     moves = pawnMoves({ piece, boardPosition, lastMove });
+  }
+
+  if (piece.type === PieceType.rook) {
+    moves = rookMoves({ piece, boardPosition });
   }
 
   if (piece.type === PieceType.knight) {
