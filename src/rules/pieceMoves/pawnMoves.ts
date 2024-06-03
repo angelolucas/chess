@@ -19,7 +19,7 @@ interface PawnMoves {
 }
 
 export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
-  const moves: Move[] = [];
+  let moves: Move[] = [];
 
   const squareAhead = getTargetByDirection({
     direction: Direction.forward,
@@ -42,18 +42,9 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
     piece,
   });
 
-  // Move forward and Promotion
+  // Move forward
   if (squareAhead && !squareAhead?.piece) {
-    const whitePromotion =
-      piece.player === Player.white && squareAhead.row === 1;
-    const blackPromotion =
-      piece.player === Player.black && squareAhead.row === 8;
-
-    if (whitePromotion || blackPromotion) {
-      moves.push({ square: squareAhead.square, type: MoveType.promotion });
-    } else {
-      moves.push({ square: squareAhead.square });
-    }
+    moves.push({ square: squareAhead.square });
 
     if (!piece.moved && squareTwoForward && !squareTwoForward.piece) {
       moves.push({ square: squareTwoForward.square });
@@ -68,6 +59,22 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
   if (squareForwardRight && squareForwardRight.opponent) {
     moves.push({ square: squareForwardRight.square });
   }
+
+  // Promotion
+  moves = moves.map((move) => {
+    const whitePromotion =
+      piece.player === Player.white &&
+      getRowColByPosition(move.square).row === 1;
+    const blackPromotion =
+      piece.player === Player.black &&
+      getRowColByPosition(move.square).row === 8;
+
+    if (whitePromotion || blackPromotion) {
+      return { ...move, type: MoveType.promotion };
+    } else {
+      return move;
+    }
+  });
 
   // En passant
   if (lastMove) {

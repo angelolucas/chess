@@ -3,11 +3,17 @@
 import { useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
-import { Move as MoveProps, Piece as PieceProps } from '@/types/app.types';
+import {
+  Move as MoveProps,
+  MoveType,
+  Piece as PieceProps,
+  PieceType,
+} from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
 import { newBoardPosition } from '@/rules/newBoardPosition';
 import { legalMoves } from '@/rules/legalMoves';
+import Promotion from './Promotion';
 
 const Chess = () => {
   const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
@@ -17,14 +23,28 @@ const Chess = () => {
     }))
   );
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
+  const [promotion, setPromotion] = useState<{
+    piece: PieceProps;
+    square: number;
+  } | null>(null);
 
   const handlePieceSelection = (piece: PieceProps) => {
     setSelectedPiece(piece);
   };
 
-  const handleMove = (piece: PieceProps, move: MoveProps) => {
-    setSelectedPiece(null);
-    setBoardPosition(newBoardPosition({ piece, move, boardPosition }));
+  const handleMove = (
+    piece: PieceProps,
+    move: MoveProps,
+    promotionPiece?: PieceType
+  ) => {
+    if (move.type === MoveType.promotion) {
+      setPromotion({ piece, square: move.square });
+    } else {
+      setSelectedPiece(null);
+      setBoardPosition(
+        newBoardPosition({ piece, move, boardPosition, promotionPiece })
+      );
+    }
   };
 
   return (
@@ -49,6 +69,24 @@ const Chess = () => {
           onClick={() => handleMove(selectedPiece, move)}
         />
       ))}
+
+      {promotion && (
+        <Promotion
+          player={promotion.piece.player}
+          square={promotion.square}
+          onPromote={(promotionPiece) =>
+            handleMove(
+              promotion.piece,
+              { square: promotion.square },
+              promotionPiece
+            )
+          }
+          onClose={() => {
+            setPromotion(null);
+            setSelectedPiece(null);
+          }}
+        />
+      )}
     </div>
   );
 };

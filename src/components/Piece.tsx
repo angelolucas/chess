@@ -21,7 +21,8 @@ interface PieceProps {
   player: Player;
   type: PieceType;
   position: number;
-  selected: boolean;
+  selected?: boolean;
+  promotion?: boolean;
   onClick: () => void;
 }
 
@@ -42,7 +43,14 @@ const getPieceAsset = (player: Player, type: PieceType) => {
   }
 };
 
-const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
+const Piece = ({
+  player,
+  type,
+  position,
+  selected,
+  promotion,
+  onClick,
+}: PieceProps) => {
   const { row, col } = getRowColByPosition(position);
   const width = `calc(100%/${BOARD_COLS})`;
   const height = `calc(100%/${BOARD_ROWS})`;
@@ -53,6 +61,7 @@ const Piece = ({ player, type, position, selected, onClick }: PieceProps) => {
     <Image
       className={clsx('absolute cursor-pointer transition-[top,left]', {
         'bg-board-selected-piece': selected,
+        'bg-board-promotion shadow-lg shadow-board-promotion': promotion,
       })}
       src={getPieceAsset(player, type).src}
       alt="white pawn"

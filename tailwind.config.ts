@@ -20,6 +20,7 @@ const config: Config = {
         'piece-black': '#000000',
         'piece-highlight-white': '#D3D3D3', // Light gray
         'piece-highlight-black': '#696969', // Dim gray
+        promotion: '#0a0a0a', // Forest green
       },
       ui: {
         background: '#333333', // Dark gray
