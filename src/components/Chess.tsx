@@ -8,6 +8,7 @@ import {
   MoveType,
   Piece as PieceProps,
   PieceType,
+  Player,
 } from '@/types/app.types';
 import Piece from './Piece';
 import Move from './Move';
@@ -16,15 +17,15 @@ import { legalMoves } from '@/rules/legalMoves';
 import Promotion from './Promotion';
 
 const Chess = () => {
+  const [player, setPlayer] = useState<Player>(Player.white);
   const initialPositionWithMoves = useMemo(
     () =>
       initialPosition.map((piece) => ({
         ...piece,
-        moves: legalMoves({ piece, boardPosition: initialPosition }),
+        moves: legalMoves({ player, piece, boardPosition: initialPosition }),
       })),
-    []
+    [player]
   );
-
   const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
     initialPositionWithMoves
   );
@@ -45,11 +46,18 @@ const Chess = () => {
       } else {
         setSelectedPiece(null);
         setBoardPosition(
-          newBoardPosition({ piece, move, boardPosition, promotionPiece })
+          newBoardPosition({
+            player,
+            piece,
+            move,
+            boardPosition,
+            promotionPiece,
+          })
         );
+        setPlayer(player === Player.white ? Player.black : Player.white);
       }
     },
-    [boardPosition]
+    [boardPosition, player]
   );
 
   return (

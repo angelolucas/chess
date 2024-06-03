@@ -1,8 +1,16 @@
-import { Direction, Move, MoveType, Piece, PieceType } from '@/types/app.types';
+import {
+  Direction,
+  Move,
+  MoveType,
+  Piece,
+  PieceType,
+  Player,
+} from '@/types/app.types';
 import { legalMoves } from './legalMoves';
 import { getSquareByDirection } from '@/helpers/getSquareByDirection';
 
 interface NewBoardPositionProps {
+  player: Player;
   piece: Piece;
   move: Move;
   boardPosition: Piece[];
@@ -10,6 +18,7 @@ interface NewBoardPositionProps {
 }
 
 export const newBoardPosition = ({
+  player,
   piece,
   move,
   boardPosition,
@@ -69,6 +78,7 @@ export const newBoardPosition = ({
   newBoardPosition = newBoardPosition.map((currentPiece) => ({
     ...currentPiece,
     moves: legalMoves({
+      player: player === Player.white ? Player.black : Player.white,
       piece: currentPiece,
       boardPosition: newBoardPosition,
       lastMove: { piece, move },

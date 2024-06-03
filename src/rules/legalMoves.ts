@@ -1,4 +1,4 @@
-import { Move, Piece, PieceType } from '@/types/app.types';
+import { Move, Piece, PieceType, Player } from '@/types/app.types';
 import { pawnMoves } from './pieceMoves/pawnMoves';
 import { kingMoves } from './pieceMoves/kingMoves';
 import { knightMoves } from './pieceMoves/knightMoves';
@@ -7,6 +7,7 @@ import { queenMoves } from './pieceMoves/queenMoves';
 import { bishopMoves } from './pieceMoves/bishopMoves';
 
 interface LegalMoves {
+  player: Player;
   piece: Piece;
   boardPosition: Piece[];
   lastMove?: {
@@ -15,8 +16,17 @@ interface LegalMoves {
   };
 }
 
-export const legalMoves = ({ piece, boardPosition, lastMove }: LegalMoves) => {
+export const legalMoves = ({
+  player,
+  piece,
+  boardPosition,
+  lastMove,
+}: LegalMoves) => {
   let moves: Move[] = [];
+
+  if (piece.player !== player) {
+    return moves;
+  }
 
   if (piece.type === PieceType.pawn) {
     moves = pawnMoves({ piece, boardPosition, lastMove });
