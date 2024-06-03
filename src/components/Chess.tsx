@@ -62,7 +62,7 @@ const Chess = () => {
 
   return (
     <div className="relative">
-      <Board />
+      <Board onClick={() => setSelectedPiece(null)} />
 
       {boardPosition.map((piece) => (
         <Piece
