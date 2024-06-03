@@ -42,9 +42,18 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
     piece,
   });
 
-  // Move forward
+  // Move forward and Promotion
   if (squareAhead && !squareAhead?.piece) {
-    moves.push({ square: squareAhead.square });
+    const whitePromotion =
+      piece.player === Player.white && squareAhead.row === 1;
+    const blackPromotion =
+      piece.player === Player.black && squareAhead.row === 8;
+
+    if (whitePromotion || blackPromotion) {
+      moves.push({ square: squareAhead.square, type: MoveType.promotion });
+    } else {
+      moves.push({ square: squareAhead.square });
+    }
 
     if (!piece.moved && squareTwoForward && !squareTwoForward.piece) {
       moves.push({ square: squareTwoForward.square });
