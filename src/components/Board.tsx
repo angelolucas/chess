@@ -26,7 +26,7 @@ const Board = ({ onClick }: BoardProps) => {
             key={`${row}-${col}`}
             className={`w-full h-full ${getSquareColor(row, col)}`}
           >
-            <p className="text-ui-text-primary">
+            <p className="text-ui-text-primary relative z-20 pointer-events-none">
               {row + 1}
               {col + 1}
             </p>

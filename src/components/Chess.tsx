@@ -15,6 +15,7 @@ import Move from './Move';
 import { newBoardPosition } from '@/rules/newBoardPosition';
 import { legalMoves } from '@/rules/legalMoves';
 import Promotion from './Promotion';
+import { check } from '@/rules/check';
 
 const Chess = () => {
   const [player, setPlayer] = useState<Player>(Player.white);
@@ -34,9 +35,30 @@ const Chess = () => {
     piece: PieceProps;
     square: number;
   } | null>(null);
+  const playerMoves = useMemo(
+    () =>
+      boardPosition.find(
+        (piece) => piece.player === player && piece.moves.length
+      ),
+    [boardPosition, player]
+  );
+
+  const checked = useMemo(
+    () =>
+      check({
+        player,
+        boardPosition,
+      }),
+    [boardPosition, player]
+  );
+
+  const checkmated = useMemo(
+    () => checked && !playerMoves,
+    [checked, playerMoves]
+  );
 
   const handlePieceSelection = (piece: PieceProps) => {
-    setSelectedPiece(piece);
+    setSelectedPiece(piece.player === player ? piece : null);
   };
 
   const handleMove = useCallback(
@@ -64,16 +86,30 @@ const Chess = () => {
     <div className="relative">
       <Board onClick={() => setSelectedPiece(null)} />
 
-      {boardPosition.map((piece) => (
-        <Piece
-          key={piece.id}
-          player={piece.player}
-          type={piece.type}
-          position={piece.position}
-          selected={selectedPiece ? selectedPiece.id === piece.id : false}
-          onClick={() => handlePieceSelection(piece)}
-        />
-      ))}
+      {boardPosition.map((piece) => {
+        const checkHighlight =
+          checked && piece.type === PieceType.king && piece.player === player;
+        const checkmateHighlight =
+          checkmated &&
+          piece.type === PieceType.king &&
+          piece.player === player;
+        const selectHighlight = selectedPiece
+          ? selectedPiece.id === piece.id
+          : false;
+
+        return (
+          <Piece
+            key={piece.id}
+            player={piece.player}
+            type={piece.type}
+            position={piece.position}
+            checked={checkHighlight}
+            checkmated={checkmateHighlight}
+            selected={selectHighlight}
+            onClick={() => handlePieceSelection(piece)}
+          />
+        );
+      })}
 
       {selectedPiece?.moves.map((move) => (
         <Move

@@ -5,6 +5,8 @@ import { knightMoves } from './pieceMoves/knightMoves';
 import { rookMoves } from './pieceMoves/rookMoves';
 import { queenMoves } from './pieceMoves/queenMoves';
 import { bishopMoves } from './pieceMoves/bishopMoves';
+import { check } from './check';
+import { newBoardPosition } from './newBoardPosition';
 
 interface LegalMoves {
   player: Player;
@@ -14,6 +16,7 @@ interface LegalMoves {
     piece: Piece;
     move: Move;
   };
+  shadowMove?: boolean;
 }
 
 export const legalMoves = ({
@@ -21,12 +24,9 @@ export const legalMoves = ({
   piece,
   boardPosition,
   lastMove,
+  shadowMove,
 }: LegalMoves) => {
   let moves: Move[] = [];
-
-  if (piece.player !== player) {
-    return moves;
-  }
 
   if (piece.type === PieceType.pawn) {
     moves = pawnMoves({ piece, boardPosition, lastMove });
@@ -50,6 +50,27 @@ export const legalMoves = ({
 
   if (piece.type === PieceType.king) {
     moves = kingMoves({ piece, boardPosition });
+  }
+
+  /*
+   * Filters out moves that would leave the opponent's king in check. Specifically:
+   * 1. Prevents the king from moving to squares that are under attack.
+   * 2. Eliminates moves that would exposing the king to check (piece pinned).
+   * 3. Removes any moves other than those that would get the king out of check.
+   */
+  if (!shadowMove && player !== piece.player) {
+    moves = moves.filter((legalMove) => {
+      return !check({
+        player: player === Player.white ? Player.black : Player.white,
+        boardPosition: newBoardPosition({
+          player,
+          piece,
+          move: legalMove,
+          boardPosition,
+          shadowMove: true,
+        }),
+      });
+    });
   }
 
   return moves;

@@ -15,6 +15,7 @@ interface NewBoardPositionProps {
   move: Move;
   boardPosition: Piece[];
   promotionPiece?: PieceType;
+  shadowMove?: boolean;
 }
 
 export const newBoardPosition = ({
@@ -23,16 +24,14 @@ export const newBoardPosition = ({
   move,
   boardPosition,
   promotionPiece,
+  shadowMove,
 }: NewBoardPositionProps) => {
   let newBoardPosition = [...boardPosition];
 
   // Capture piece
-  newBoardPosition = newBoardPosition.filter((piece) => {
-    if (piece.position === move.square) {
-      console.log(piece, move);
-    }
-    return piece.position !== move.square;
-  });
+  newBoardPosition = newBoardPosition.filter(
+    (piece) => piece.position !== move.square
+  );
 
   // En passant
   if (move.type === MoveType.enPassant) {
@@ -74,16 +73,39 @@ export const newBoardPosition = ({
     });
   }
 
-  // Update legal moves
-  newBoardPosition = newBoardPosition.map((currentPiece) => ({
-    ...currentPiece,
-    moves: legalMoves({
-      player: player === Player.white ? Player.black : Player.white,
-      piece: currentPiece,
-      boardPosition: newBoardPosition,
-      lastMove: { piece, move },
-    }),
-  }));
+  // Update current player's moves
+  newBoardPosition = newBoardPosition.map((currentPiece) => {
+    if (currentPiece.player === player) {
+      return {
+        ...currentPiece,
+        moves: legalMoves({
+          player,
+          piece: currentPiece,
+          boardPosition: newBoardPosition,
+          lastMove: { piece, move },
+          shadowMove,
+        }),
+      };
+    }
+    return currentPiece;
+  });
+
+  // Update opponent's moves
+  newBoardPosition = newBoardPosition.map((currentPiece) => {
+    if (currentPiece.player !== player) {
+      return {
+        ...currentPiece,
+        moves: legalMoves({
+          player,
+          piece: currentPiece,
+          boardPosition: newBoardPosition,
+          lastMove: { piece, move },
+          shadowMove,
+        }),
+      };
+    }
+    return currentPiece;
+  });
 
   return newBoardPosition;
 };
