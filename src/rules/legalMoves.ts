@@ -49,7 +49,7 @@ export const legalMoves = ({
   }
 
   if (piece.type === PieceType.king) {
-    moves = kingMoves({ piece, boardPosition });
+    moves = kingMoves({ piece, boardPosition, player });
   }
 
   /*
@@ -57,6 +57,7 @@ export const legalMoves = ({
    * 1. Prevents the king from moving to squares that are under attack.
    * 2. Eliminates moves that would exposing the king to check (piece pinned).
    * 3. Removes any moves other than those that would get the king out of check.
+   * 4. Prevents castling when the king's squares are under attack
    */
   if (!shadowMove && player !== piece.player) {
     moves = moves.filter((legalMove) => {

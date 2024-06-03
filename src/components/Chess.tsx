@@ -25,7 +25,8 @@ const Chess = () => {
         ...piece,
         moves: legalMoves({ player, piece, boardPosition: initialPosition }),
       })),
-    [player]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
   const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
     initialPositionWithMoves
