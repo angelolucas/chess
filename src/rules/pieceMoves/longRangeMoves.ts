@@ -1,5 +1,5 @@
 import { getTargetByDirection } from '@/helpers/getTargetByDirection';
-import { Direction, Move, MoveType, Piece } from '@/types/app.types';
+import { Direction, Move, Piece } from '@/types/app.types';
 
 interface LongRangeMoves {
   piece: Piece;
@@ -23,10 +23,10 @@ export const longRangeMoves = ({
 
     while (targetSquare) {
       if (!targetSquare.piece) {
-        moves.push({ square: targetSquare.square, type: MoveType.move });
+        moves.push({ square: targetSquare.square });
       } else {
         if (targetSquare.opponent) {
-          moves.push({ square: targetSquare.square, type: MoveType.capture });
+          moves.push({ square: targetSquare.square });
         }
         break; // Stop if there's a piece in the way
       }

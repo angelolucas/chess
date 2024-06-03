@@ -16,11 +16,9 @@ export const newBoardPosition = ({
   let newBoardPosition = [...boardPosition];
 
   // Capture piece
-  if (move.type === MoveType.capture) {
-    newBoardPosition = newBoardPosition.filter((piece) => {
-      return piece.position !== move.square;
-    });
-  }
+  newBoardPosition = newBoardPosition.filter((piece) => {
+    return piece.position !== move.square;
+  });
 
   // En passant
   if (move.type === MoveType.enPassant) {

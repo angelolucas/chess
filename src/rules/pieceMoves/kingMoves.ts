@@ -1,5 +1,5 @@
 import { getTargetByDirection } from '@/helpers/getTargetByDirection';
-import { Direction, Move, MoveType, Piece } from '@/types/app.types';
+import { Direction, Move, Piece } from '@/types/app.types';
 
 interface KingMoves {
   piece: Piece;
@@ -28,10 +28,8 @@ export const kingMoves = ({ piece, boardPosition }: KingMoves) => {
     });
 
     if (targetSquare) {
-      if (!targetSquare.piece) {
-        moves.push({ square: targetSquare.square, type: MoveType.move });
-      } else if (targetSquare.opponent) {
-        moves.push({ square: targetSquare.square, type: MoveType.capture });
+      if (!targetSquare.piece || targetSquare.opponent) {
+        moves.push({ square: targetSquare.square });
       }
     }
   });

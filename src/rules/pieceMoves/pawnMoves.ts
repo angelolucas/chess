@@ -44,20 +44,20 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
 
   // Move forward
   if (squareAhead && !squareAhead?.piece) {
-    moves.push({ square: squareAhead.square, type: MoveType.move });
+    moves.push({ square: squareAhead.square });
 
     if (!piece.moved && squareTwoForward && !squareTwoForward.piece) {
-      moves.push({ square: squareTwoForward.square, type: MoveType.move });
+      moves.push({ square: squareTwoForward.square });
     }
   }
 
   // Capture
   if (squareForwardLeft && squareForwardLeft.opponent) {
-    moves.push({ square: squareForwardLeft.square, type: MoveType.capture });
+    moves.push({ square: squareForwardLeft.square });
   }
 
   if (squareForwardRight && squareForwardRight.opponent) {
-    moves.push({ square: squareForwardRight.square, type: MoveType.capture });
+    moves.push({ square: squareForwardRight.square });
   }
 
   // En passant
