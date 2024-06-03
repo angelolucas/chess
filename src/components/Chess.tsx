@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
 import {
@@ -16,11 +16,17 @@ import { legalMoves } from '@/rules/legalMoves';
 import Promotion from './Promotion';
 
 const Chess = () => {
+  const initialPositionWithMoves = useMemo(
+    () =>
+      initialPosition.map((piece) => ({
+        ...piece,
+        moves: legalMoves({ piece, boardPosition: initialPosition }),
+      })),
+    []
+  );
+
   const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
-    initialPosition.map((piece) => ({
-      ...piece,
-      moves: legalMoves({ piece, boardPosition: initialPosition }),
-    }))
+    initialPositionWithMoves
   );
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
   const [promotion, setPromotion] = useState<{
@@ -32,20 +38,19 @@ const Chess = () => {
     setSelectedPiece(piece);
   };
 
-  const handleMove = (
-    piece: PieceProps,
-    move: MoveProps,
-    promotionPiece?: PieceType
-  ) => {
-    if (move.type === MoveType.promotion) {
-      setPromotion({ piece, square: move.square });
-    } else {
-      setSelectedPiece(null);
-      setBoardPosition(
-        newBoardPosition({ piece, move, boardPosition, promotionPiece })
-      );
-    }
-  };
+  const handleMove = useCallback(
+    (piece: PieceProps, move: MoveProps, promotionPiece?: PieceType) => {
+      if (move.type === MoveType.promotion) {
+        setPromotion({ piece, square: move.square });
+      } else {
+        setSelectedPiece(null);
+        setBoardPosition(
+          newBoardPosition({ piece, move, boardPosition, promotionPiece })
+        );
+      }
+    },
+    [boardPosition]
+  );
 
   return (
     <div className="relative">
