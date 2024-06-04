@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
 import {
@@ -16,14 +16,25 @@ import { newBoardPosition } from '@/rules/newBoardPosition';
 import { legalMoves } from '@/rules/legalMoves';
 import Promotion from './Promotion';
 import { check } from '@/rules/check';
+import clsx from 'clsx';
 
-const Chess = () => {
-  const [player, setPlayer] = useState<Player>(Player.white);
+interface ChessProps {
+  player: Player;
+  gameStarted: boolean;
+}
+
+const Chess = ({ player, gameStarted }: ChessProps) => {
+  const [currentPlayer, setCurrentPlayer] = useState<Player>(player);
+
   const initialPositionWithMoves = useMemo(
     () =>
       initialPosition.map((piece) => ({
         ...piece,
-        moves: legalMoves({ player, piece, boardPosition: initialPosition }),
+        moves: legalMoves({
+          player: currentPlayer,
+          piece,
+          boardPosition: initialPosition,
+        }),
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -39,18 +50,18 @@ const Chess = () => {
   const playerMoves = useMemo(
     () =>
       boardPosition.find(
-        (piece) => piece.player === player && piece.moves.length
+        (piece) => piece.player === currentPlayer && piece.moves.length
       ),
-    [boardPosition, player]
+    [boardPosition, currentPlayer]
   );
 
   const checked = useMemo(
     () =>
       check({
-        player,
+        player: currentPlayer,
         boardPosition,
       }),
-    [boardPosition, player]
+    [boardPosition, currentPlayer]
   );
 
   const checkmated = useMemo(
@@ -59,7 +70,7 @@ const Chess = () => {
   );
 
   const handlePieceSelection = (piece: PieceProps) => {
-    setSelectedPiece(piece.player === player ? piece : null);
+    setSelectedPiece(piece.player === currentPlayer ? piece : null);
   };
 
   const handleMove = useCallback(
@@ -70,30 +81,44 @@ const Chess = () => {
         setSelectedPiece(null);
         setBoardPosition(
           newBoardPosition({
-            player,
+            player: currentPlayer,
             piece,
             move,
             boardPosition,
             promotionPiece,
           })
         );
-        setPlayer(player === Player.white ? Player.black : Player.white);
+        setCurrentPlayer(
+          currentPlayer === Player.white ? Player.black : Player.white
+        );
       }
     },
-    [boardPosition, player]
+    [boardPosition, currentPlayer]
   );
 
+  useEffect(() => {
+    setSelectedPiece(null);
+    setCurrentPlayer(player);
+  }, [player]);
+
   return (
-    <div className="relative">
+    <div
+      className={clsx('relative transition-transform duration-500', {
+        '-rotate-180': player === Player.black,
+        'pointer-events-none blur-sm': !gameStarted,
+      })}
+    >
       <Board onClick={() => setSelectedPiece(null)} />
 
       {boardPosition.map((piece) => {
         const checkHighlight =
-          checked && piece.type === PieceType.king && piece.player === player;
+          checked &&
+          piece.type === PieceType.king &&
+          piece.player === currentPlayer;
         const checkmateHighlight =
           checkmated &&
           piece.type === PieceType.king &&
-          piece.player === player;
+          piece.player === currentPlayer;
         const selectHighlight = selectedPiece
           ? selectedPiece.id === piece.id
           : false;
@@ -107,6 +132,7 @@ const Chess = () => {
             checked={checkHighlight}
             checkmated={checkmateHighlight}
             selected={selectHighlight}
+            rotate={player === Player.black}
             onClick={() => handlePieceSelection(piece)}
           />
         );

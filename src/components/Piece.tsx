@@ -25,6 +25,7 @@ interface PieceProps {
   checked?: boolean;
   checkmated?: boolean;
   promotion?: boolean;
+  rotate?: boolean;
   onClick: () => void;
 }
 
@@ -53,6 +54,7 @@ const Piece = ({
   checked,
   checkmated,
   promotion,
+  rotate,
   onClick,
 }: PieceProps) => {
   const { row, col } = getRowColByPosition(position);
@@ -63,12 +65,16 @@ const Piece = ({
 
   return (
     <Image
-      className={clsx('absolute cursor-pointer transition-[top,left]', {
-        'bg-board-selected-piece': selected,
-        'bg-board-promotion shadow-lg shadow-board-promotion': promotion,
-        'bg-board-check': checked,
-        'bg-board-checkmate': checkmated,
-      })}
+      className={clsx(
+        'absolute cursor-pointer transition-[top,left,transform] duration-500',
+        {
+          'bg-board-selected-piece': selected,
+          'bg-board-promotion shadow-lg shadow-board-promotion': promotion,
+          'bg-board-check': checked,
+          'bg-board-checkmate': checkmated,
+          'rotate-180': rotate,
+        }
+      )}
       src={getPieceAsset(player, type).src}
       alt="white pawn"
       width={100}
