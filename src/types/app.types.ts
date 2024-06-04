@@ -1,3 +1,9 @@
+export enum GameMode {
+  humanVsHuman = 'humanVsHuman',
+  humanVsComputer = 'humanVsComputer',
+  computerVsComputer = 'computerVsComputer',
+}
+
 export enum Player {
   white = 'white',
   black = 'black',

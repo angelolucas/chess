@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Board from './Board';
 import { initialPosition } from '@/constants/initialPosition';
 import {
+  GameMode,
   Move as MoveProps,
   MoveType,
   Piece as PieceProps,
@@ -20,10 +21,11 @@ import clsx from 'clsx';
 
 interface ChessProps {
   player: Player;
+  gameMode: GameMode;
   gameStarted: boolean;
 }
 
-const Chess = ({ player, gameStarted }: ChessProps) => {
+const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
   const [currentPlayer, setCurrentPlayer] = useState<Player>(player);
 
   const initialPositionWithMoves = useMemo(
@@ -70,14 +72,28 @@ const Chess = ({ player, gameStarted }: ChessProps) => {
   );
 
   const handlePieceSelection = (piece: PieceProps) => {
+    if (gameMode === GameMode.computerVsComputer) return;
+    if (gameMode === GameMode.humanVsComputer && currentPlayer !== player)
+      return;
+
     setSelectedPiece(piece.player === currentPlayer ? piece : null);
   };
 
   const handleMove = useCallback(
-    (piece: PieceProps, move: MoveProps, promotionPiece?: PieceType) => {
+    ({
+      piece,
+      move,
+      promotionPiece,
+    }: {
+      piece: PieceProps;
+      move: MoveProps;
+      promotionPiece?: PieceType;
+    }) => {
       if (move.type === MoveType.promotion) {
         setPromotion({ piece, square: move.square });
       } else {
+        const opponent =
+          currentPlayer === Player.white ? Player.black : Player.white;
         setSelectedPiece(null);
         setBoardPosition(
           newBoardPosition({
@@ -88,13 +104,53 @@ const Chess = ({ player, gameStarted }: ChessProps) => {
             promotionPiece,
           })
         );
-        setCurrentPlayer(
-          currentPlayer === Player.white ? Player.black : Player.white
-        );
+        setCurrentPlayer(opponent);
       }
     },
     [boardPosition, currentPlayer]
   );
+
+  const handleEngineMove = useCallback(
+    (player: Player) => {
+      const pieces = boardPosition.filter(
+        (piece) => piece.player === player && piece.moves.length
+      );
+      const randomPiece = pieces[Math.floor(Math.random() * pieces.length)];
+      const randomMove =
+        randomPiece.moves[Math.floor(Math.random() * randomPiece.moves.length)];
+
+      if (randomMove.type === MoveType.promotion) {
+        handleMove({
+          piece: randomPiece,
+          move: { square: randomMove.square },
+          promotionPiece: PieceType.queen,
+        });
+      } else {
+        handleMove({ piece: randomPiece, move: randomMove });
+      }
+    },
+    [boardPosition, handleMove]
+  );
+
+  useEffect(() => {
+    if (!playerMoves || !gameStarted) return;
+
+    if (
+      (gameMode === GameMode.computerVsComputer && gameStarted) ||
+      (gameMode === GameMode.humanVsComputer && currentPlayer !== player)
+    ) {
+      setTimeout(() => {
+        handleEngineMove(currentPlayer);
+      }, 300);
+    }
+  }, [
+    currentPlayer,
+    gameMode,
+    gameStarted,
+    handleEngineMove,
+    player,
+    playerMoves,
+  ]);
 
   useEffect(() => {
     setSelectedPiece(null);
@@ -142,7 +198,7 @@ const Chess = ({ player, gameStarted }: ChessProps) => {
         <Move
           key={move.square}
           position={move.square}
-          onClick={() => handleMove(selectedPiece, move)}
+          onClick={() => handleMove({ piece: selectedPiece, move })}
         />
       ))}
 
@@ -151,11 +207,11 @@ const Chess = ({ player, gameStarted }: ChessProps) => {
           player={promotion.piece.player}
           square={promotion.square}
           onPromote={(promotionPiece) =>
-            handleMove(
-              promotion.piece,
-              { square: promotion.square },
-              promotionPiece
-            )
+            handleMove({
+              piece: promotion.piece,
+              move: { square: promotion.square },
+              promotionPiece,
+            })
           }
           onClose={() => {
             setPromotion(null);
