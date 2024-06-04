@@ -77,7 +77,7 @@ export const kingMoves = ({ piece, boardPosition, player }: KingMoves) => {
       });
 
       if (emptySquaresBetween) {
-        moves.push({ square: piece.position - 2, type: MoveType.castling });
+        moves.push({ square: piece.position - 2, type: MoveType.longCastling });
       }
     }
     if (isShortSide) {
@@ -90,7 +90,10 @@ export const kingMoves = ({ piece, boardPosition, player }: KingMoves) => {
       });
 
       if (emptySquaresBetween) {
-        moves.push({ square: piece.position + 2, type: MoveType.castling });
+        moves.push({
+          square: piece.position + 2,
+          type: MoveType.shortCastling,
+        });
       }
     }
   });

@@ -14,7 +14,8 @@ export enum PieceType {
 
 export enum MoveType {
   enPassant = 'enPassant',
-  castling = 'castling',
+  longCastling = 'longCastling',
+  shortCastling = 'shortCastling',
   promotion = 'promotion',
 }
 

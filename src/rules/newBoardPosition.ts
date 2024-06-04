@@ -33,6 +33,48 @@ export const newBoardPosition = ({
     (piece) => piece.position !== move.square
   );
 
+  // Move piece
+  newBoardPosition = newBoardPosition.map((currentPiece) => {
+    if (currentPiece.id === piece.id) {
+      return {
+        ...currentPiece,
+        moved: true,
+        position: move.square,
+      };
+    }
+
+    return currentPiece;
+  });
+
+  // Castling
+  const castlingRookPositions = {
+    [Player.white]: {
+      [MoveType.shortCastling]: { from: 88, to: 86 },
+      [MoveType.longCastling]: { from: 81, to: 84 },
+    },
+    [Player.black]: {
+      [MoveType.shortCastling]: { from: 18, to: 16 },
+      [MoveType.longCastling]: { from: 11, to: 14 },
+    },
+  };
+
+  if (
+    move.type === MoveType.shortCastling ||
+    move.type === MoveType.longCastling
+  ) {
+    const rookMove = castlingRookPositions[piece.player][move.type];
+    newBoardPosition = newBoardPosition.map((currentPiece) => {
+      if (currentPiece.position === rookMove.from) {
+        return {
+          ...currentPiece,
+          position: rookMove.to,
+          moved: true,
+        };
+      }
+      return currentPiece;
+    });
+  }
+
   // En passant
   if (move.type === MoveType.enPassant) {
     const squareOpponentPawn = getSquareByDirection({
@@ -45,19 +87,6 @@ export const newBoardPosition = ({
       return currentPiece.position !== squareOpponentPawn;
     });
   }
-
-  // Move pieces
-  newBoardPosition = newBoardPosition.map((currentPiece) => {
-    if (currentPiece.id === piece.id) {
-      return {
-        ...currentPiece,
-        moved: true,
-        position: move.square,
-      };
-    }
-
-    return currentPiece;
-  });
 
   // Promotion
   if (promotionPiece) {
