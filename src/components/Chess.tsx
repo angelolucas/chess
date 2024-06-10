@@ -18,15 +18,17 @@ import { legalMoves } from '@/rules/legalMoves';
 import Promotion from './Promotion';
 import { check } from '@/rules/check';
 import clsx from 'clsx';
+import { useChessStore } from '@/store/useChessStore';
 
-interface ChessProps {
-  player: Player;
-  gameMode: GameMode;
-  gameStarted: boolean;
-}
-
-const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
-  const [currentPlayer, setCurrentPlayer] = useState<Player>(player);
+const Chess = () => {
+  const boardPerspective = useChessStore((state) => state.boardPerspective);
+  const gameMode = useChessStore((state) => state.gameMode);
+  const gameStarted = useChessStore((state) => state.gameStarted);
+  const [currentPlayer, setCurrentPlayer] = useState<Player>(boardPerspective);
+  const boardPosition = useChessStore((state) => state.boardPosition);
+  const updateBoardPosition = useChessStore(
+    (state) => state.updateBoardPosition
+  );
 
   const initialPositionWithMoves = useMemo(
     () =>
@@ -40,9 +42,6 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
       })),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
-  );
-  const [boardPosition, setBoardPosition] = useState<Array<PieceProps>>(
-    initialPositionWithMoves
   );
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
   const [promotion, setPromotion] = useState<{
@@ -73,7 +72,10 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
 
   const handlePieceSelection = (piece: PieceProps) => {
     if (gameMode === GameMode.computerVsComputer) return;
-    if (gameMode === GameMode.humanVsComputer && currentPlayer !== player)
+    if (
+      gameMode === GameMode.humanVsComputer &&
+      currentPlayer !== boardPerspective
+    )
       return;
 
     setSelectedPiece(piece.player === currentPlayer ? piece : null);
@@ -95,7 +97,7 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
         const opponent =
           currentPlayer === Player.white ? Player.black : Player.white;
         setSelectedPiece(null);
-        setBoardPosition(
+        updateBoardPosition(
           newBoardPosition({
             player: currentPlayer,
             piece,
@@ -107,7 +109,7 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
         setCurrentPlayer(opponent);
       }
     },
-    [boardPosition, currentPlayer]
+    [boardPosition, currentPlayer, updateBoardPosition]
   );
 
   const handleEngineMove = useCallback(
@@ -137,7 +139,8 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
 
     if (
       (gameMode === GameMode.computerVsComputer && gameStarted) ||
-      (gameMode === GameMode.humanVsComputer && currentPlayer !== player)
+      (gameMode === GameMode.humanVsComputer &&
+        currentPlayer !== boardPerspective)
     ) {
       setTimeout(() => {
         handleEngineMove(currentPlayer);
@@ -148,19 +151,23 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
     gameMode,
     gameStarted,
     handleEngineMove,
-    player,
+    boardPerspective,
     playerMoves,
   ]);
 
   useEffect(() => {
     setSelectedPiece(null);
-    setCurrentPlayer(player);
-  }, [player]);
+    setCurrentPlayer(boardPerspective);
+  }, [boardPerspective]);
+
+  useEffect(() => {
+    updateBoardPosition(initialPositionWithMoves);
+  }, [initialPositionWithMoves, updateBoardPosition]);
 
   return (
     <div
       className={clsx('relative transition-transform duration-500', {
-        '-rotate-180': player === Player.black,
+        '-rotate-180': boardPerspective === Player.black,
         'pointer-events-none blur-sm': !gameStarted,
       })}
     >
@@ -188,7 +195,7 @@ const Chess = ({ player, gameMode, gameStarted }: ChessProps) => {
             checked={checkHighlight}
             checkmated={checkmateHighlight}
             selected={selectHighlight}
-            rotate={player === Player.black}
+            rotate={boardPerspective === Player.black}
             onClick={() => handlePieceSelection(piece)}
           />
         );
