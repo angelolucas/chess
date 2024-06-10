@@ -24,25 +24,15 @@ const Chess = () => {
   const boardPerspective = useChessStore((state) => state.boardPerspective);
   const gameMode = useChessStore((state) => state.gameMode);
   const gameStarted = useChessStore((state) => state.gameStarted);
-  const [currentPlayer, setCurrentPlayer] = useState<Player>(boardPerspective);
+  const currentPlayer = useChessStore((state) => state.currentPlayer);
+  const updateCurrentPlayer = useChessStore(
+    (state) => state.updateCurrentPlayer
+  );
   const boardPosition = useChessStore((state) => state.boardPosition);
   const updateBoardPosition = useChessStore(
     (state) => state.updateBoardPosition
   );
 
-  const initialPositionWithMoves = useMemo(
-    () =>
-      initialPosition.map((piece) => ({
-        ...piece,
-        moves: legalMoves({
-          player: currentPlayer,
-          piece,
-          boardPosition: initialPosition,
-        }),
-      })),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
   const [promotion, setPromotion] = useState<{
     piece: PieceProps;
@@ -106,10 +96,10 @@ const Chess = () => {
             promotionPiece,
           })
         );
-        setCurrentPlayer(opponent);
+        updateCurrentPlayer(opponent);
       }
     },
-    [boardPosition, currentPlayer, updateBoardPosition]
+    [boardPosition, currentPlayer, updateBoardPosition, updateCurrentPlayer]
   );
 
   const handleEngineMove = useCallback(
@@ -157,12 +147,22 @@ const Chess = () => {
 
   useEffect(() => {
     setSelectedPiece(null);
-    setCurrentPlayer(boardPerspective);
-  }, [boardPerspective]);
+    updateCurrentPlayer(boardPerspective);
+  }, [boardPerspective, updateCurrentPlayer]);
 
+  // Set initial moves
   useEffect(() => {
-    updateBoardPosition(initialPositionWithMoves);
-  }, [initialPositionWithMoves, updateBoardPosition]);
+    updateBoardPosition(
+      initialPosition.map((piece) => ({
+        ...piece,
+        moves: legalMoves({
+          player: currentPlayer,
+          piece,
+          boardPosition: initialPosition,
+        }),
+      }))
+    );
+  }, [currentPlayer, updateBoardPosition]);
 
   return (
     <div

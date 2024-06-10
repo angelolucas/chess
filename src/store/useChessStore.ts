@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { BoardPosition, createBoardPosition } from './createBoardPosition';
+import { GameProgress, createGameProgress } from './createGameProgress';
 import { GameSetup, createGameSetup } from './createGameSetup';
 
-type CombinedState = BoardPosition & GameSetup;
+type CombinedState = GameSetup & GameProgress;
 
 export const useChessStore = create<CombinedState>()(
   devtools(
     (...a) => ({
-      ...createBoardPosition(...a),
       ...createGameSetup(...a),
+      ...createGameProgress(...a),
     }),
     {
       name: 'chess-storage',
