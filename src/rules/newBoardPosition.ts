@@ -15,7 +15,7 @@ interface NewBoardPositionProps {
   move: Move;
   boardPosition: Piece[];
   promotionPiece?: PieceType;
-  shadowMove?: boolean;
+  isShadowMove?: boolean;
 }
 
 export const newBoardPosition = ({
@@ -24,7 +24,7 @@ export const newBoardPosition = ({
   move,
   boardPosition,
   promotionPiece,
-  shadowMove,
+  isShadowMove,
 }: NewBoardPositionProps) => {
   let newBoardPosition = [...boardPosition];
 
@@ -112,7 +112,7 @@ export const newBoardPosition = ({
           piece: currentPiece,
           boardPosition: newBoardPosition,
           lastMove: { piece, move },
-          shadowMove,
+          isShadowMove,
         }),
       };
     }
@@ -129,7 +129,7 @@ export const newBoardPosition = ({
           piece: currentPiece,
           boardPosition: newBoardPosition,
           lastMove: { piece, move },
-          shadowMove,
+          isShadowMove,
         }),
       };
     }

@@ -40,7 +40,7 @@ const useChess = () => {
     [boardPosition, currentPlayer]
   );
 
-  const checked = useMemo(
+  const isCheck = useMemo(
     () =>
       verifyCheck({
         player: currentPlayer,
@@ -49,9 +49,9 @@ const useChess = () => {
     [boardPosition, currentPlayer]
   );
 
-  const checkmated = useMemo(
-    () => checked && !playerMoves,
-    [checked, playerMoves]
+  const isCheckmate = useMemo(
+    () => isCheck && !playerMoves,
+    [isCheck, playerMoves]
   );
 
   const handlePieceSelection = (piece: PieceProps) => {
@@ -168,8 +168,8 @@ const useChess = () => {
     selectedPiece,
     promotion,
     playerMoves,
-    checked,
-    checkmated,
+    isCheck,
+    isCheckmate,
     handlePieceSelection,
     handleMove,
     handleEngineMove,

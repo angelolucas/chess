@@ -16,8 +16,8 @@ const Chess = () => {
     currentPlayer,
     selectedPiece,
     promotion,
-    checked,
-    checkmated,
+    isCheck,
+    isCheckmate,
     handlePieceSelection,
     handleMove,
     setSelectedPiece,
@@ -35,11 +35,11 @@ const Chess = () => {
 
       {boardPosition.map((piece) => {
         const checkHighlight =
-          checked &&
+          isCheck &&
           piece.type === PieceType.king &&
           piece.player === currentPlayer;
         const checkmateHighlight =
-          checkmated &&
+          isCheckmate &&
           piece.type === PieceType.king &&
           piece.player === currentPlayer;
         const selectHighlight = selectedPiece
@@ -52,10 +52,10 @@ const Chess = () => {
             player={piece.player}
             type={piece.type}
             position={piece.position}
-            checked={checkHighlight}
-            checkmated={checkmateHighlight}
-            selected={selectHighlight}
-            rotate={boardPerspective === Player.black}
+            isCheck={checkHighlight}
+            isCheckmate={checkmateHighlight}
+            isSelected={selectHighlight}
+            isRotated={boardPerspective === Player.black}
             onClick={() => handlePieceSelection(piece)}
           />
         );

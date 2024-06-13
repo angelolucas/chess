@@ -47,12 +47,12 @@ export const kingMoves = ({ piece, boardPosition, player }: KingMoves) => {
   if (piece.moved) return moves;
 
   const opponent = player === Player.white ? Player.black : Player.white;
-  const checked = verifyCheck({
+  const isCheck = verifyCheck({
     player: opponent,
     boardPosition,
   });
 
-  if (checked) return moves;
+  if (isCheck) return moves;
 
   const rooks = boardPosition.filter(
     (currentPiece) =>

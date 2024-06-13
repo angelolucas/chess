@@ -21,11 +21,11 @@ interface PieceProps {
   player: Player;
   type: PieceType;
   position: number;
-  selected?: boolean;
-  checked?: boolean;
-  checkmated?: boolean;
-  promotion?: boolean;
-  rotate?: boolean;
+  isSelected?: boolean;
+  isCheck?: boolean;
+  isCheckmate?: boolean;
+  isPromotion?: boolean;
+  isRotated?: boolean;
   onClick: () => void;
 }
 
@@ -50,11 +50,11 @@ const Piece = ({
   player,
   type,
   position,
-  selected,
-  checked,
-  checkmated,
-  promotion,
-  rotate,
+  isSelected,
+  isCheck,
+  isCheckmate,
+  isPromotion,
+  isRotated,
   onClick,
 }: PieceProps) => {
   const { row, col } = getRowColByPosition(position);
@@ -68,11 +68,11 @@ const Piece = ({
       className={clsx(
         'absolute cursor-pointer transition-[top,left,transform] duration-500',
         {
-          'bg-board-selected-piece': selected,
-          'bg-board-promotion shadow-lg shadow-board-promotion': promotion,
-          'bg-board-check': checked,
-          'bg-board-checkmate': checkmated,
-          'rotate-180': rotate,
+          'bg-board-selected-piece': isSelected,
+          'bg-board-promotion shadow-lg shadow-board-promotion': isPromotion,
+          'bg-board-check': isCheck,
+          'bg-board-checkmate': isCheckmate,
+          'rotate-180': isRotated,
         }
       )}
       src={getPieceAsset(player, type).src}

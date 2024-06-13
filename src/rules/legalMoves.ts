@@ -16,7 +16,7 @@ interface LegalMoves {
     piece: Piece;
     move: Move;
   };
-  shadowMove?: boolean;
+  isShadowMove?: boolean;
 }
 
 export const legalMoves = ({
@@ -24,7 +24,7 @@ export const legalMoves = ({
   piece,
   boardPosition,
   lastMove,
-  shadowMove,
+  isShadowMove,
 }: LegalMoves) => {
   let moves: Move[] = [];
 
@@ -59,7 +59,7 @@ export const legalMoves = ({
    * 3. Removes any moves other than those that would get the king out of check.
    * 4. Prevents castling when the king's squares are under attack
    */
-  if (!shadowMove && player !== piece.player) {
+  if (!isShadowMove && player !== piece.player) {
     moves = moves.filter((legalMove) => {
       return !verifyCheck({
         player: player === Player.white ? Player.black : Player.white,
@@ -68,7 +68,7 @@ export const legalMoves = ({
           piece,
           move: legalMove,
           boardPosition,
-          shadowMove: true,
+          isShadowMove: true,
         }),
       });
     });
