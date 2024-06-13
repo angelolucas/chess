@@ -1,6 +1,6 @@
 import { Direction, Piece } from '@/types/app.types';
 import { getSquareByDirection } from './getSquareByDirection';
-import getRowColByPosition from './getRowColByPosition';
+import { getRowColByPosition } from './getRowColByPosition';
 
 interface getTargetByDirection {
   direction: Direction;

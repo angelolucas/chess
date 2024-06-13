@@ -1,4 +1,4 @@
-import getRowColByPosition from '@/helpers/getRowColByPosition';
+import { getRowColByPosition } from '@/helpers/getRowColByPosition';
 import { getTargetByDirection } from '@/helpers/getTargetByDirection';
 import {
   Direction,

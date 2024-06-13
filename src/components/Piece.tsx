@@ -15,7 +15,7 @@ import IconBlackKing from '@/icons/black-king.svg';
 import Image from 'next/image';
 import { BOARD_COLS, BOARD_ROWS } from '@/constants/board';
 import clsx from 'clsx';
-import getRowColByPosition from '@/helpers/getRowColByPosition';
+import { getRowColByPosition } from '@/helpers/getRowColByPosition';
 
 interface PieceProps {
   player: Player;

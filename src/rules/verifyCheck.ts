@@ -1,11 +1,11 @@
 import { Piece, PieceType, Player } from '@/types/app.types';
 
-interface Check {
+interface VerifyCheck {
   boardPosition: Piece[];
   player: Player;
 }
 
-export const verifyCheck = ({ boardPosition, player }: Check) => {
+export const verifyCheck = ({ boardPosition, player }: VerifyCheck) => {
   const king = boardPosition.find(
     (piece) => piece.player === player && piece.type === PieceType.king
   );

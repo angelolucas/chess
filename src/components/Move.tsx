@@ -1,5 +1,5 @@
 import { BOARD_COLS, BOARD_ROWS } from '@/constants/board';
-import getRowColByPosition from '@/helpers/getRowColByPosition';
+import { getRowColByPosition } from '@/helpers/getRowColByPosition';
 
 interface MoveProps {
   position: number;
