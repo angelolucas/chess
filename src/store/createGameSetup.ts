@@ -7,15 +7,15 @@ export interface GameSetup {
   gameStarted: boolean;
   updateBoardPerspective: (boardPerspective: Player) => void;
   updateGameMode: (gameMode: GameMode) => void;
-  startGame: () => void;
+  updateGameStarted: (gameStarted: boolean) => void;
 }
 
 export const createGameSetup: StateCreator<GameSetup> = (set) => ({
   boardPerspective: Player.white,
-  gameMode: GameMode.humanVsComputer,
+  gameMode: GameMode.humanVsHuman,
   gameStarted: false,
   updateBoardPerspective: (boardPerspective) =>
     set(() => ({ boardPerspective })),
   updateGameMode: (gameMode) => set(() => ({ gameMode })),
-  startGame: () => set(() => ({ gameStarted: true })),
+  updateGameStarted: (gameStarted) => set(() => ({ gameStarted })),
 });

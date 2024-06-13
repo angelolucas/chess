@@ -7,7 +7,7 @@ import {
   PieceType,
   Player,
 } from '@/types/app.types';
-import { verifyCheck } from '../verifyCheck';
+import { verifyCheck } from '../gameStatus/verifyCheck';
 
 interface KingMoves {
   piece: Piece;

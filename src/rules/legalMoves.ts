@@ -5,7 +5,7 @@ import { knightMoves } from './pieceMoves/knightMoves';
 import { rookMoves } from './pieceMoves/rookMoves';
 import { queenMoves } from './pieceMoves/queenMoves';
 import { bishopMoves } from './pieceMoves/bishopMoves';
-import { verifyCheck } from './verifyCheck';
+import { verifyCheck } from './gameStatus/verifyCheck';
 import { newBoardPosition } from './newBoardPosition';
 
 interface LegalMoves {

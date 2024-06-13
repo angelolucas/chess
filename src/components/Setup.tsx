@@ -8,7 +8,7 @@ const Setup = () => {
     (state) => state.updateBoardPerspective
   );
   const updateMode = useChessStore((state) => state.updateGameMode);
-  const startGame = useChessStore((state) => state.startGame);
+  const updateGameStarted = useChessStore((state) => state.updateGameStarted);
 
   return (
     <div className="bg-ui-background absolute z-20 p-20 flex flex-col items-center justify-center">
@@ -64,7 +64,7 @@ const Setup = () => {
       </div>
       <button
         className="px-4 py-2 rounded bg-buttons-primary text-ui-text-primary"
-        onClick={() => startGame()}
+        onClick={() => updateGameStarted(true)}
       >
         Start Game
       </button>

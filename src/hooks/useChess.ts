@@ -10,7 +10,6 @@ import {
 } from '@/types/app.types';
 import { newBoardPosition } from '@/rules/newBoardPosition';
 import { legalMoves } from '@/rules/legalMoves';
-import { verifyCheck } from '@/rules/verifyCheck';
 import { useChessStore } from '@/store/useChessStore';
 
 const useChess = () => {
@@ -38,20 +37,6 @@ const useChess = () => {
         (piece) => piece.player === currentPlayer && piece.moves.length
       ),
     [boardPosition, currentPlayer]
-  );
-
-  const isCheck = useMemo(
-    () =>
-      verifyCheck({
-        player: currentPlayer,
-        boardPosition,
-      }),
-    [boardPosition, currentPlayer]
-  );
-
-  const isCheckmate = useMemo(
-    () => isCheck && !playerMoves,
-    [isCheck, playerMoves]
   );
 
   const handlePieceSelection = (piece: PieceProps) => {
@@ -146,18 +131,20 @@ const useChess = () => {
 
   // Set initial moves
   useEffect(() => {
-    updateBoardPosition(
-      initialPosition.map((piece) => ({
-        ...piece,
-        moves: legalMoves({
-          player: currentPlayer,
-          piece,
-          boardPosition: initialPosition,
-        }),
-      }))
-    );
+    if (gameStarted) {
+      updateBoardPosition(
+        initialPosition.map((piece) => ({
+          ...piece,
+          moves: legalMoves({
+            player: currentPlayer,
+            piece,
+            boardPosition: initialPosition,
+          }),
+        }))
+      );
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [gameStarted]);
 
   return {
     boardPosition,
@@ -168,8 +155,6 @@ const useChess = () => {
     selectedPiece,
     promotion,
     playerMoves,
-    isCheck,
-    isCheckmate,
     handlePieceSelection,
     handleMove,
     handleEngineMove,

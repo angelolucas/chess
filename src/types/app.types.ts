@@ -4,12 +4,6 @@ export enum GameMode {
   computerVsComputer = 'computerVsComputer',
 }
 
-export enum GameStatus {
-  check = 'check',
-  checkmate = 'checkmate',
-  draw = 'draw',
-}
-
 export enum DrawType {
   stalemate = 'Stalemate',
   insufficientMaterial = 'Insufficient Material',

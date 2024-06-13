@@ -1,16 +1,17 @@
-import { Piece, Player } from '@/types/app.types';
+import { DrawType, Player } from '@/types/app.types';
 import { StateCreator } from 'zustand';
 
-export interface GameProgress {
-  currentPlayer: Player;
-  boardPosition: Piece[];
-  updateCurrentPlayer: (currentPlayer: Player) => void;
-  updateBoardPosition: (boardPosition: Piece[]) => void;
+export interface GameOver {
+  winner?: Player;
+  draw?: DrawType;
+  updateWinner: (winner?: Player) => void;
+  updateDraw: (drawType?: DrawType) => void;
 }
 
-export const createGameProgress: StateCreator<GameProgress> = (set) => ({
-  currentPlayer: Player.white,
-  boardPosition: [],
-  updateCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
-  updateBoardPosition: (boardPosition) => set(() => ({ boardPosition })),
+// Implement the createGameOver state creator
+export const createGameOver: StateCreator<GameOver> = (set) => ({
+  winner: undefined,
+  draw: undefined,
+  updateWinner: (winner) => set(() => ({ winner })),
+  updateDraw: (draw) => set(() => ({ draw })),
 });
