@@ -4,14 +4,14 @@ import { StateCreator } from 'zustand';
 export interface GameOver {
   winner?: Player;
   draw?: DrawType;
-  updateWinner: (winner?: Player) => void;
-  updateDraw: (drawType?: DrawType) => void;
+  setWinner: (winner?: Player) => void;
+  setDraw: (drawType?: DrawType) => void;
 }
 
 // Implement the createGameOver state creator
 export const createGameOver: StateCreator<GameOver> = (set) => ({
   winner: undefined,
   draw: undefined,
-  updateWinner: (winner) => set(() => ({ winner })),
-  updateDraw: (draw) => set(() => ({ draw })),
+  setWinner: (winner) => set(() => ({ winner })),
+  setDraw: (draw) => set(() => ({ draw })),
 });

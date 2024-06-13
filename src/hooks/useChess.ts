@@ -17,13 +17,9 @@ const useChess = () => {
   const gameMode = useChessStore((state) => state.gameMode);
   const gameStarted = useChessStore((state) => state.gameStarted);
   const currentPlayer = useChessStore((state) => state.currentPlayer);
-  const updateCurrentPlayer = useChessStore(
-    (state) => state.updateCurrentPlayer
-  );
+  const setCurrentPlayer = useChessStore((state) => state.setCurrentPlayer);
   const boardPosition = useChessStore((state) => state.boardPosition);
-  const updateBoardPosition = useChessStore(
-    (state) => state.updateBoardPosition
-  );
+  const setBoardPosition = useChessStore((state) => state.setBoardPosition);
 
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
   const [promotion, setPromotion] = useState<{
@@ -66,7 +62,7 @@ const useChess = () => {
         const opponent =
           currentPlayer === Player.white ? Player.black : Player.white;
         setSelectedPiece(null);
-        updateBoardPosition(
+        setBoardPosition(
           newBoardPosition({
             player: currentPlayer,
             piece,
@@ -75,10 +71,10 @@ const useChess = () => {
             promotionPiece,
           })
         );
-        updateCurrentPlayer(opponent);
+        setCurrentPlayer(opponent);
       }
     },
-    [boardPosition, currentPlayer, updateBoardPosition, updateCurrentPlayer]
+    [boardPosition, currentPlayer, setBoardPosition, setCurrentPlayer]
   );
 
   const handleEngineMove = useCallback(
@@ -126,13 +122,13 @@ const useChess = () => {
 
   useEffect(() => {
     setSelectedPiece(null);
-    updateCurrentPlayer(boardPerspective);
-  }, [boardPerspective, updateCurrentPlayer]);
+    setCurrentPlayer(boardPerspective);
+  }, [boardPerspective, setCurrentPlayer]);
 
   // Set initial moves
   useEffect(() => {
     if (gameStarted) {
-      updateBoardPosition(
+      setBoardPosition(
         initialPosition.map((piece) => ({
           ...piece,
           moves: legalMoves({

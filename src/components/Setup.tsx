@@ -4,11 +4,11 @@ import { GameMode, Player } from '@/types/app.types';
 const Setup = () => {
   const boardPerspective = useChessStore((state) => state.boardPerspective);
   const gameMode = useChessStore((state) => state.gameMode);
-  const updateBoardPerspective = useChessStore(
-    (state) => state.updateBoardPerspective
+  const setBoardPerspective = useChessStore(
+    (state) => state.setBoardPerspective
   );
-  const updateMode = useChessStore((state) => state.updateGameMode);
-  const updateGameStarted = useChessStore((state) => state.updateGameStarted);
+  const setGameMode = useChessStore((state) => state.setGameMode);
+  const setGameStarted = useChessStore((state) => state.setGameStarted);
 
   return (
     <div className="bg-ui-background absolute z-20 p-20 flex flex-col items-center justify-center">
@@ -18,7 +18,7 @@ const Setup = () => {
           className={`px-4 py-2 rounded bg-buttons-primary text-ui-text-primary ${
             boardPerspective === Player.white ? 'ring-2 ring-ui-borders' : ''
           }`}
-          onClick={() => updateBoardPerspective(Player.white)}
+          onClick={() => setBoardPerspective(Player.white)}
         >
           White
         </button>
@@ -26,7 +26,7 @@ const Setup = () => {
           className={`px-4 py-2 rounded bg-buttons-secondary text-ui-text-primary ${
             boardPerspective === Player.black ? 'ring-2 ring-ui-borders' : ''
           }`}
-          onClick={() => updateBoardPerspective(Player.black)}
+          onClick={() => setBoardPerspective(Player.black)}
         >
           Black
         </button>
@@ -37,7 +37,7 @@ const Setup = () => {
           className={`px-4 py-2 rounded bg-buttons-primary text-ui-text-primary ${
             gameMode === GameMode.humanVsHuman ? 'ring-2 ring-ui-borders' : ''
           }`}
-          onClick={() => updateMode(GameMode.humanVsHuman)}
+          onClick={() => setGameMode(GameMode.humanVsHuman)}
         >
           human Vs Human
         </button>
@@ -47,7 +47,7 @@ const Setup = () => {
               ? 'ring-2 ring-ui-borders'
               : ''
           }`}
-          onClick={() => updateMode(GameMode.humanVsComputer)}
+          onClick={() => setGameMode(GameMode.humanVsComputer)}
         >
           human Vs Computer
         </button>
@@ -57,14 +57,14 @@ const Setup = () => {
               ? 'ring-2 ring-ui-borders'
               : ''
           }`}
-          onClick={() => updateMode(GameMode.computerVsComputer)}
+          onClick={() => setGameMode(GameMode.computerVsComputer)}
         >
           Computer Vs Computer
         </button>
       </div>
       <button
         className="px-4 py-2 rounded bg-buttons-primary text-ui-text-primary"
-        onClick={() => updateGameStarted(true)}
+        onClick={() => setGameStarted(true)}
       >
         Start Game
       </button>

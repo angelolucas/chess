@@ -8,11 +8,11 @@ export const useGameStatus = () => {
   const gameStarted = useChessStore((state) => state.gameStarted);
   const currentPlayer = useChessStore((state) => state.currentPlayer);
   const isCheck = useChessStore((state) => state.isCheck);
-  const updateIsCheck = useChessStore((state) => state.updateIsCheck);
+  const setIsCheck = useChessStore((state) => state.setIsCheck);
   const isCheckmate = useChessStore((state) => state.isCheckmate);
-  const updateIsCheckmate = useChessStore((state) => state.updateIsCheckmate);
-  const updateWinner = useChessStore((state) => state.updateWinner);
-  const updateDraw = useChessStore((state) => state.updateDraw);
+  const setIsCheckmate = useChessStore((state) => state.setIsCheckmate);
+  const setWinner = useChessStore((state) => state.setWinner);
+  const setDraw = useChessStore((state) => state.setDraw);
 
   useEffect(() => {
     if (gameStarted) {
@@ -21,27 +21,25 @@ export const useGameStatus = () => {
         player: currentPlayer,
       });
 
-      updateIsCheck(gameStatus.isCheck);
+      setIsCheck(gameStatus.isCheck);
 
       if (gameStatus.isCheckmate) {
-        updateIsCheckmate(true);
-        updateWinner(
-          currentPlayer === Player.white ? Player.black : Player.white
-        );
+        setIsCheckmate(true);
+        setWinner(currentPlayer === Player.white ? Player.black : Player.white);
       }
 
       if (gameStatus.drawType) {
-        updateDraw(gameStatus.drawType);
+        setDraw(gameStatus.drawType);
       }
     }
   }, [
     boardPosition,
     currentPlayer,
     gameStarted,
-    updateDraw,
-    updateIsCheck,
-    updateIsCheckmate,
-    updateWinner,
+    setDraw,
+    setIsCheck,
+    setIsCheckmate,
+    setWinner,
   ]);
 
   return {

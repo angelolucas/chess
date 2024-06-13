@@ -6,10 +6,10 @@ export interface GameProgress {
   boardPosition: Piece[];
   isCheck: boolean;
   isCheckmate: boolean;
-  updateCurrentPlayer: (currentPlayer: Player) => void;
-  updateBoardPosition: (boardPosition: Piece[]) => void;
-  updateIsCheck: (isCheck: boolean) => void;
-  updateIsCheckmate: (isCheckmate: boolean) => void;
+  setCurrentPlayer: (currentPlayer: Player) => void;
+  setBoardPosition: (boardPosition: Piece[]) => void;
+  setIsCheck: (isCheck: boolean) => void;
+  setIsCheckmate: (isCheckmate: boolean) => void;
 }
 
 export const createGameProgress: StateCreator<GameProgress> = (set) => ({
@@ -17,8 +17,8 @@ export const createGameProgress: StateCreator<GameProgress> = (set) => ({
   boardPosition: [],
   isCheck: false,
   isCheckmate: false,
-  updateCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
-  updateBoardPosition: (boardPosition) => set(() => ({ boardPosition })),
-  updateIsCheck: (isCheck) => set(() => ({ isCheck })),
-  updateIsCheckmate: (isCheckmate) => set(() => ({ isCheckmate })),
+  setCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
+  setBoardPosition: (boardPosition) => set(() => ({ boardPosition })),
+  setIsCheck: (isCheck) => set(() => ({ isCheck })),
+  setIsCheckmate: (isCheckmate) => set(() => ({ isCheckmate })),
 });
