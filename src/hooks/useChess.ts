@@ -10,7 +10,7 @@ import {
 } from '@/types/app.types';
 import { newBoardPosition } from '@/rules/newBoardPosition';
 import { legalMoves } from '@/rules/legalMoves';
-import { check } from '@/rules/check';
+import { verifyCheck } from '@/rules/verifyCheck';
 import { useChessStore } from '@/store/useChessStore';
 
 const useChess = () => {
@@ -42,7 +42,7 @@ const useChess = () => {
 
   const checked = useMemo(
     () =>
-      check({
+      verifyCheck({
         player: currentPlayer,
         boardPosition,
       }),

@@ -7,7 +7,7 @@ import {
   PieceType,
   Player,
 } from '@/types/app.types';
-import { check } from '../check';
+import { verifyCheck } from '../verifyCheck';
 
 interface KingMoves {
   piece: Piece;
@@ -47,7 +47,7 @@ export const kingMoves = ({ piece, boardPosition, player }: KingMoves) => {
   if (piece.moved) return moves;
 
   const opponent = player === Player.white ? Player.black : Player.white;
-  const checked = check({
+  const checked = verifyCheck({
     player: opponent,
     boardPosition,
   });

@@ -5,7 +5,7 @@ interface Check {
   player: Player;
 }
 
-export const check = ({ boardPosition, player }: Check) => {
+export const verifyCheck = ({ boardPosition, player }: Check) => {
   const king = boardPosition.find(
     (piece) => piece.player === player && piece.type === PieceType.king
   );

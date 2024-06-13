@@ -5,7 +5,7 @@ import { knightMoves } from './pieceMoves/knightMoves';
 import { rookMoves } from './pieceMoves/rookMoves';
 import { queenMoves } from './pieceMoves/queenMoves';
 import { bishopMoves } from './pieceMoves/bishopMoves';
-import { check } from './check';
+import { verifyCheck } from './verifyCheck';
 import { newBoardPosition } from './newBoardPosition';
 
 interface LegalMoves {
@@ -61,7 +61,7 @@ export const legalMoves = ({
    */
   if (!shadowMove && player !== piece.player) {
     moves = moves.filter((legalMove) => {
-      return !check({
+      return !verifyCheck({
         player: player === Player.white ? Player.black : Player.white,
         boardPosition: newBoardPosition({
           player,
