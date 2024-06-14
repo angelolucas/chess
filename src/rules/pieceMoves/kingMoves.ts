@@ -37,8 +37,10 @@ export const kingMoves = ({ piece, boardPosition, player }: KingMoves) => {
     });
 
     if (targetSquare) {
-      if (!targetSquare.piece || targetSquare.opponent) {
-        moves.push({ square: targetSquare.square });
+      if (targetSquare.opponent) {
+        moves.push({ square: targetSquare.square, type: MoveType.capture });
+      } else if (!targetSquare.piece) {
+        moves.push({ square: targetSquare.square, type: MoveType.normal });
       }
     }
   });

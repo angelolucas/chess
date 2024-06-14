@@ -44,20 +44,20 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
 
   // Move forward
   if (squareAhead && !squareAhead?.piece) {
-    moves.push({ square: squareAhead.square });
+    moves.push({ square: squareAhead.square, type: MoveType.normal });
 
     if (!piece.moved && squareTwoForward && !squareTwoForward.piece) {
-      moves.push({ square: squareTwoForward.square });
+      moves.push({ square: squareTwoForward.square, type: MoveType.normal });
     }
   }
 
   // Capture
   if (squareForwardLeft && squareForwardLeft.opponent) {
-    moves.push({ square: squareForwardLeft.square });
+    moves.push({ square: squareForwardLeft.square, type: MoveType.capture });
   }
 
   if (squareForwardRight && squareForwardRight.opponent) {
-    moves.push({ square: squareForwardRight.square });
+    moves.push({ square: squareForwardRight.square, type: MoveType.capture });
   }
 
   // Promotion
@@ -70,7 +70,7 @@ export const pawnMoves = ({ piece, boardPosition, lastMove }: PawnMoves) => {
       getRowColByPosition(move.square).row === 8;
 
     if (whitePromotion || blackPromotion) {
-      return { ...move, type: MoveType.promotion };
+      return { ...move, type: MoveType.promotionPieceChoice };
     } else {
       return move;
     }

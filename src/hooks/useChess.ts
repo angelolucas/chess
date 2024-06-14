@@ -56,7 +56,7 @@ const useChess = () => {
       move: MoveProps;
       promotionPiece?: PieceType;
     }) => {
-      if (move.type === MoveType.promotion) {
+      if (move.type === MoveType.promotionPieceChoice) {
         setPromotion({ piece, square: move.square });
       } else {
         const opponent =
@@ -86,10 +86,10 @@ const useChess = () => {
       const randomMove =
         randomPiece.moves[Math.floor(Math.random() * randomPiece.moves.length)];
 
-      if (randomMove.type === MoveType.promotion) {
+      if (randomMove.type === MoveType.promotionPieceChoice) {
         handleMove({
           piece: randomPiece,
-          move: { square: randomMove.square },
+          move: { square: randomMove.square, type: MoveType.promotion },
           promotionPiece: PieceType.queen,
         });
       } else {

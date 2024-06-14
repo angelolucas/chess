@@ -26,15 +26,18 @@ export enum PieceType {
 }
 
 export enum MoveType {
+  normal = 'normal',
+  capture = 'capture',
   enPassant = 'enPassant',
   longCastling = 'longCastling',
   shortCastling = 'shortCastling',
+  promotionPieceChoice = 'promotionPieceChoice',
   promotion = 'promotion',
 }
 
 export type Move = {
   square: number;
-  type?: MoveType;
+  type: MoveType;
 };
 
 export type Piece = {

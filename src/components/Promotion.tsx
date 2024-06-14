@@ -28,7 +28,7 @@ const Promotion = ({ player, square, onPromote, onClose }: PromotionProps) => {
               player={player}
               type={type}
               position={position}
-              promotion={true}
+              isPromotion={true}
               onClick={() => onPromote(type)}
             />
           </div>

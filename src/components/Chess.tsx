@@ -6,7 +6,7 @@ import Piece from './Piece';
 import Move from './Move';
 import Promotion from './Promotion';
 import useChess from '@/hooks/useChess';
-import { PieceType, Player } from '@/types/app.types';
+import { MoveType, PieceType, Player } from '@/types/app.types';
 import { useGameStatus } from '@/hooks/useGameStatus';
 
 const Chess = () => {
@@ -77,7 +77,7 @@ const Chess = () => {
           onPromote={(promotionPiece) =>
             handleMove({
               piece: promotion.piece,
-              move: { square: promotion.square },
+              move: { square: promotion.square, type: MoveType.promotion },
               promotionPiece,
             })
           }
