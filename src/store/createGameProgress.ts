@@ -4,6 +4,7 @@ import { StateCreator } from 'zustand';
 export interface GameProgress {
   currentPlayer: Player;
   boardPosition: Piece[];
+  boardHistory: Piece[][];
   isCheck: boolean;
   isCheckmate: boolean;
   setCurrentPlayer: (currentPlayer: Player) => void;
@@ -15,10 +16,15 @@ export interface GameProgress {
 export const createGameProgress: StateCreator<GameProgress> = (set) => ({
   currentPlayer: Player.white,
   boardPosition: [],
+  boardHistory: [],
   isCheck: false,
   isCheckmate: false,
   setCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
-  setBoardPosition: (boardPosition) => set(() => ({ boardPosition })),
+  setBoardPosition: (boardPosition) =>
+    set((state) => ({
+      boardPosition,
+      boardHistory: [...state.boardHistory, boardPosition],
+    })),
   setIsCheck: (isCheck) => set(() => ({ isCheck })),
   setIsCheckmate: (isCheckmate) => set(() => ({ isCheckmate })),
 });

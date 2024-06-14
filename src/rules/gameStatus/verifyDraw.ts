@@ -3,12 +3,31 @@ import { Piece, PieceType, DrawType } from '@/types/app.types';
 
 interface VerifyDraw {
   boardPosition: Piece[];
+  boardHistory: Piece[][];
   isCheck: boolean;
   hasPlayerMoves: boolean;
 }
 
+const boardPositionToString = (boardPosition: Piece[]): string => {
+  return boardPosition
+    .map((piece) => `${piece.player}-${piece.type}-${piece.position}`)
+    .sort()
+    .join(',');
+};
+
+const countOccurrences = (
+  boardHistory: Piece[][],
+  currentPosition: string
+): number => {
+  return boardHistory.filter(
+    (historyPosition) =>
+      boardPositionToString(historyPosition) === currentPosition
+  ).length;
+};
+
 export const verifyDraw = ({
   boardPosition,
+  boardHistory,
   isCheck,
   hasPlayerMoves,
 }: VerifyDraw): DrawType | null => {
@@ -52,6 +71,12 @@ export const verifyDraw = ({
   // Check for stalemate
   if (!hasPlayerMoves && !isCheck) {
     return DrawType.stalemate;
+  }
+
+  // Check for threefold repetition
+  const currentPosition = boardPositionToString(boardPosition);
+  if (countOccurrences(boardHistory, currentPosition) >= 3) {
+    return DrawType.threefoldRepetition;
   }
 
   return null;

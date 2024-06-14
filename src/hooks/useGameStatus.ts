@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 export const useGameStatus = () => {
   const boardPosition = useChessStore((state) => state.boardPosition);
+  const boardHistory = useChessStore((state) => state.boardHistory);
   const gameStarted = useChessStore((state) => state.gameStarted);
   const currentPlayer = useChessStore((state) => state.currentPlayer);
   const isCheck = useChessStore((state) => state.isCheck);
@@ -18,6 +19,7 @@ export const useGameStatus = () => {
     if (gameStarted) {
       const gameStatus = checkGameStatus({
         boardPosition,
+        boardHistory,
         player: currentPlayer,
       });
 
@@ -33,6 +35,7 @@ export const useGameStatus = () => {
       }
     }
   }, [
+    boardHistory,
     boardPosition,
     currentPlayer,
     gameStarted,
