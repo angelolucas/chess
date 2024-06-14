@@ -20,6 +20,14 @@ const useChess = () => {
   const setCurrentPlayer = useChessStore((state) => state.setCurrentPlayer);
   const boardPosition = useChessStore((state) => state.boardPosition);
   const setBoardPosition = useChessStore((state) => state.setBoardPosition);
+  const draw = useChessStore((state) => state.draw);
+  const winner = useChessStore((state) => state.winner);
+  const fiftyMoveRuleCounter = useChessStore(
+    (state) => state.fiftyMoveRuleCounter
+  );
+  const setFiftyMoveRuleCounter = useChessStore(
+    (state) => state.setFiftyMoveRuleCounter
+  );
 
   const [selectedPiece, setSelectedPiece] = useState<PieceProps | null>(null);
   const [promotion, setPromotion] = useState<{
@@ -72,9 +80,22 @@ const useChess = () => {
           })
         );
         setCurrentPlayer(opponent);
+
+        if (move.type === MoveType.capture || piece.type === PieceType.pawn) {
+          setFiftyMoveRuleCounter(0);
+        } else {
+          setFiftyMoveRuleCounter(fiftyMoveRuleCounter + 1);
+        }
       }
     },
-    [boardPosition, currentPlayer, setBoardPosition, setCurrentPlayer]
+    [
+      boardPosition,
+      currentPlayer,
+      fiftyMoveRuleCounter,
+      setBoardPosition,
+      setCurrentPlayer,
+      setFiftyMoveRuleCounter,
+    ]
   );
 
   const handleEngineMove = useCallback(
@@ -100,7 +121,7 @@ const useChess = () => {
   );
 
   useEffect(() => {
-    if (!playerMoves || !gameStarted) return;
+    if (!playerMoves || !gameStarted || winner || draw) return;
 
     if (
       (gameMode === GameMode.computerVsComputer && gameStarted) ||
@@ -118,6 +139,8 @@ const useChess = () => {
     handleEngineMove,
     boardPerspective,
     playerMoves,
+    winner,
+    draw,
   ]);
 
   useEffect(() => {

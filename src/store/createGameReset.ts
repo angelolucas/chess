@@ -12,6 +12,7 @@ export const createGameReset: StateCreator<GameReset> = (set) => ({
       currentPlayer: Player.white,
       boardPosition: [],
       boardHistory: [],
+      fiftyMoveRuleCounter: 0,
       draw: undefined,
       winner: undefined,
       gameStarted: false,

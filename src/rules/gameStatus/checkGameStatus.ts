@@ -6,12 +6,14 @@ import { verifyCheckmate } from './verifyCheckmate';
 interface VerifyCheck {
   boardPosition: Piece[];
   boardHistory: Piece[][];
+  fiftyMoveRuleCounter: number;
   player: Player;
 }
 
 export const checkGameStatus = ({
   boardPosition,
   boardHistory,
+  fiftyMoveRuleCounter,
   player,
 }: VerifyCheck) => {
   const hasPlayerMoves = !!boardPosition.find(
@@ -26,7 +28,9 @@ export const checkGameStatus = ({
   const drawType = verifyDraw({
     boardPosition,
     boardHistory,
+    fiftyMoveRuleCounter,
     isCheck,
+    isCheckmate,
     hasPlayerMoves,
   });
 

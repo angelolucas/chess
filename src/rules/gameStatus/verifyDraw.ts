@@ -1,13 +1,6 @@
 import { getRowColByPosition } from '@/helpers/getRowColByPosition';
 import { Piece, PieceType, DrawType } from '@/types/app.types';
 
-interface VerifyDraw {
-  boardPosition: Piece[];
-  boardHistory: Piece[][];
-  isCheck: boolean;
-  hasPlayerMoves: boolean;
-}
-
 const boardPositionToString = (boardPosition: Piece[]): string => {
   return boardPosition
     .map((piece) => `${piece.player}-${piece.type}-${piece.position}`)
@@ -25,10 +18,21 @@ const countOccurrences = (
   ).length;
 };
 
+interface VerifyDraw {
+  boardPosition: Piece[];
+  boardHistory: Piece[][];
+  fiftyMoveRuleCounter: number;
+  isCheck: boolean;
+  isCheckmate: boolean;
+  hasPlayerMoves: boolean;
+}
+
 export const verifyDraw = ({
   boardPosition,
   boardHistory,
+  fiftyMoveRuleCounter,
   isCheck,
+  isCheckmate,
   hasPlayerMoves,
 }: VerifyDraw): DrawType | null => {
   if (!boardPosition.length) return null;
@@ -77,6 +81,11 @@ export const verifyDraw = ({
   const currentPosition = boardPositionToString(boardPosition);
   if (countOccurrences(boardHistory, currentPosition) >= 3) {
     return DrawType.threefoldRepetition;
+  }
+
+  // Check for fifty-move rule
+  if (fiftyMoveRuleCounter >= 100 && !isCheckmate) {
+    return DrawType.fiftyMoveRule;
   }
 
   return null;

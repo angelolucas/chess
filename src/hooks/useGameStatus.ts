@@ -14,12 +14,16 @@ export const useGameStatus = () => {
   const setIsCheckmate = useChessStore((state) => state.setIsCheckmate);
   const setWinner = useChessStore((state) => state.setWinner);
   const setDraw = useChessStore((state) => state.setDraw);
+  const fiftyMoveRuleCounter = useChessStore(
+    (state) => state.fiftyMoveRuleCounter
+  );
 
   useEffect(() => {
     if (gameStarted) {
       const gameStatus = checkGameStatus({
         boardPosition,
         boardHistory,
+        fiftyMoveRuleCounter,
         player: currentPlayer,
       });
 
@@ -38,6 +42,7 @@ export const useGameStatus = () => {
     boardHistory,
     boardPosition,
     currentPlayer,
+    fiftyMoveRuleCounter,
     gameStarted,
     setDraw,
     setIsCheck,
