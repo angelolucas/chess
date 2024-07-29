@@ -20,6 +20,7 @@ const useChess = () => {
   const setCurrentPlayer = useChessStore((state) => state.setCurrentPlayer);
   const boardPosition = useChessStore((state) => state.boardPosition);
   const setBoardPosition = useChessStore((state) => state.setBoardPosition);
+  const setLastMove = useChessStore((state) => state.setLastMove);
   const draw = useChessStore((state) => state.draw);
   const winner = useChessStore((state) => state.winner);
   const fiftyMoveRuleCounter = useChessStore(
@@ -80,6 +81,7 @@ const useChess = () => {
           })
         );
         setCurrentPlayer(opponent);
+        setLastMove({ piece, move, promotionPiece });
 
         if (move.type === MoveType.capture || piece.type === PieceType.pawn) {
           setFiftyMoveRuleCounter(0);
@@ -95,6 +97,7 @@ const useChess = () => {
       setBoardPosition,
       setCurrentPlayer,
       setFiftyMoveRuleCounter,
+      setLastMove,
     ]
   );
 

@@ -8,6 +8,7 @@ import Promotion from './Promotion';
 import useChess from '@/hooks/useChess';
 import { MoveType, PieceType, Player } from '@/types/app.types';
 import { useGameStatus } from '@/hooks/useGameStatus';
+import { useAlgebricNotation } from '@/hooks/useAlgebricNotation';
 
 const Chess = () => {
   const {
@@ -24,6 +25,8 @@ const Chess = () => {
   } = useChess();
 
   const { isCheck, isCheckmate } = useGameStatus();
+
+  useAlgebricNotation();
 
   return (
     <div

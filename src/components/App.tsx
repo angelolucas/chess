@@ -2,6 +2,7 @@
 
 import Chess from './Chess';
 import GameOver from './GameOver';
+import Notation from './Notation';
 import Setup from './Setup';
 import { useChessStore } from '@/store/useChessStore';
 
@@ -13,12 +14,17 @@ const App = () => {
   const gameOver = winner || draw;
 
   return (
-    <div className="flex justify-center items-center h-full gap-4">
-      {!gameStarted && <Setup />}
-      <Chess />
-      {gameOver && (
-        <GameOver winner={winner} draw={draw} onRestart={gameReset} />
-      )}
+    <div className="flex h-full">
+      <div className="flex flex-auto justify-center items-center h-full gap-4">
+        {!gameStarted && <Setup />}
+        <Chess />
+        {gameOver && (
+          <GameOver winner={winner} draw={draw} onRestart={gameReset} />
+        )}
+      </div>
+      <div className="w-[300px]">
+        <Notation />
+      </div>
     </div>
   );
 };

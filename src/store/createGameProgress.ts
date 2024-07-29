@@ -1,4 +1,4 @@
-import { Piece, Player } from '@/types/app.types';
+import { Move, Piece, PieceType, Player } from '@/types/app.types';
 import { StateCreator } from 'zustand';
 
 export interface GameProgress {
@@ -8,11 +8,19 @@ export interface GameProgress {
   fiftyMoveRuleCounter: number;
   isCheck: boolean;
   isCheckmate: boolean;
+  notation: string[][];
+  lastMove?: { piece: Piece; move: Move; promotionPiece?: PieceType };
   setCurrentPlayer: (currentPlayer: Player) => void;
   setBoardPosition: (boardPosition: Piece[]) => void;
   setFiftyMoveRuleCounter: (fiftyMoveRuleCounter: number) => void;
   setIsCheck: (isCheck: boolean) => void;
   setIsCheckmate: (isCheckmate: boolean) => void;
+  setNotation: (notation: string[][]) => void;
+  setLastMove: (lastMove: {
+    piece: Piece;
+    move: Move;
+    promotionPiece?: PieceType;
+  }) => void;
 }
 
 export const createGameProgress: StateCreator<GameProgress> = (set) => ({
@@ -22,6 +30,8 @@ export const createGameProgress: StateCreator<GameProgress> = (set) => ({
   fiftyMoveRuleCounter: 0,
   isCheck: false,
   isCheckmate: false,
+  notation: [],
+  lastMove: undefined,
   setCurrentPlayer: (currentPlayer) => set(() => ({ currentPlayer })),
   setBoardPosition: (boardPosition) =>
     set((state) => ({
@@ -32,4 +42,6 @@ export const createGameProgress: StateCreator<GameProgress> = (set) => ({
     set(() => ({ fiftyMoveRuleCounter })),
   setIsCheck: (isCheck) => set(() => ({ isCheck })),
   setIsCheckmate: (isCheckmate) => set(() => ({ isCheckmate })),
+  setNotation: (notation) => set(() => ({ notation })),
+  setLastMove: (lastMove) => set(() => ({ lastMove })),
 });
